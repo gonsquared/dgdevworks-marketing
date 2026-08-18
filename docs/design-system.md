@@ -2,7 +2,7 @@
 
 **Source:** ui-design-agent output from the orchestrate-plan run (2026-08-18), covering stories E1-F2-S1 (color/typography tokens) and E1-F3-S1 (nav/footer UX spec). Persisted here so frontend-coding-agent has a durable reference for Epic 1 stories and beyond.
 
-**Aesthetic direction — "Spec Sheet / Blueprint":** DG DevWorks' working method is spec-first, systematic engineering (this project itself was built from a written, versioned spec). Rather than a generic SaaS-indigo look, the site borrows the visual language of a specification/blueprint document: hairline rules, small mono-set annotation labels (`§01`, `FIG. 02`), and sparing corner-bracket "registration marks" (like CAD/viewfinder ticks) framing only the highest-signal elements (hero visual, the recommended pricing tier, case-study stat callouts). The accent color is a cyan/teal (`#007a9e` light / `#00d4ff` dark), aligned with the DG DevWorks portfolio site's palette per docs/superpowers/specs/2026-08-18-portfolio-cyan-theme-reskin-design.md — the blueprint's "spec-review annotation" color, now teal instead of redline. Error/validation states keep a dedicated red-orange `--color-error` token, split out from accent so form errors still read as errors. Dark mode is literal blueprint paper: deep blueprint-navy background with pale linework text and a glowing cyan accent — and dark is now the **default** theme, matching the portfolio.
+**Aesthetic direction — "Spec Sheet / Blueprint":** DG DevWorks' working method is spec-first, systematic engineering (this project itself was built from a written, versioned spec). Rather than a generic SaaS-indigo look, the site borrows the visual language of a specification/blueprint document: hairline rules, small mono-set annotation labels (`§01`, `FIG. 02`), and sparing corner-bracket "registration marks" (like CAD/viewfinder ticks) framing only the highest-signal elements (hero visual, the recommended pricing tier, case-study stat callouts). The accent color is a Shiny Metagross violet-orchid (`#524293` light / `#b9a3ff` dark) — the shiny palette-swap's lavender-steel body plating standing in for the blueprint's "spec-review annotation" color. Error/validation states keep the dedicated red-orange `--color-error` token (`#c7360f` light / `#ff6a45` dark, unchanged from the prior reskin) standing in for the creature's red eye, so form errors read distinctly from the accent. Dark mode is a near-black violet-steel background with pale linework text and a glowing orchid accent tuned for maximum contrast — dark stays the **default** theme.
 
 This deliberately avoids generic AI-design defaults (cream+serif+terracotta, near-black+neon, broadsheet-hairline-columns) while staying inside the approved spec's structural constraints (Inter/Space Grotesk/JetBrains Mono, hairline rules, mono annotation labels, corner-bracket registration marks, dark-default toggle with glow).
 
@@ -65,43 +65,43 @@ No component needs runtime data fetching or persistence — everything is import
 
 Light (`:root` / `[data-theme="light"]`):
 ```css
---color-bg: #F7F6F3
+--color-bg: #F5F3FA
 --color-surface: #FFFFFF
---color-surface-sunken: #F1F0EC
+--color-surface-sunken: #EEEAF5
 --color-text-primary: #16191D
 --color-text-secondary: #5C6470
 --color-text-tertiary: #8A9099
---color-border: #E3E1DC
---color-border-strong: #C9C6BE
---color-accent: #007A9E        /* 4.9:1 on white — passes AA normal text */
---color-accent-hover: #005F7A
---color-accent-bright: #0089B3 /* decorative-only: icons, ticks, borders — 3:1 min, NOT for body text */
---color-accent-soft: #E0F4FA
+--color-border: #E0DBEE
+--color-border-strong: #C7BCD9
+--color-accent: #524293        /* 8.2:1 on white — passes AAA normal text */
+--color-accent-hover: #3D3070
+--color-accent-bright: #7D68C9 /* decorative-only: icons, ticks, borders — 3:1 min, NOT for body text */
+--color-accent-soft: #ECE7F7
 --color-accent-on-fill: #FFFFFF
 --color-success: #1F8A57
 --color-error: #C7360F         /* dedicated token, no longer aliases accent — 5.3:1 on white, passes AA */
---color-focus-ring: #007A9E
+--color-focus-ring: #524293
 ```
 
 Dark (`[data-theme="dark"]`):
 ```css
---color-bg: #0D1420
---color-surface: #141C2C
---color-surface-sunken: #0A0F18
+--color-bg: #0C0A16
+--color-surface: #171029
+--color-surface-sunken: #07060D
 --color-text-primary: #EDEFF3
 --color-text-secondary: #94A0B4
 --color-text-tertiary: #5E6B80
---color-border: #253048
---color-border-strong: #34405C
---color-accent: #00D4FF        /* 10.4:1 on bg — passes AA */
---color-accent-hover: #33DDFF
---color-accent-bright: #7CE7FF
---color-accent-soft: #113240
---color-accent-on-fill: #0D1420 /* dark text on bright accent fill — 10.4:1 */
+--color-border: #2A2440
+--color-border-strong: #3C3459
+--color-accent: #B9A3FF        /* 9.1:1 on bg — passes AAA */
+--color-accent-hover: #CDB9FF
+--color-accent-bright: #E4D8FF
+--color-accent-soft: #241C3F
+--color-accent-on-fill: #0C0A16 /* dark bg color as text on bright accent fill — 9.1:1 */
 --color-success: #34C77E
---color-error: #FF6A45          /* dedicated token, no longer aliases accent — 6.5:1 on bg, passes AA */
---color-focus-ring: #00D4FF
---glow-accent: 0 0 24px rgba(0,212,255,0.35)  /* dark-mode-only accent glow, sparing use on primary CTA + hero mark */
+--color-error: #FF6A45          /* dedicated token, no longer aliases accent — 6.9:1 on bg, passes AA */
+--color-focus-ring: #B9A3FF
+--glow-accent: 0 0 24px rgba(185,163,255,0.4)  /* dark-mode-only accent glow, sparing use on primary CTA + hero mark */
 ```
 
 ## 5. Nav & footer UX spec (E1-F3-S1)
