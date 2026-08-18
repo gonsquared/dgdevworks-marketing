@@ -8,7 +8,8 @@ export function AboutStory() {
 
       <p className="text-body text-text-secondary mt-6">
         I&apos;m Daryll, a senior full-stack engineer who spent years shipping production software
-        for regulated banks, global hardware brands, and fast-moving product teams — a regulated bank, a global hardware brand, a global electronics manufacturer, and a regional stock exchange among them. DG DevWorks is where that same discipline gets applied
+        for regulated banks, global hardware brands, and fast-moving product teams. DG DevWorks is where
+        that same discipline gets applied
         to founder-scale projects: spec-first, systematic, and built to hand off cleanly rather than
         create a dependency on me.
       </p>

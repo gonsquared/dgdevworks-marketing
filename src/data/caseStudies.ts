@@ -26,7 +26,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "hardware-brand-partner-portals",
-    title: "Rebuilding A global hardware brand's Partner and Developer Portals",
+    title: "Rebuilding a Global Hardware Brand's Partner and Developer Portals",
     challenge:
       "A global hardware brand's partner and developer-facing portals ran on an aging PHP/Drupal stack that was slow to update, difficult to internationalize, and falling short on accessibility and SEO fundamentals for a global developer audience.",
     approach:
@@ -57,7 +57,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "stock-exchange-data-migration",
     title: "Migrating a Real-Time Stock Data Product off Django",
     challenge:
-      "A regional stock exchange data product's stock exchange data product was built on Django and PostgreSQL, with a real-time feed parser that was becoming a bottleneck as query volume grew. The stack needed to move to a more scalable foundation without interrupting a live, time-sensitive data product.",
+      "A regional stock exchange data product was built on Django and PostgreSQL, with a real-time feed parser that was becoming a bottleneck as query volume grew. The stack needed to move to a more scalable foundation without interrupting a live, time-sensitive data product.",
     approach:
       "Led the migration from Django/PostgreSQL to a MERN (MongoDB, Express, React, Node) stack, rebuilding the exchange's live feed parser on the new stack and re-architecting the data layer for the query patterns the product actually needed.",
     impact: [
