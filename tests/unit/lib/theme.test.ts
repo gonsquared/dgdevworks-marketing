@@ -21,29 +21,29 @@ describe("src/lib/theme.ts (E1-F2-S2 theming mechanism)", () => {
     expect(themeInitScript).not.toMatch(/\$\{/);
   });
 
-  it("themeInitScript defaults to light when nothing is stored and light when storage throws", () => {
-    // Simulate the exact branching the blocking script encodes.
-    const stored = null;
-    const theme = stored === "dark" ? "dark" : "light";
-    expect(theme).toBe("light");
+  it("themeInitScript defaults to dark when nothing is stored and dark when storage throws", () => {
+    // Assert against the actual script string, not a re-implementation of
+    // its logic — a tautological version of this test would always pass.
+    expect(themeInitScript).toContain('stored === "light" ? "light" : "dark"');
+    expect(themeInitScript).toMatch(/catch[\s\S]*"dark"/);
   });
 
-  it("getServerThemeSnapshot always returns 'light' (deterministic SSR snapshot, avoids hydration mismatch)", () => {
-    expect(getServerThemeSnapshot()).toBe("light");
+  it("getServerThemeSnapshot always returns 'dark' (deterministic SSR snapshot, avoids hydration mismatch)", () => {
+    expect(getServerThemeSnapshot()).toBe("dark");
   });
 
-  it("readStoredTheme defaults to 'light' when nothing is stored", () => {
-    expect(readStoredTheme()).toBe("light");
-  });
-
-  it("readStoredTheme returns 'dark' only when explicitly stored as 'dark'", () => {
-    window.localStorage.setItem(THEME_STORAGE_KEY, "dark");
+  it("readStoredTheme defaults to 'dark' when nothing is stored", () => {
     expect(readStoredTheme()).toBe("dark");
   });
 
-  it("readStoredTheme treats any non-'dark' stored value as light (defensive default)", () => {
-    window.localStorage.setItem(THEME_STORAGE_KEY, "not-a-real-theme");
+  it("readStoredTheme returns 'light' only when explicitly stored as 'light'", () => {
+    window.localStorage.setItem(THEME_STORAGE_KEY, "light");
     expect(readStoredTheme()).toBe("light");
+  });
+
+  it("readStoredTheme treats any non-'light' stored value as dark (defensive default)", () => {
+    window.localStorage.setItem(THEME_STORAGE_KEY, "not-a-real-theme");
+    expect(readStoredTheme()).toBe("dark");
   });
 
   it("applyTheme sets the data-theme attribute on <html> and persists to localStorage", () => {

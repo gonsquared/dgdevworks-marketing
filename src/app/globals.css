@@ -1,10 +1,14 @@
 @import "tailwindcss";
 
 /*
- * DG DevWorks design tokens — "Spec Sheet / Blueprint" aesthetic.
- * Source: docs/design-system.md (E1-F2-S1). New palette, not copied from
- * the portfolio project. Light is the default theme; dark is opt-in via
- * `data-theme="dark"` on <html> (see src/components/layout/ThemeScript.tsx).
+ * DG DevWorks design tokens — "Spec Sheet / Blueprint" aesthetic, cyan/teal
+ * palette. Source: docs/design-system.md (E1-F2-S1), recolored per
+ * docs/superpowers/specs/2026-08-18-portfolio-cyan-theme-reskin-design.md to
+ * align with the portfolio project's cyan/teal accent family. Structural
+ * language (hairline rules, mono annotation labels, corner-bracket
+ * registration marks) is unchanged — only the accent/error hues and the
+ * default theme moved. Dark is now the default theme; light is opt-in via
+ * `data-theme="light"` on <html> (see src/app/layout.tsx and src/lib/theme.ts).
  *
  * Pattern: raw values live on :root / [data-theme="dark"], then an
  * `@theme inline` block re-exposes them as Tailwind utilities (bg-bg,
@@ -22,15 +26,16 @@
   --color-text-tertiary: #8a9099;
   --color-border: #e3e1dc;
   --color-border-strong: #c9c6be;
-  --color-accent: #c7360f;
-  --color-accent-hover: #a62c0c;
-  --color-accent-bright: #e8431f;
-  --color-accent-soft: #fbe7e0;
+  --color-accent: #007a9e;
+  --color-accent-hover: #005f7a;
+  --color-accent-bright: #0089b3;
+  --color-accent-soft: #e0f4fa;
   --color-accent-on-fill: #ffffff;
   --color-success: #1f8a57;
   --color-error: #c7360f;
-  --color-focus-ring: #c7360f;
+  --color-focus-ring: #007a9e;
   --shadow-glow-accent: none;
+  color-scheme: light;
 }
 
 [data-theme="dark"] {
@@ -42,15 +47,16 @@
   --color-text-tertiary: #5e6b80;
   --color-border: #253048;
   --color-border-strong: #34405c;
-  --color-accent: #ff6a45;
-  --color-accent-hover: #ff8562;
-  --color-accent-bright: #ff6a45;
-  --color-accent-soft: #2a1712;
+  --color-accent: #00d4ff;
+  --color-accent-hover: #33ddff;
+  --color-accent-bright: #7ce7ff;
+  --color-accent-soft: #113240;
   --color-accent-on-fill: #0d1420;
   --color-success: #34c77e;
   --color-error: #ff6a45;
-  --color-focus-ring: #ff6a45;
-  --shadow-glow-accent: 0 0 24px rgba(255, 106, 69, 0.35);
+  --color-focus-ring: #00d4ff;
+  --shadow-glow-accent: 0 0 24px rgba(0, 212, 255, 0.35);
+  color-scheme: dark;
 }
 
 @theme inline {

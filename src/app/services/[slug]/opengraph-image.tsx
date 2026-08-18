@@ -34,13 +34,13 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ fontFamily: "monospace", fontSize: 24, color: "#FF6A45" }}>[DG] DevWorks</span>
+          <span style={{ fontFamily: "monospace", fontSize: 24, color: "#00D4FF" }}>[DG] DevWorks</span>
         </div>
         <div style={{ display: "flex", marginTop: 40, fontSize: 52, fontWeight: 600, lineHeight: 1.15 }}>
           {title}
         </div>
         {priceLabel && (
-          <div style={{ display: "flex", marginTop: 24, fontSize: 32, fontFamily: "monospace", color: "#FF6A45" }}>
+          <div style={{ display: "flex", marginTop: 24, fontSize: 32, fontFamily: "monospace", color: "#00D4FF" }}>
             {priceLabel}
           </div>
         )}

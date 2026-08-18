@@ -7,7 +7,7 @@ export interface ContactFormValues {
   message: string;
 }
 
-const ACCENT_DECIMAL = 13052943; // #C7360F as decimal RGB, per docs/api-contract.md recommendation
+const ACCENT_DECIMAL = 31390; // #007A9E as decimal RGB — cyan/teal accent, 2026-08-18 reskin
 
 function buildPayload(values: ContactFormValues): DiscordWebhookPayload {
   return {
