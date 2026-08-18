@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 /*
- * DG DevWorks design tokens — "Spec Sheet / Blueprint" aesthetic, cyan/teal
- * palette. Source: docs/design-system.md (E1-F2-S1), recolored per
- * docs/superpowers/specs/2026-08-18-portfolio-cyan-theme-reskin-design.md to
- * align with the portfolio project's cyan/teal accent family. Structural
- * language (hairline rules, mono annotation labels, corner-bracket
- * registration marks) is unchanged — only the accent/error hues and the
- * default theme moved. Dark is now the default theme; light is opt-in via
- * `data-theme="light"` on <html> (see src/app/layout.tsx and src/lib/theme.ts).
+ * DG DevWorks design tokens — "Spec Sheet / Blueprint" aesthetic, Shiny
+ * Metagross palette. Source: docs/design-system.md (E1-F2-S1), recolored
+ * per docs/superpowers/plans/2026-08-19-shiny-metagross-theme-reskin.md.
+ * Structural language (hairline rules, mono annotation labels, corner-
+ * bracket registration marks) is unchanged — only bg/surface/border and the
+ * accent/error hues moved to a violet-orchid family (shiny body plating),
+ * with the red-orange error token standing in for the red eye. Dark is the
+ * default theme; light is opt-in via `data-theme="light"` on <html> (see
+ * src/app/layout.tsx and src/lib/theme.ts).
  *
  * Pattern: raw values live on :root / [data-theme="dark"], then an
  * `@theme inline` block re-exposes them as Tailwind utilities (bg-bg,
@@ -18,44 +19,44 @@
 
 :root,
 [data-theme="light"] {
-  --color-bg: #f7f6f3;
+  --color-bg: #f5f3fa;
   --color-surface: #ffffff;
-  --color-surface-sunken: #f1f0ec;
+  --color-surface-sunken: #eeeaf5;
   --color-text-primary: #16191d;
   --color-text-secondary: #5c6470;
   --color-text-tertiary: #8a9099;
-  --color-border: #e3e1dc;
-  --color-border-strong: #c9c6be;
-  --color-accent: #007a9e;
-  --color-accent-hover: #005f7a;
-  --color-accent-bright: #0089b3;
-  --color-accent-soft: #e0f4fa;
+  --color-border: #e0dbee;
+  --color-border-strong: #c7bcd9;
+  --color-accent: #524293;
+  --color-accent-hover: #3d3070;
+  --color-accent-bright: #7d68c9;
+  --color-accent-soft: #ece7f7;
   --color-accent-on-fill: #ffffff;
   --color-success: #1f8a57;
   --color-error: #c7360f;
-  --color-focus-ring: #007a9e;
+  --color-focus-ring: #524293;
   --shadow-glow-accent: none;
   color-scheme: light;
 }
 
 [data-theme="dark"] {
-  --color-bg: #0d1420;
-  --color-surface: #141c2c;
-  --color-surface-sunken: #0a0f18;
+  --color-bg: #0c0a16;
+  --color-surface: #171029;
+  --color-surface-sunken: #07060d;
   --color-text-primary: #edeff3;
   --color-text-secondary: #94a0b4;
   --color-text-tertiary: #5e6b80;
-  --color-border: #253048;
-  --color-border-strong: #34405c;
-  --color-accent: #00d4ff;
-  --color-accent-hover: #33ddff;
-  --color-accent-bright: #7ce7ff;
-  --color-accent-soft: #113240;
-  --color-accent-on-fill: #0d1420;
+  --color-border: #2a2440;
+  --color-border-strong: #3c3459;
+  --color-accent: #b9a3ff;
+  --color-accent-hover: #cdb9ff;
+  --color-accent-bright: #e4d8ff;
+  --color-accent-soft: #241c3f;
+  --color-accent-on-fill: #0c0a16;
   --color-success: #34c77e;
   --color-error: #ff6a45;
-  --color-focus-ring: #00d4ff;
-  --shadow-glow-accent: 0 0 24px rgba(0, 212, 255, 0.35);
+  --color-focus-ring: #b9a3ff;
+  --shadow-glow-accent: 0 0 24px rgba(185, 163, 255, 0.4);
   color-scheme: dark;
 }
 
