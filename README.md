@@ -55,7 +55,7 @@ src/
     ui/                 Reusable primitives: Button, Card, Section, CTABand, FAQAccordion, ScrollReveal, Badge, SpecLabel, StatCallout
   data/                 Typed content data (services, caseStudies, pricing, business, faq, portfolioDisclosure, types)
   lib/                  env.ts (env var accessors), discord.ts (webhook submission), theme.ts, seo.ts, navLinks.ts
-docs/                   Design system spec, API contract, dev stories tracker, session log
+docs/                   Internal planning notes — design spec, API contract, dev-stories tracker, session log (gitignored, local-only; not part of a fresh clone)
 tests/
   unit/                 Vitest + React Testing Library specs (components, data, lib, seo, accessibility, security)
   e2e/                  Playwright specs (run against the built static export, not the dev server)
@@ -65,7 +65,7 @@ out/                    Build output (static export) — generated, not committe
 
 ## Environment Variables
 
-All environment variables are `NEXT_PUBLIC_*` because this is a fully static export with no server runtime — nothing here is a genuine secret (see `docs/api-contract.md`). Accessed via typed helpers in `src/lib/env.ts` rather than `process.env` ad hoc. Copy `.env.example` to `.env.local` and fill in real values before deploying to production.
+All environment variables are `NEXT_PUBLIC_*` because this is a fully static export with no server runtime — nothing here is a genuine secret. Accessed via typed helpers in `src/lib/env.ts` rather than `process.env` ad hoc. Copy `.env.example` to `.env.local` and fill in real values before deploying to production.
 
 | Variable | Required | Purpose | Notes |
 | --- | --- | --- | --- |
@@ -145,18 +145,18 @@ Steps to deploy:
 2. Push/merge to the branch connected to the Vercel project, or run `vercel --prod` from a machine with Vercel CLI access.
 3. Vercel runs `bun install --frozen-lockfile` then `bun run build`, and serves the static `out/` directory.
 
-**TODO:** an actual live Vercel preview/production deployment has not been independently verified end-to-end in this environment (no deploy credentials/network egress were available during the last QA pass — see `docs/dev-stories-tracker.md`, story `E6-F2-S1`). Confirm all routes serve correctly, and confirm the `Content-Type: image/png` header on the extensionless Open Graph image routes, on a real Vercel deployment before public launch.
+**TODO:** an actual live Vercel preview/production deployment has not been independently verified end-to-end in this environment (no deploy credentials/network egress were available during the last QA pass). Confirm all routes serve correctly, and confirm the `Content-Type: image/png` header on the extensionless Open Graph image routes, on a real Vercel deployment before public launch.
 
 ## Architecture Summary
 
 - **Next.js 16 App Router, static export.** All 14 routes (11 route templates, including 2 dynamic `[slug]` templates for services and case studies) are pre-rendered at build time via `generateStaticParams()`. No server runtime, no API routes, no middleware.
 - **No backend, no database.** All content (services, case studies, pricing, business/contact info, FAQ, portfolio-disclosure copy) lives in typed TypeScript data files under `src/data/`, imported directly by pages and components. There is no CMS and no persistence layer.
-- **Contact form → Discord webhook.** The `/contact` form POSTs directly from the browser to a Discord incoming webhook URL (`NEXT_PUBLIC_DISCORD_WEBHOOK_URL`), formatted as an embed. This is the site's only external integration; see `docs/api-contract.md` for the full request/response contract.
+- **Contact form → Discord webhook.** The `/contact` form POSTs directly from the browser to a Discord incoming webhook URL (`NEXT_PUBLIC_DISCORD_WEBHOOK_URL`), formatted as an embed. This is the site's only external integration.
 - **Theming.** Light-default / dark-toggle theme implemented via CSS custom properties and a `data-theme` attribute on `<html>`, set by a blocking inline script in the root layout before first paint (no flash of incorrect theme), with preference persisted via `localStorage`.
 - **SEO/AEO/GEO.** Per-route `generateMetadata()`, `app/sitemap.ts` / `app/robots.ts` driven by the same data used for `generateStaticParams()`, per-route Open Graph images (`opengraph-image.tsx`, including 8 dynamic ones for services/case studies), and JSON-LD structured data (`Person`/`ProfessionalService` sitewide, `Service` per service page, `FAQPage` on `/pricing` and `/contact`).
-- **Portfolio disclosure modal.** A sitewide, session-scoped modal (`src/components/layout/PortfolioDisclosureModal.tsx`) shown once per browser session on first load, disclosing this is a portfolio project and linking to `/contact`. See `docs/design-system.md` §9 for the full UX/accessibility spec.
+- **Portfolio disclosure modal.** A sitewide, session-scoped modal (`src/components/layout/PortfolioDisclosureModal.tsx`) shown once per browser session on first load, disclosing this is a portfolio project and linking to `/contact`.
 
-For deeper rationale behind these decisions (why, not just how), see `docs/design-system.md` and `docs/api-contract.md`. Project specs, requirements, and personas are tracked separately (docs-agent's domain) and are out of scope for this README.
+Deeper rationale behind these decisions (why, not just how) lives in internal planning notes (`docs/`) that are gitignored and not part of a fresh clone.
 
 ## Troubleshooting
 
@@ -168,14 +168,14 @@ For deeper rationale behind these decisions (why, not just how), see `docs/desig
 
 ## Known Open Items (pending owner follow-up before public launch)
 
-These carry over from the project's design spec and are tracked in `docs/dev-stories-tracker.md`:
+These carry over from the project's design spec:
 
 - **Pricing figures** (`src/data/pricing.ts`) are placeholder values pending confirmation (flagged in-code with a comment).
 - **Real booking URL** — `NEXT_PUBLIC_BOOKING_URL` still points at a placeholder (`https://cal.com/dgdevworks/placeholder`); replace with a real scheduling link before launch.
 - **Real production domain** — `NEXT_PUBLIC_SITE_URL` still points at a placeholder value; confirm/replace before launch (affects canonical URLs, sitemap, OG metadata).
 - **Case study copy review** — case study content should get a final review pass before public launch.
 - **Live Vercel deployment verification** — see [Build / Deployment](#build--deployment) above.
-- **Known accessibility defects (open, tracked in `docs/dev-stories-tracker.md`):** a WCAG AA color-contrast issue in the Footer (`text-text-tertiary` usage) and a WCAG 1.4.1 use-of-color issue on the About page's inline portfolio link. See stories `E1-F3-S3` and `E3-F3-S1` in the tracker for full detail and the prescribed fix.
+- **Known accessibility defects (open):** a WCAG AA color-contrast issue in the Footer (`text-text-tertiary` usage) and a WCAG 1.4.1 use-of-color issue on the About page's inline portfolio link (tracked internally as stories `E1-F3-S3` and `E3-F3-S1`).
 
 ## Contributing
 
