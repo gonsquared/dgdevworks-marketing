@@ -47,3 +47,19 @@ next-env.d.ts
 
 # local files
 docs/*
+
+# sandbox/IDE artifacts observed at repo root in this environment — not real
+# project files (confirmed character-special devices via `file`), but
+# ignored explicitly so a future `git add -A` can never sweep them in.
+# .idea/.vscode have no trailing slash because they're device files here,
+# not directories, and a trailing-slash pattern only matches directories.
+.idea
+.vscode
+.claude/
+.mcp.json
+.bashrc
+.bash_profile
+.zshrc
+.zprofile
+.profile
+.gitconfig

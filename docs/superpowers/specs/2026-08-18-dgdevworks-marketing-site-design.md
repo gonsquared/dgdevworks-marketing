@@ -18,10 +18,10 @@ This is a **separate project** from the existing personal portfolio (`portfolio/
 
 ## Services (four offerings)
 
-1. **MVP / product build** — full-stack build from idea to shipped product (frontend, backend, database, deployment). Core strength per work history (a regulated bank Next.js/microservices work, a stock-data platform's MERN migration).
-2. **Marketing / landing site build** — fast, conversion-focused marketing sites (this site is the proof). Draws on the a global hardware brand portal migration (PHP/Drupal → Next.js).
-3. **Legacy modernization / migration** — migrating old stacks (PHP/Angular/monoliths, Apigee, Django) to modern Next.js/microservices/Azure. Draws on a regulated bank API Management migration and the stock-data platform's Django→MERN migration.
-4. **Fractional / embedded senior engineer** — part-time ongoing engagement: code review, mentoring, Agile/Scrum leadership. Draws on a regulated bank Scrum Lead role and a mentoring engagement at an enterprise consulting firm.
+1. **MVP / product build** — full-stack build from idea to shipped product (frontend, backend, database, deployment). Core strength per work history (a regulated bank's Next.js/microservices work, a stock-data platform's MERN migration).
+2. **Marketing / landing site build** — fast, conversion-focused marketing sites (this site is the proof). Draws on a global hardware brand's partner-portal migration (PHP/Drupal → Next.js).
+3. **Legacy modernization / migration** — migrating old stacks (PHP/Angular/monoliths, Apigee, Django) to modern Next.js/microservices/Azure. Draws on a regulated bank's API Management migration and a stock-data platform's Django→MERN migration.
+4. **Fractional / embedded senior engineer** — part-time ongoing engagement: code review, mentoring, Agile/Scrum leadership. Draws on a Scrum Lead role at a regulated bank and a mentoring engagement at an enterprise consulting firm.
 
 ## Proof of Work — Case Studies
 
@@ -29,10 +29,10 @@ No freelance client case studies exist yet (all experience is employer-based). E
 
 | Case study slug | Source project | Reframed around | Primary service link | Secondary service link |
 |---|---|---|---|---|
-| `bank-platform-modernization` | A regulated bank — Apigee→Azure APIM migration, monolith→Next.js/microservices refactor, JWT+Key Vault | Legacy modernization at a regulated bank | `/services/modernization` | `/services/fractional` (Scrum Lead role) |
-| `hardware-brand-partner-portals` | a global hardware brand Partner/Developer Portal — PHP/Drupal→Next.js, i18n+GeoIP, WCAG accessibility, SEO | Marketing/developer portal rebuild | `/services/marketing-sites` | — |
-| `retail-pos-platform` | global electronics manufacturer POS — perf optimization, RTL/i18n (Arabic, Spanish), Cypress/Cucumber regression expansion | Full-stack feature delivery under enterprise QA rigor | `/services/mvp-development` | — |
-| `stock-exchange-data-migration` | a regional stock exchange — Django/PostgreSQL→MERN migration, exchange's live feed parser, 40% query perf gain | Legacy system migration + real-time data product | `/services/mvp-development` | `/services/modernization` |
+| `bank-platform-modernization` | Regulated bank — Apigee→Azure APIM migration, monolith→Next.js/microservices refactor, JWT+Key Vault | Legacy modernization at a regulated bank | `/services/modernization` | `/services/fractional` (Scrum Lead role) |
+| `hardware-brand-partner-portals` | Global hardware brand partner/developer portal — PHP/Drupal→Next.js, i18n+GeoIP, WCAG accessibility, SEO | Marketing/developer portal rebuild | `/services/marketing-sites` | — |
+| `retail-pos-platform` | Enterprise POS platform — perf optimization, RTL/i18n (Arabic, Spanish), Cypress/Cucumber regression expansion | Full-stack feature delivery under enterprise QA rigor | `/services/mvp-development` | — |
+| `stock-exchange-data-migration` | Stock exchange data platform — Django/PostgreSQL→MERN migration, real-time feed parser, 40% query perf gain | Legacy system migration + real-time data product | `/services/mvp-development` | `/services/modernization` |
 
 Case study visuals are abstract/illustrative graphics (diagrams, stat call-outs, gradients) — not real product screenshots, since the underlying UIs are confidential/proprietary.
 

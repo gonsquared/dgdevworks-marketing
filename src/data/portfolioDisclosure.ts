@@ -10,7 +10,7 @@ export const portfolioDisclosureCopy: PortfolioDisclosureCopy = {
   eyebrow: "// PORTFOLIO NOTICE",
   heading: "You're looking at a portfolio project",
   body:
-    "I'm Daryll — I designed and built this entire site myself as a self-directed portfolio piece, not a live storefront with an active client roster. The services, case studies, and pricing shown are real examples of how I work. If something here resonates, I'd genuinely like to hear from you.",
+    "I'm Daryll. I designed and built this entire site myself as a self-directed portfolio piece, not a live storefront with an active client roster. The services, case studies, and pricing shown are real examples of how I work. If something here resonates, I'd genuinely like to hear from you.",
   primaryCtaLabel: "Get in touch",
   secondaryCtaLabel: "Continue browsing",
   closeButtonAriaLabel: "Close portfolio notice",
