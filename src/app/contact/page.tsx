@@ -15,7 +15,7 @@ import { getBookingUrl } from "@/lib/env";
 export const metadata: Metadata = buildMetadata({
   title: "Contact",
   description:
-    "Get in touch with DG DevWorks — send a message or book a call directly to talk about your project.",
+    "Get in touch with DG DevWorks: send a message, or book a call directly to talk about your project.",
   path: "/contact",
 });
 
@@ -27,7 +27,7 @@ export default function ContactPage() {
       <JsonLd data={faqPageJsonLd(contactFaq)} />
 
       <Section className="pt-14">
-        <SpecLabel>§00 — CONTACT</SpecLabel>
+        <SpecLabel>§00 · CONTACT</SpecLabel>
         <h1 className="heading-display mt-3">Let&apos;s talk about your project</h1>
 
         <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[1.2fr_1fr]">
@@ -43,7 +43,7 @@ export default function ContactPage() {
             <Card bracket>
               <h2 className="heading-h3">Prefer to talk it through?</h2>
               <p className="text-body text-text-secondary mt-3">
-                Book time directly on the calendar — no back-and-forth over email.
+                Book time directly on the calendar. No back-and-forth over email.
               </p>
               <Button href={bookingUrl} external variant="solid" size="lg" className="mt-5">
                 Book a call

@@ -43,7 +43,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "retail-pos-platform",
     title: "Shipping Features Under Enterprise QA Rigor for a POS Platform",
     challenge:
-      "A global electronics manufacturer's point-of-sale platform needed new features shipped against enterprise-grade quality bars, plus real internationalization (including Arabic RTL layouts) — all without regressing a system retailers depend on at the register.",
+      "A global electronics manufacturer's point-of-sale platform needed new features shipped against enterprise-grade quality bars, plus real internationalization (including Arabic RTL layouts), all without regressing a system retailers depend on at the register.",
     approach:
       "Delivered full-stack feature work on the POS platform while optimizing frontend performance for in-store hardware constraints. Implemented RTL layout support and localization for Arabic and Spanish markets, and expanded the automated regression suite using Cypress and Cucumber so new features shipped with confidence rather than manual re-testing.",
     impact: [

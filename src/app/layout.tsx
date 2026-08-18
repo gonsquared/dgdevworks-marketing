@@ -34,7 +34,7 @@ const googleVerification = getGoogleVerification();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${business.brandName} — ${business.tagline}`,
+    default: `${business.brandName} | ${business.tagline}`,
     template: `%s | ${business.brandName}`,
   },
   description: business.positioningCopy,

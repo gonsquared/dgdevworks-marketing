@@ -28,7 +28,7 @@ export default function HomePage() {
       </Section>
 
       <Section>
-        <SpecLabel>§01 — SERVICES</SpecLabel>
+        <SpecLabel>§01 · SERVICES</SpecLabel>
         <h2 className="heading-h2 mt-3">What I help founders build</h2>
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, index) => (
@@ -40,7 +40,7 @@ export default function HomePage() {
       </Section>
 
       <Section className="bg-surface">
-        <SpecLabel>§02 — PROOF OF WORK</SpecLabel>
+        <SpecLabel>§02 · PROOF OF WORK</SpecLabel>
         <h2 className="heading-h2 mt-3">Shipped in production, not just planned</h2>
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
           {caseStudies.slice(0, 2).map((caseStudy, index) => (
@@ -57,7 +57,7 @@ export default function HomePage() {
       </Section>
 
       <Section>
-        <SpecLabel>§03 — PRICING</SpecLabel>
+        <SpecLabel>§03 · PRICING</SpecLabel>
         <h2 className="heading-h2 mt-3">Indicative pricing, pending a scoping call</h2>
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {pricing.packages.map((pkg) => (

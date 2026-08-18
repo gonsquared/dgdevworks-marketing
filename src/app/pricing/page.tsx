@@ -13,7 +13,7 @@ import { buildMetadata, faqPageJsonLd } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Pricing",
   description:
-    "Indicative pricing for MVP builds, marketing sites, legacy modernization, and fractional engineering — plus the DG DevWorks hourly rate.",
+    "Indicative pricing for MVP builds, marketing sites, legacy modernization, and fractional engineering, plus the DG DevWorks hourly rate.",
   path: "/pricing",
 });
 
@@ -23,10 +23,10 @@ export default function PricingPage() {
       <JsonLd data={faqPageJsonLd(pricingFaq)} />
 
       <Section className="pt-14 pb-0">
-        <SpecLabel>§00 — PRICING</SpecLabel>
+        <SpecLabel>§00 · PRICING</SpecLabel>
         <h1 className="heading-display mt-3">Pricing</h1>
         <p className="text-body-lead text-text-secondary mt-4 max-w-2xl">
-          Every engagement starts with a scoping call — the figures below are the range real projects
+          Every engagement starts with a scoping call. The figures below are the range real projects
           of that type tend to land in.
         </p>
 
@@ -49,7 +49,7 @@ export default function PricingPage() {
 
         <div className="mt-10 rounded-md border border-accent bg-accent-soft px-5 py-4">
           <p className="text-ui text-text-primary">
-            All figures on this page are <strong>indicative, pending a scoping call</strong> — actual
+            All figures on this page are <strong>indicative, pending a scoping call</strong>. Actual
             pricing stays flexible and depends on the scope of your project, not a locked-in quote.
           </p>
         </div>

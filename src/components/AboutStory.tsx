@@ -15,14 +15,14 @@ export function AboutStory() {
       </p>
 
       <p className="text-body text-text-secondary mt-4">
-        I work with startup founders specifically — not agencies looking to subcontract, not local
+        I work with startup founders specifically, not agencies looking to subcontract and not local
         businesses that need a brochure site. Founders come to me with a product that needs to get built,
         a legacy system that&apos;s become the bottleneck, or a team that needs a senior engineer&apos;s
         judgment without a full-time senior hire yet. That&apos;s the work I&apos;m built for.
       </p>
 
       <p className="text-body text-text-secondary mt-4">
-        Every engagement is me, directly — no subcontracting, no account-manager layer between you and
+        Every engagement is me, directly. No subcontracting, no account-manager layer between you and
         the person writing the code. If you want to see the deeper technical history behind this
         practice (full project history, stack details, and code samples), the{" "}
         <a

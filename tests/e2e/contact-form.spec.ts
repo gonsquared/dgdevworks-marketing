@@ -41,7 +41,7 @@ test.describe("Contact form (E6-F1-S2) — webhook mocked/stubbed, never hits th
     await page.getByLabel("Message").fill("We'd like to talk about an MVP build.");
     await page.getByRole("button", { name: "Send message" }).click();
 
-    await expect(page.getByText(/Thanks — your message has been sent/)).toBeVisible();
+    await expect(page.getByText(/Thanks, your message has been sent/)).toBeVisible();
     expect(webhookCalled).toBe(true);
   });
 

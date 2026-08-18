@@ -104,7 +104,7 @@ describe("ContactForm (E5-F1-S1 / E5-F1-S2)", () => {
 
     resolveSubmit({ ok: true });
 
-    expect(await screen.findByText(/Thanks — your message has been sent/)).toBeInTheDocument();
+    expect(await screen.findByText(/Thanks, your message has been sent/)).toBeInTheDocument();
   });
 
   it("shows a generic, retry-friendly error state on failure — never raw fetch/HTTP details", async () => {
@@ -150,7 +150,7 @@ describe("ContactForm (E5-F1-S1 / E5-F1-S2)", () => {
     await userEvent.type(honeypot, "http://spam.example.com");
     await userEvent.click(submit);
 
-    expect(await screen.findByText(/Thanks — your message has been sent/)).toBeInTheDocument();
+    expect(await screen.findByText(/Thanks, your message has been sent/)).toBeInTheDocument();
     expect(submitContactFormMock).not.toHaveBeenCalled();
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining("honeypot"));
 

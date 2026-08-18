@@ -10,7 +10,7 @@ import { getBookingUrl } from "@/lib/env";
 export const metadata: Metadata = buildMetadata({
   title: "About",
   description:
-    "Daryll's story and the DG DevWorks framing — a one-person senior engineering practice built for startup founders.",
+    "Daryll's story and the DG DevWorks framing: a one-person senior engineering practice built for startup founders.",
   path: "/about",
 });
 
@@ -19,7 +19,7 @@ export default function AboutPage() {
 
   return (
     <Section className="pt-14">
-      <SpecLabel>§00 — ABOUT</SpecLabel>
+      <SpecLabel>§00 · ABOUT</SpecLabel>
       <h1 className="heading-display mt-3">About DG DevWorks</h1>
 
       <ScrollReveal className="mt-10">

@@ -11,7 +11,7 @@ export function Logotype({ className }: LogotypeProps) {
     <Link
       href="/"
       className={clsx("inline-flex items-center gap-1.5 heading-h4 text-text-primary", className)}
-      aria-label="DG DevWorks — home"
+      aria-label="DG DevWorks, home"
     >
       <span className="font-mono-annotation text-accent normal-case tracking-normal">[DG]</span>
       <span>DevWorks</span>

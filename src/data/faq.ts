@@ -10,12 +10,12 @@ export const pricingFaq: FAQItem[] = [
   {
     question: "Why is pricing a range instead of a fixed number?",
     answer:
-      "Every project has a different mix of scope, integrations, and timeline pressure. The ranges above reflect typical projects of that type — your actual quote comes from a short scoping call, not a generic price list.",
+      "Every project has a different mix of scope, integrations, and timeline pressure. The ranges above reflect typical projects of that type, but your actual quote comes from a short scoping call, not a generic price list.",
   },
   {
     question: "What happens on a scoping call?",
     answer:
-      "We talk through what you're trying to build or fix, your timeline, and any constraints (existing systems, team, budget). You'll get a clear scope and a firm quote afterward — no obligation to proceed.",
+      "We talk through what you're trying to build or fix, your timeline, and any constraints (existing systems, team, budget). You'll get a clear scope and a firm quote afterward, with no obligation to proceed.",
   },
   {
     question: "Do you work hourly or fixed-price?",
@@ -25,7 +25,7 @@ export const pricingFaq: FAQItem[] = [
   {
     question: "Are these prices final?",
     answer:
-      "No — all figures on this page are indicative, pending a scoping call. Actual pricing stays flexible and depends on the scope of your project, not a locked-in quote.",
+      "No, all figures on this page are indicative, pending a scoping call. Actual pricing stays flexible and depends on the scope of your project, not a locked-in quote.",
   },
 ];
 
@@ -38,7 +38,7 @@ export const contactFaq: FAQItem[] = [
   {
     question: "What happens to the information I submit?",
     answer:
-      "Your info is only used to respond to your inquiry — no spam, no third parties. There's no mailing list and no data resale.",
+      "Your info is only used to respond to your inquiry. No spam, no third parties, no mailing list, and no data resale.",
   },
   {
     question: "Do I need a fully-formed spec before reaching out?",

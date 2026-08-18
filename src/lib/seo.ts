@@ -14,7 +14,7 @@ export interface RouteMetadataInput {
 export function buildMetadata({ title, description, path }: RouteMetadataInput): Metadata {
   const siteUrl = getSiteUrl();
   const url = `${siteUrl}${path}`;
-  const fullTitle = path === "" ? `${title} — ${business.brandName}` : `${title} | ${business.brandName}`;
+  const fullTitle = `${title} | ${business.brandName}`;
 
   return {
     // `absolute` bypasses the root layout's title template (which already

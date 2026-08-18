@@ -21,13 +21,13 @@ const MAX_MESSAGE_LENGTH = 3000;
 function friendlyErrorMessage(reason: ContactFormFailureReason) {
   switch (reason) {
     case "placeholder":
-      return "Something went wrong sending your message — try again or book a call directly.";
+      return "Something went wrong sending your message. Try again, or book a call directly.";
     case "rate-limited":
-      return "This form is receiving a lot of messages right now — please try again in a few minutes, or book a call directly.";
+      return "This form is receiving a lot of messages right now. Please try again in a few minutes, or book a call directly.";
     case "invalid":
     case "network":
     default:
-      return "Something went wrong sending your message — try again or book a call directly.";
+      return "Something went wrong sending your message. Try again, or book a call directly.";
   }
 }
 
@@ -52,7 +52,7 @@ function validate(values: { name: string; email: string; message: string }): For
   if (!message) {
     errors.message = "Please enter a message.";
   } else if (message.length > MAX_MESSAGE_LENGTH) {
-    errors.message = "Message is too long — please keep it under 3000 characters.";
+    errors.message = "Message is too long. Please keep it under 3000 characters.";
   }
 
   return errors;
@@ -89,7 +89,7 @@ export function ContactForm() {
         );
       }
       setStatus("success");
-      setStatusMessage("Thanks — your message has been sent. I'll get back to you within 1–2 business days.");
+      setStatusMessage("Thanks, your message has been sent. I'll get back to you within 1 to 2 business days.");
       return;
     }
 
@@ -110,7 +110,7 @@ export function ContactForm() {
 
     if (result.ok) {
       setStatus("success");
-      setStatusMessage("Thanks — your message has been sent. I'll get back to you within 1–2 business days.");
+      setStatusMessage("Thanks, your message has been sent. I'll get back to you within 1 to 2 business days.");
       setValues({ name: "", email: "", message: "" });
     } else {
       setStatus("error");

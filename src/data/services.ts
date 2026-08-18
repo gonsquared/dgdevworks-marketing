@@ -12,7 +12,7 @@ export const services: Service[] = [
     slug: "mvp-development",
     title: "MVP / Product Build",
     summary:
-      "A full-stack build from idea to shipped product — frontend, backend, database, and deployment handled end to end by one senior engineer.",
+      "A full-stack build from idea to shipped product. Frontend, backend, database, and deployment, all handled end to end by one senior engineer.",
     includes: [
       "Technical scoping and architecture plan before any code is written",
       "Full-stack build: frontend, backend, database schema, and deployment pipeline",
@@ -35,12 +35,12 @@ export const services: Service[] = [
     slug: "marketing-sites",
     title: "Marketing / Landing Site Build",
     summary:
-      "Fast, conversion-focused marketing sites built to sell — this site is the proof of the craft.",
+      "Fast, conversion-focused marketing sites built to sell. This site is the proof of the craft.",
     includes: [
       "Conversion-focused copy structure and page flow, not just visual design",
       "Fully responsive, accessible (WCAG-conscious) implementation",
       "SEO fundamentals: metadata, sitemap, structured data from day one",
-      "Fast, static-first build — no bloated CMS overhead",
+      "Fast, static-first build with no bloated CMS overhead",
       "Contact/lead-capture wired up and ready to receive inquiries",
     ],
     process: [
@@ -50,7 +50,7 @@ export const services: Service[] = [
       "Launch, plus a short post-launch check-in",
     ],
     idealClient:
-      "Founders who need a site that converts visitors into leads or customers — not a generic template, and not a six-week agency process.",
+      "Founders who need a site that converts visitors into leads or customers, not a generic template, and not a six-week agency process.",
     priceLabel: "$2,500–$3,500",
     relatedCaseStudySlugs: ["hardware-brand-partner-portals"],
   },
@@ -58,7 +58,7 @@ export const services: Service[] = [
     slug: "modernization",
     title: "Legacy Modernization / Migration",
     summary:
-      "Migrating aging stacks — PHP, Angular, monoliths, Django, brittle API gateways — to a modern Next.js and microservices foundation.",
+      "Migrating aging stacks (PHP, Angular, monoliths, Django, brittle API gateways) to a modern Next.js and microservices foundation.",
     includes: [
       "Audit of the existing system and a phased migration plan that avoids a risky big-bang rewrite",
       "Incremental migration to Next.js / microservices architecture",
@@ -73,21 +73,21 @@ export const services: Service[] = [
       "Cutover, monitoring, and a stabilization period",
     ],
     idealClient:
-      "Founders or teams carrying a legacy system that's now the bottleneck — slow to change, risky to touch, or blocking new hires from being productive.",
-    priceLabel: "Starting at $5,600 — custom quote",
+      "Founders or teams carrying a legacy system that's now the bottleneck: slow to change, risky to touch, or blocking new hires from being productive.",
+    priceLabel: "Starting at $5,600 (custom quote)",
     relatedCaseStudySlugs: ["bank-platform-modernization", "stock-exchange-data-migration"],
   },
   {
     slug: "fractional",
     title: "Fractional / Embedded Senior Engineer",
     summary:
-      "A part-time, ongoing senior engineer embedded in your team — code review, mentoring, and Agile/Scrum leadership.",
+      "A part-time, ongoing senior engineer embedded in your team: code review, mentoring, and Agile/Scrum leadership.",
     includes: [
       "Regular code review and architectural guidance for your existing team",
       "Mentoring for junior/mid-level engineers",
       "Agile/Scrum facilitation and delivery leadership",
       "Flexible weekly hours (roughly 10–20 hrs/week) that scale with your needs",
-      "Direct async access — no account manager between you and the engineer doing the work",
+      "Direct async access, no account manager between you and the engineer doing the work",
     ],
     process: [
       "Intro call to understand your team, stack, and current bottlenecks",

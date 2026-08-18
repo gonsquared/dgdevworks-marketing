@@ -9,17 +9,17 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Work",
   description:
-    "Case studies from regulated banking, global hardware, and fintech platforms — reframed proof of the engineering behind DG DevWorks.",
+    "Case studies from regulated banking, global hardware, and fintech platforms: reframed proof of the engineering behind DG DevWorks.",
   path: "/work",
 });
 
 export default function WorkIndexPage() {
   return (
     <Section className="pt-14">
-      <SpecLabel>§00 — CASE STUDIES</SpecLabel>
+      <SpecLabel>§00 · CASE STUDIES</SpecLabel>
       <h1 className="heading-display mt-3">Work</h1>
       <p className="text-body-lead text-text-secondary mt-4 max-w-2xl">
-        Employer projects, reframed as proof of work — challenge, approach, and impact, without
+        Employer projects, reframed as proof of work: challenge, approach, and impact, without
         confidential specifics.
       </p>
 

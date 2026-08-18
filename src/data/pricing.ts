@@ -14,7 +14,7 @@ export const pricing: PricingData = {
       priceLabel: "$2,500–$3,500",
       timeframe: "1–2 weeks",
       rangeNote:
-        "Scales with page count and content complexity — roughly 40–70 hours at the hourly rate.",
+        "Scales with page count and content complexity. Roughly 40 to 70 hours at the hourly rate.",
     },
     {
       slug: "mvp-development",
@@ -27,10 +27,10 @@ export const pricing: PricingData = {
     {
       slug: "modernization",
       name: "Legacy Modernization / Migration",
-      priceLabel: "Starting at $5,600 — custom quote",
+      priceLabel: "Starting at $5,600 (custom quote)",
       timeframe: "Varies by scope",
       rangeNote:
-        "Migration scope varies too much for a fixed range — every quote follows a technical audit of the existing system.",
+        "Migration scope varies too much for a fixed range. Every quote follows a technical audit of the existing system.",
     },
     {
       slug: "fractional",
@@ -38,7 +38,7 @@ export const pricing: PricingData = {
       priceLabel: "$2,450–$4,900/mo",
       timeframe: "Ongoing, month to month",
       rangeNote:
-        "Reflects roughly 10–20 hours/week at the hourly rate — scoped to your team's cadence, not a fixed headcount contract.",
+        "Reflects roughly 10 to 20 hours a week at the hourly rate, scoped to your team's cadence, not a fixed headcount contract.",
     },
   ],
 };

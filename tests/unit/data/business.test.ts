@@ -30,7 +30,7 @@ describe("src/data/business.ts (E2-F1-S4)", () => {
 
   it("trustLine matches the exact copy specified in E5-F1-S3's acceptance criteria", () => {
     expect(business.trustLine).toBe(
-      "Your info is only used to respond to your inquiry — no spam, no third parties."
+      "Your info is only used to respond to your inquiry. No spam, no third parties."
     );
   });
 });

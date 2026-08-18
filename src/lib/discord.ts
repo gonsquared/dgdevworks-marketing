@@ -11,7 +11,7 @@ const ACCENT_DECIMAL = 31390; // #007A9E as decimal RGB — cyan/teal accent, 20
 
 function buildPayload(values: ContactFormValues): DiscordWebhookPayload {
   return {
-    username: "DG DevWorks — Contact Form",
+    username: "DG DevWorks Contact Form",
     embeds: [
       {
         title: "New Contact Form Submission",
