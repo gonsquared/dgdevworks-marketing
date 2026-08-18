@@ -33,24 +33,24 @@ function contrastRatio(hex1: string, hex2: string): number {
 // Values transcribed from src/app/globals.css (must stay in sync with the
 // live stylesheet — a mismatch here would itself be worth flagging).
 const LIGHT = {
-  bg: "#f7f6f3",
+  bg: "#f5f3fa",
   surface: "#ffffff",
   textPrimary: "#16191d",
   textSecondary: "#5c6470",
-  accent: "#007a9e",
-  accentBright: "#0089b3",
+  accent: "#524293",
+  accentBright: "#7d68c9",
   accentOnFill: "#ffffff",
   error: "#c7360f",
 };
 
 const DARK = {
-  bg: "#0d1420",
-  surface: "#141c2c",
+  bg: "#0c0a16",
+  surface: "#171029",
   textPrimary: "#edeff3",
   textSecondary: "#94a0b4",
-  accent: "#00d4ff",
-  accentBright: "#7ce7ff",
-  accentOnFill: "#0d1420",
+  accent: "#b9a3ff",
+  accentBright: "#e4d8ff",
+  accentOnFill: "#0c0a16",
   error: "#ff6a45",
 };
 
