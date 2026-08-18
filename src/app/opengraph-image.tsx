@@ -19,7 +19,7 @@ export default function Image() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          background: "#0D1420",
+          background: "#0C0A16",
           color: "#EDEFF3",
           fontFamily: "sans-serif",
         }}
@@ -30,7 +30,7 @@ export default function Image() {
               fontFamily: "monospace",
               fontSize: 28,
               letterSpacing: 2,
-              color: "#00D4FF",
+              color: "#B9A3FF",
             }}
           >
             [DG]
