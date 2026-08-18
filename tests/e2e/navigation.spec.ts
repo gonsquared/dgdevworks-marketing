@@ -1,4 +1,7 @@
-import { test, expect } from "@playwright/test";
+// Uses tests/e2e/fixtures.ts (not "@playwright/test" directly) so the
+// sitewide PortfolioDisclosureModal (E1-F4-S2) is pre-dismissed via
+// sessionStorage and never intercepts clicks on these unrelated nav flows.
+import { test, expect } from "./fixtures";
 
 /**
  * E6-F1-S2: home -> service page -> case study -> back, against the

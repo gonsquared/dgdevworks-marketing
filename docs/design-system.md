@@ -152,3 +152,72 @@ Tailwind default breakpoints: `sm` 640 / `md` 768 / `lg` 1024 / `xl` 1280.
 - No `?redirect=`/`?next=` params anywhere in this site's flows.
 - No auth, no iframe-embedding sensitivity, no session/logout UX needed — static marketing site, out of scope.
 - Booking URL and Discord webhook URL are both `NEXT_PUBLIC_*` and therefore public in the client bundle by design (documented as an accepted risk in `docs/api-contract.md`); no UI change can mitigate this, only Discord's own rate limiting + the honeypot above.
+
+## 9. Portfolio disclosure modal (E1-F4-S1)
+
+A centered overlay dialog, shown once per browsing session on whichever route the visitor lands on first, disclosing that the site is a self-built portfolio project and offering a direct path to `/contact`. Reuses `MobileNavPanel`'s accessible-dialog mechanics (focus trap, inert background, Esc-to-close, reduced-motion fallback) but is visually and structurally new: a small centered card, not a full-height panel, with a backdrop and click-outside-to-close (no prior precedent in this codebase).
+
+**Decision — contact link target: `/contact`.** Reasoning: no in-page contact anchor exists on any other route, and `/contact` is already the canonical destination used consistently by `CTABand`, `Footer`, and `MobileNavPanel`'s "Send a message" button.
+
+**Decision — dismissal persistence: `sessionStorage`, shows once per session.** Key: `"dgdevworks-portfolio-disclosure-dismissed"` = `"true"`. Every dismissal path (X, Esc, backdrop click, "Continue browsing," "Get in touch") sets the same flag. If `sessionStorage` throws (private-mode restrictions), catch and fail open — show the modal rather than crash or silently never show it.
+
+**Decision — route scope: sitewide, mounted in the root layout.** `PortfolioDisclosureModal` mounts in `src/app/layout.tsx` as a client leaf sibling near `<Nav />`, gated by the `sessionStorage` check above. Most real visits will not enter through `/` (SEO-crawled marketing site), so a home-only mount would silently skip the disclosure for anyone landing on `/services`, `/pricing`, `/work/[slug]`, etc. Combined with the persistence decision, a visitor sees it exactly once per session regardless of entry route.
+
+**User flow:** page content paints immediately and normally (no blocking script, unlike the theme-init script — a one-frame absence of the modal is an acceptable tradeoff). On mount, the component checks `sessionStorage`; if already dismissed this session, it renders nothing. Otherwise, after a 300ms settle delay, it opens with a backdrop fade + panel fade/scale-in. The component remounts on every route (it lives in the root layout), but the `sessionStorage` check on mount is what prevents it reopening after the first dismissal.
+
+**Disclosure copy:**
+
+| Element | Copy |
+|---|---|
+| Eyebrow (mono annotation) | `// PORTFOLIO NOTICE` |
+| Heading | You're looking at a portfolio project |
+| Body | I'm Daryll — I designed and built this entire site myself as a self-directed portfolio piece, not a live storefront with an active client roster. The services, case studies, and pricing shown are real examples of how I work. If something here resonates, I'd genuinely like to hear from you. |
+| Primary CTA | Get in touch → `/contact` |
+| Secondary/dismiss CTA | Continue browsing |
+| Close button `aria-label` | Close portfolio notice |
+
+**Component structure:** new `src/components/layout/PortfolioDisclosureModal.tsx` (`"use client"`, no props, internal open state), mounted as a sibling of `<Nav />` in `src/app/layout.tsx`. Copy lives in a new typed `src/data/portfolioDisclosure.ts` (`portfolioDisclosureCopy`, typed via a new `PortfolioDisclosureCopy` interface in `src/data/types.ts`), matching this project's "everything typed in `src/data/*.ts`" convention rather than hardcoding copy in the component.
+
+```
+<PortfolioDisclosureModal />
+ └─ AnimatePresence
+     └─ motion.div  (backdrop, onClick=dismiss)  fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm
+          └─ motion.div  role="dialog" aria-modal="true"
+                          aria-labelledby="portfolio-disclosure-heading"
+                          aria-describedby="portfolio-disclosure-body"
+                          onClick={stopPropagation}
+                          card-bracket relative w-full max-w-[440px] rounded-lg border border-border bg-surface p-8
+               ├─ button  (close X, absolute top-4 right-4)   ← initial focus target
+               ├─ SpecLabel  "// PORTFOLIO NOTICE"
+               ├─ h2#portfolio-disclosure-heading   (heading-h3)
+               ├─ p#portfolio-disclosure-body       (text-body, text-text-secondary)
+               └─ div.mt-6.flex.flex-col.gap-3.sm:flex-row.sm:justify-end
+                    ├─ Button variant="ghost" size="md"  "Continue browsing"  onClick={dismiss}
+                    └─ Button variant="solid" size="md" href="/contact"  "Get in touch"  onClick={dismiss}
+```
+
+Tokens/styling: `card-bracket` (justified here — this dialog is a meta-annotation about the site itself, exactly the "highest-signal element" that motif is reserved for), `rounded-lg border border-border bg-surface p-8` (matches `Card`'s surface treatment), `heading-h3`, `text-body`, `text-text-secondary` (never `text-text-tertiary`, given the known contrast defect noted for `Footer` in E1-F3-S3), `font-mono-annotation`/`text-accent` via `SpecLabel`. Backdrop: `bg-black/60 backdrop-blur-sm` at `z-[60]` (above `MobileNavPanel`'s `z-50`) — a token-agnostic scrim, consistent across both themes. Motion (Framer Motion, gated by `useReducedMotion()` exactly like `MobileNavPanel`): backdrop opacity 0→1 over 180ms; panel `{opacity:0, scale:0.96, y:8}` → `{opacity:1, scale:1, y:0}` over 200ms ease-out; reduced motion → instant `{opacity:1}`, no transform.
+
+**Accessibility:**
+- `role="dialog"`, `aria-modal="true"`, `aria-labelledby`/`aria-describedby` pointing at the real visible heading/body (no static `aria-label` needed).
+- Initial focus: the close (X) button — lets keyboard/screen-reader users dismiss immediately without risking an accidental Enter on "Get in touch."
+- Focus trap: identical pattern to `MobileNavPanel` — `FOCUSABLE_SELECTOR` query filtered by `offsetParent !== null`, Tab/Shift+Tab wrap-around confined to the dialog. Reuse the constant, don't re-derive it.
+- Escape closes via the same `dismiss()` used by every other close path.
+- Focus return on close: capture `document.activeElement` at open time, restore it (or `document.body` if gone) on close. On initial page load this resolves to `document.body` in virtually all real browsers, since nothing has been focused yet — an explicit answer, not a silent assumption. Moot when "Get in touch" is the dismissal path, since the browser is about to navigate away.
+- Background inerted: three siblings this time, not two like `MobileNavPanel` — `#site-header-content`, `#main-content`, and a new `#site-footer-content` (add this id to `Footer.tsx`'s root element) all get `inert` + `aria-hidden="true"` while open, restored on close.
+- Body scroll lock: `document.body.style.overflow = "hidden"` while open, restored on close.
+- Click-outside-to-close: new pattern for this codebase. Backdrop is a separate `motion.div` behind the panel; the panel calls `stopPropagation` on click so interacting with its content never bubbles to the backdrop's dismiss handler.
+- `prefers-reduced-motion`: gated via `useReducedMotion()` per the motion spec above.
+- Flag for E1-F4-S3 (qa-agent): the existing live-browser axe scan (`tests/e2e/accessibility.spec.ts`) needs to also run with the modal forced open on at least one route, the same way it caught the `Footer` contrast defect in its default state.
+
+**Security notes:** no forms, no sensitive fields, no auth — low-risk surface. "Get in touch" is a plain internal `Link href="/contact"` with no query params (no `?ref=`/`?source=` tracking, no `?redirect=`/`?next=` pattern). The `sessionStorage` flag is a boolean UI-state marker only, not user data — no privacy/data-use disclosure implication. Not a destructive or sensitive action — no confirmation step warranted. No network calls in this component, so no error-message design applies.
+
+**Implementation handoff for frontend-coding-agent (E1-F4-S2):**
+- Create `src/components/layout/PortfolioDisclosureModal.tsx` per the component tree above; mount as a sibling of `<Nav />` in `src/app/layout.tsx`.
+- Create `src/data/portfolioDisclosure.ts` exporting `portfolioDisclosureCopy`, typed via a new `PortfolioDisclosureCopy` interface added to `src/data/types.ts`, using the exact copy table above.
+- Add `id="site-footer-content"` to `src/components/layout/Footer.tsx`'s root element.
+- `sessionStorage` key `"dgdevworks-portfolio-disclosure-dismissed"`, value `"true"`; wrap all reads/writes in `try/catch`, fail open (show modal) on error.
+- Reuse `MobileNavPanel`'s exact `FOCUSABLE_SELECTOR` constant and Tab-trap logic; do not re-derive it.
+- 300ms open delay via `setTimeout` in the mount effect (cleared on unmount).
+- Inert three ids on open (`site-header-content`, `main-content`, `site-footer-content`); restore on close/unmount, same pattern as `MobileNavPanel`'s `releaseInert()`.
+- Capture `document.activeElement` at open time; restore it (or `document.body`) on close.

@@ -1,4 +1,9 @@
-import { test, expect, devices } from "@playwright/test";
+// Uses tests/e2e/fixtures.ts (not "@playwright/test" directly) so the
+// sitewide PortfolioDisclosureModal (E1-F4-S2) is pre-dismissed via
+// sessionStorage and never inerts the header (hiding the hamburger from the
+// accessibility tree) mid-test.
+import { test, expect } from "./fixtures";
+import { devices } from "@playwright/test";
 
 // Spread only the viewport/touch-emulation fields from the iPhone 13 device
 // descriptor — the full descriptor also pins `defaultBrowserType: "webkit"`,

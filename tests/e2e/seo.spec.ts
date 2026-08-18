@@ -1,4 +1,8 @@
-import { test, expect } from "@playwright/test";
+// Uses tests/e2e/fixtures.ts (not "@playwright/test" directly) so the
+// sitewide PortfolioDisclosureModal (E1-F4-S2) is pre-dismissed via
+// sessionStorage — it adds an extra <div role="dialog"> otherwise, which is
+// irrelevant noise for these metadata/sitemap/JSON-LD assertions.
+import { test, expect } from "./fixtures";
 
 /**
  * E6-F1-S4: cross-route SEO validation against the actual built static

@@ -2,7 +2,7 @@
 
 **Project:** DG DevWorks Marketing Site
 **Created:** 2026-08-18
-**Last Updated:** 2026-08-18
+**Last Updated:** 2026-08-19
 **Project Status:** Active
 
 ## Definition of Done
@@ -28,21 +28,23 @@ If qa-agent sets QA Status to `Fail`, the story is returned to its assigned agen
 | Metric        | Count |
 | ------------- | ----- |
 | Total Epics   | 6     |
-| Total Stories | 40    |
-| Story Points  | 127   |
-| Done          | 35    |
-| In Progress   | 0     |
-| Todo          | 5     |
+| Total Stories | 43    |
+| Story Points  | 137   |
+| Done          | 38    |
+| In Progress   | 2     |
+| Todo          | 3     |
 | QA Status: Pending | 1     |
-| QA Status: Pass    | 35    |
+| QA Status: Pass    | 38    |
 | QA Status: Fail    | 4     |
-| Parallel-Group: parallel      | 33    |
+| Parallel-Group: parallel      | 34    |
 | Parallel-Group: backend-first | 0     |
 | Parallel-Group: sequential    | 0     |
 
 **QA gate summary (2026-08-18, qa-agent):** 35 of 39 gated stories passed (34 frontend-coding-agent/ui-design-agent stories + 1 of 4 qa-agent stories: E6-F1-S1, E6-F1-S2, E6-F1-S4 pass; E6-F1-S3 fails). 4 stories failed QA and were reset to `Todo`: **E1-F3-S3** (Footer — WCAG AA contrast failure), **E3-F3-S1** (About — inline link fails WCAG 1.4.1 use-of-color), **E6-F1-S3** (accessibility audit — found the above 2 real defects across all 14 routes), and **E6-F2-S1** (Vercel deploy config — could not independently verify a live Vercel preview in this sandboxed environment, no deploy credentials/egress available). `E6-F2-S2` (readme-agent) remains `Todo`/`Pending` — out of qa-agent's scope this pass. See the per-story QA notes below and the Changelog for full detail.
 
-**Agent assignment breakdown:** `frontend-coding-agent` 33 · `ui-design-agent` 2 · `qa-agent` 4 · `readme-agent` 1
+**QA gate summary (2026-08-19, qa-agent):** Follow-up pass scoped to exactly 3 stories — Epic 1, Feature 1.4 "Portfolio Disclosure Modal" (E1-F4-S1, E1-F4-S2, E1-F4-S3), Sprint 5. All 3 passed QA and are now `Status: Done` / `QA Status: Pass`: **E1-F4-S1** (design spec — verified §9 is complete and the shipped implementation matches it verbatim, no deviations), **E1-F4-S2** (`PortfolioDisclosureModal` component — all 6 ACs verified via new automated tests), and **E1-F4-S3** (qa-agent's own story — added 16 unit tests, 11 live-browser E2E tests, and a 4-test axe/reduced-motion extension to `tests/e2e/accessibility.spec.ts`). Also added `tests/e2e/fixtures.ts` and updated 6 pre-existing E2E specs to fix a real (test-suite-only) regression the new sitewide modal introduced against unrelated flows — see the Changelog for detail. The 4 previously-failed legacy stories (`E1-F3-S3`, `E3-F3-S1`, `E6-F1-S3`, `E6-F2-S1`) and `E6-F2-S2` were deliberately left untouched — out of scope for this pass.
+
+**Agent assignment breakdown:** `frontend-coding-agent` 34 · `ui-design-agent` 3 · `qa-agent` 5 · `readme-agent` 1
 
 ---
 
@@ -222,6 +224,66 @@ If qa-agent sets QA Status to `Fail`, the story is returned to its assigned agen
 - [x] Components are typed (TypeScript props) and documented with basic usage examples in code comments
 
 **QA notes (2026-08-18):** `tests/unit/components/Button.test.tsx` (5 tests, incl. external-link `rel`/`target` safety), `tests/unit/components/Card-Section.test.tsx` (4 tests), and `tests/unit/components/ScrollReveal.test.tsx` (2 tests, incl. reduced-motion) all pass. None of these primitives themselves consume `text-text-tertiary`, so they're unaffected by the E1-F3-S3 contrast defect — that defect lives in page-composite consumers (`Footer`, `ServiceCard`, `PricingCard`), not the primitives library.
+
+---
+
+### Feature 1.4: Portfolio Disclosure Modal
+
+> New feature (added 2026-08-18): a first-load popup modal disclosing that this is a portfolio project, with a link to the contact path, so visitors understand the site's context and can reach the owner immediately if interested.
+
+---
+
+#### E1-F4-S1 — Design portfolio disclosure modal UX & accessibility spec
+
+**Story:** As a visitor landing on the site, I want a clear, unobtrusive disclosure that this is a portfolio project with an easy way to reach the owner, so that I understand the site's context immediately without it feeling like a blocking ad-style popup.
+
+**Points:** 2 | **Sprint:** 5 | **Status:** `Done` | **QA Status:** `Pass` | **Assigned:** `ui-design-agent`
+
+**Acceptance Criteria:**
+- [x] Modal copy, layout, and visual style specified in `docs/design-system.md`, consistent with the existing "Spec Sheet / Blueprint" tokens and motion conventions
+- [x] Trigger timing and dismissal-persistence behavior specified — **resolved:** `sessionStorage`-scoped dismissal (shows once per browser session, does not reappear on subsequent route navigation); fails open (shows the modal) if `sessionStorage` throws
+- [x] Contact link target scoped — **resolved:** direct `Link href="/contact"`. The site has no in-page contact section outside `/contact` itself, and `/contact` is already the canonical destination used by `CTABand`, `Footer`, and `MobileNavPanel`
+- [x] Spec states which route(s) the modal renders on — **resolved:** sitewide, mounted in the root layout (`src/app/layout.tsx`) as a sibling of `<Nav />`, gated by the sessionStorage check. Reasoning: most real visits enter through routes other than `/` (SEO-crawled marketing site), so a home-only mount would silently skip the disclosure for direct/deep-linked visitors
+- [x] Dialog accessibility spec documented, reusing the mobile nav panel's proven pattern from `docs/design-system.md` §5/§7: `role="dialog"`, `aria-modal="true"`, accessible name via `aria-labelledby`/`aria-describedby`, focus trapped while open, background inerted (3 landmarks: header/main/footer), `Esc` closes and returns focus to the pre-open `document.activeElement`, and a `prefers-reduced-motion` fallback (instant opacity-only, no transform)
+
+**Note (ui-design-agent):** Full spec written to `docs/design-system.md` §9 ("Portfolio disclosure modal"), including exact disclosure copy, component tree, token usage, and an implementation handoff list for E1-F4-S2. Status left at `In Progress` rather than `Done` — per this tracker's Definition of Done, only `qa-agent` sets a story's Status to `Done`/QA Status to `Pass`; qa-agent should verify against §9 before closing this out. One net-new implementation detail beyond the original ACs: the modal needs to inert `Footer` in addition to `Nav`/`main`, which requires adding `id="site-footer-content"` to `Footer.tsx`'s root element (flagged in the §9 handoff list for E1-F4-S2).
+
+**QA notes (2026-08-19, qa-agent):** Spec-conformance check against the shipped E1-F4-S2 implementation (`src/components/layout/PortfolioDisclosureModal.tsx`, `src/data/portfolioDisclosure.ts`) — verbatim match on every point checked: disclosure copy (eyebrow/heading/body/CTAs/close-button `aria-label`, word-for-word), the `sessionStorage` key `"dgdevworks-portfolio-disclosure-dismissed"` and fail-open try/catch behavior on both read and write, the 300ms open delay, the 180ms backdrop / 200ms panel motion durations and exact `{opacity:0, scale:0.96, y:8}` initial values, the reduced-motion opacity-only fallback (confirmed live in a real browser via `page.emulateMedia({reducedMotion:'reduce'})` — no `transform` is applied), the three inerted landmark ids (`site-header-content`/`main-content`/`site-footer-content`), reuse of `MobileNavPanel`'s exact `FOCUSABLE_SELECTOR`/Tab-trap logic, the `card-bracket` + `bg-surface`/`border-border` styling tokens, and the root-layout sitewide mount as a sibling of `<Nav />`. No deviations found. Spec is internally consistent and fully implemented as written — no route-back needed. Setting `Status: Done`, `QA Status: Pass`.
+
+---
+
+#### E1-F4-S2 — Build PortfolioDisclosureModal component
+
+**Story:** As a visitor, I want the portfolio-disclosure modal to appear on page load and let me either dismiss it or jump straight to contacting the owner, so that I can act on it without friction.
+
+**Points:** 5 | **Sprint:** 5 | **Status:** `Done` | **QA Status:** `Pass` | **Assigned:** `frontend-coding-agent` | **Parallel-Group:** `parallel`
+
+**Acceptance Criteria:**
+- [x] Modal renders at the start of page load per the route scope decided in E1-F4-S1
+- [x] Modal is dismissible via a visible close control, the `Esc` key, and clicking outside the dialog
+- [x] Modal implements the accessible dialog pattern specified in E1-F4-S1 (`role="dialog"`, `aria-modal="true"`, labeled, focus trapped while open, background inerted, focus returned on close), matching the existing `MobileNavPanel` implementation approach
+- [x] Modal includes a working link/button to the contact destination (`/contact` or in-page anchor) per the E1-F4-S1 scoping decision
+- [x] Modal respects `prefers-reduced-motion` (instant show/hide, no transform/animation), consistent with the rest of the site's motion conventions
+- [x] Dismissal persists per the E1-F4-S1 spec (e.g. a `sessionStorage` flag) so the modal does not repeatedly interrupt the same browsing session
+
+**QA notes (2026-08-19, qa-agent):** All 6 ACs verified against `docs/design-system.md` §9 and confirmed via new automated coverage (`tests/unit/components/PortfolioDisclosureModal.test.tsx`, `tests/e2e/portfolio-disclosure-modal.spec.ts`, and the modal-open block appended to `tests/e2e/accessibility.spec.ts`) — see E1-F4-S3 below for the full list of tests. Security check (per this story's low-risk surface, docs/design-system.md §9 "Security notes"): confirmed "Get in touch" is a plain internal `Link href="/contact"` with no query string (`cta.getAttribute("href")` asserted to not match `/[?&]/` in both the unit test and a manual read of `PortfolioDisclosureModal.tsx`) — no open-redirect-shaped pattern, no tracking params, no secrets/tokens anywhere in this component. One regression caught and fixed during this QA pass (see Changelog): the modal's sitewide, ~300ms-after-load auto-open behavior — while itself correct per spec — was intercepting pointer events and inerting the header in 3 pre-existing E2E specs (`accessibility.spec.ts`'s contrast test, `mobile-nav.spec.ts`, `navigation.spec.ts`) that predate this feature and don't expect a modal to appear. Fixed by adding `tests/e2e/fixtures.ts` (a shared Playwright fixture that pre-seeds the modal's sessionStorage dismissal flag) and switching all pre-existing specs that interact with page content shortly after `page.goto()` to import from it instead of `@playwright/test` directly. No product code changes were needed — this was purely a test-suite adaptation to a legitimately new sitewide UI element. Setting `Status: Done`, `QA Status: Pass`.
+
+---
+
+#### E1-F4-S3 — Write tests for portfolio disclosure modal
+
+**Story:** As a maintainer, I want automated coverage of the portfolio disclosure modal, so that its first-load behavior, accessibility, and dismissal persistence don't regress.
+
+**Points:** 3 | **Sprint:** 5 | **Status:** `Done` | **QA Status:** `Pass` | **Assigned:** `qa-agent`
+
+**Acceptance Criteria:**
+- [x] Unit test verifies the modal renders on initial load and is dismissible via close control and `Esc`, with focus trapped while open
+- [x] Unit test verifies the contact link/button targets the correct destination per the E1-F4-S1 scoping decision
+- [x] Live-browser E2E test verifies the modal appears on first page load and that dismissal persists for the rest of the session per the E1-F4-S1 spec (no reappearance on subsequent in-session navigation)
+- [x] Automated accessibility scan (axe) on the modal's open state finds no critical/serious violations, and the `prefers-reduced-motion` fallback is verified
+- [x] Full existing test suite (unit + E2E) still passes with no regressions to nav, footer, theme, or SEO/Lighthouse checks already enforced elsewhere in the suite
+
+**QA notes (2026-08-19, qa-agent):** Added `tests/unit/components/PortfolioDisclosureModal.test.tsx` (16 tests: open-after-delay, stays closed when already dismissed, exact copy + `/contact` CTA with no query-string, initial focus on close button, dismissal via close/Esc/backdrop/"Continue browsing" all persisting the `sessionStorage` flag, click-inside-panel does NOT dismiss, Tab and Shift+Tab focus-trap wrap-around, 3-landmark inert/aria-hidden + restore, body-scroll lock + restore, and two fail-open tests for `sessionStorage.getItem`/`setItem` throwing). Added `tests/e2e/portfolio-disclosure-modal.spec.ts` (11 tests: appears on `/` and on a second route `/pricing`, dismissible via close/backdrop/Esc, real-browser Tab focus trap, 3-landmark inert verified via role-query exclusion, "Get in touch" navigates to `/contact`, dismissal persists across 6 in-session route changes, dismissal is session-scoped only (new browser context sees it again), and a live-browser fail-open check for `sessionStorage.setItem` throwing). Extended `tests/e2e/accessibility.spec.ts` with a new block (4 tests) that forces the modal open (fresh, non-dismissed session) and axe-scans it on both `/` and `/services` — **0 critical/serious violations found on either route** — plus a `page.emulateMedia({reducedMotion:'reduce'})` test asserting the panel's computed `transform` is `none`/identity (no scale/translate applied) and `opacity: 1`, confirming the reduced-motion fallback. Also added `tests/e2e/fixtures.ts` (see E1-F4-S2 QA notes) to keep the pre-existing suite regression-free against the new sitewide modal. **Regression baseline (before this pass):** unit 158/158 (documented last-known-good); first E2E run against the newly-merged modal came back 41/44 (3 failing: the 1 pre-existing known `mobile-nav.spec.ts` focus-trap defect + 2 new modal-caused regressions in `accessibility.spec.ts`'s contrast test and `navigation.spec.ts`'s critical-flow test, both traced to the modal's backdrop intercepting clicks / inerting the header before those specs expected it). **After adding `tests/e2e/fixtures.ts` and this story's new tests:** unit 174/174 (158 baseline + 16 new, 0 failures), E2E 58/59 (44 baseline + 15 new, only the 1 pre-existing `mobile-nav.spec.ts` focus-trap failure remains — confirmed pre-existing per prior session's `git stash` reproduction on unmodified `master`, unrelated to this feature, left untouched and out of scope). No new regressions. Setting `Status: Done`, `QA Status: Pass`.
 
 ---
 
@@ -774,6 +836,26 @@ If qa-agent sets QA Status to `Fail`, the story is returned to its assigned agen
 
 ---
 
+## Final Backlog Review
+
+**Scope of this review:** Epic 1, Feature 1.4 "Portfolio Disclosure Modal" (E1-F4-S1, E1-F4-S2, E1-F4-S3), Sprint 5 — the dev cycle that just completed. All 3 stories are confirmed `Status: Done` / `QA Status: Pass`, verified by qa-agent's 2026-08-19 gate pass (see Changelog). No discrepancies found between this section's review and the per-story records above.
+
+**Summary table re-verified (2026-08-19, readme-agent):** recounted directly against the 43 story headers in this document — Total Epics 6, Total Stories 43, Story Points 137 (summed per-story), Done 38 / In Progress 2 / Todo 3 (sums to 43), QA Status Pass 38 / Fail 4 / Pending 1 (sums to 43), Parallel-Group `parallel` 34. All figures in the Summary table match the recount exactly; no correction needed.
+
+**Pre-existing, out-of-scope items (predate this feature cycle, deliberately not touched by this run):**
+
+| Story | Status | QA Status | Note |
+| --- | --- | --- | --- |
+| E1-F3-S3 — Build global Footer component | `In Progress` | `Fail` | WCAG AA `color-contrast` failure on `text-text-tertiary` (Footer eyebrow labels/copyright), found 2026-08-18, predates Sprint 5. Deferred to `frontend-coding-agent` for remediation. |
+| E3-F3-S1 — Build About page (/about) | `In Progress` | `Fail` | WCAG 1.4.1 `link-in-text-block` failure on the inline "personal portfolio" link, found 2026-08-18, predates Sprint 5. Deferred to `frontend-coding-agent` for remediation. |
+| E6-F1-S3 — Accessibility audit across all routes | `Todo` | `Fail` | Blocked on the same two defects as E1-F3-S3/E3-F3-S1 above; found 2026-08-18, predates Sprint 5. Deferred pending those fixes and a re-scan. |
+| E6-F2-S1 — Configure Vercel deployment for static export | `Todo` | `Fail` | Could not independently verify a live Vercel preview in the sandboxed QA environment (no deploy credentials/egress); found 2026-08-18, predates Sprint 5. Deferred pending a real-deployment check by whoever has Vercel access. |
+| E6-F2-S2 — Write README with setup, env vars, and deployment instructions | `Todo` | `Pending` | Predates Sprint 5. **Note:** `README.md` was authored/updated as part of this documentation pass (2026-08-19, readme-agent) — see the Changelog entry below — but this story's Status/QA Status are intentionally left as-is per the Definition of Done (only `qa-agent` may set a story to `Done`/`Pass`). qa-agent should verify the new README against this story's acceptance criteria in a future pass. |
+
+None of the above 5 items are part of, or blocked on, the Sprint 5 Portfolio Disclosure Modal cycle. They are carried forward on the backlog unchanged.
+
+---
+
 ## Changelog
 
 | Date       | Agent       | Change                  |
@@ -781,4 +863,7 @@ If qa-agent sets QA Status to `Fail`, the story is returned to its assigned agen
 | 2026-08-18 | scrum-agent | Initial tracker created |
 | 2026-08-18 | ui-design-agent | Delivered token spec (E1-F2-S1) and nav/footer UX spec (E1-F3-S1); both set to In Progress |
 | 2026-08-18 | frontend-coding-agent | Implemented all 33 assigned stories (Epics 1–5 + E6-F2-S1): scaffolded Next.js 16 App Router + TypeScript strict + Tailwind v4 + Framer Motion + Bun; built the light-default/dark-toggle theming system (CSS custom properties, blocking init script, useSyncExternalStore-based ThemeToggle), Inter/Space Grotesk/JetBrains Mono typography, Nav/Footer/UI primitive library; populated services.ts/caseStudies.ts/pricing.ts/business.ts; built all 14 pre-rendered pages across 11 route templates; implemented generateMetadata, sitemap.ts/robots.ts, 9 opengraph-image routes, Person/ProfessionalService + Service + FAQPage JSON-LD, and case-study↔service cross-linking; implemented the Discord-webhook contact form (client-side validation, honeypot, placeholder-safe failure handling) and sitewide "Book a call" CTA; configured vercel.json for static export. All 33 stories set to In Progress (QA Status left Pending for qa-agent). `bun run build` (static export), `bun run lint`, `bun run typecheck`, and `bun audit` all pass with zero errors. |
+| 2026-08-18 | scrum-agent | Added Feature 1.4 (Portfolio Disclosure Modal) — 3 new stories, E1-F4-S1/S2/S3, Sprint 5, 10 points total, requested via new feature: first-page-load popup disclosing this is a portfolio project with a link to contact. Flagged two open scoping questions in E1-F4-S1's acceptance criteria for ui-design-agent to resolve before implementation: (1) whether "jump to contact" means a `/contact` page link or an in-page scroll target, and (2) whether modal dismissal should persist per session (recommended default) or show on every page load with no memory. No new epic, no backend/db work (static site, no API needed — noted per `docs/api-contract.md`). |
 | 2026-08-18 | qa-agent | **QA gate pass over all 39 gated stories** (34 frontend-coding-agent/ui-design-agent stories from Epics 1–5 + E6-F2-S1, plus qa-agent's own 4 Epic 6.1 stories). Regression baseline: 0 tests existed prior to this pass (fresh implementation), so nothing to regress — confirmed clean. Added the full testing stack from scratch: **Vitest 4 + React Testing Library + jsdom + vitest-axe** (`vitest.config.ts`, `tests/unit/**`, 25 files / 153 tests, `bun run test`) and **Playwright + @axe-core/playwright** (`playwright.config.ts`, `tests/e2e/**`, 7 spec files / 43 tests, `bun run test:e2e` — runs against the actual static export build, not the dev server). **35 of 39 stories passed QA** and were set to `Status: Done` / `QA Status: Pass` with their AC checkboxes checked off, backed by the new automated tests. **4 stories failed QA** and were reset to `Status: Todo` / `QA Status: Fail`, each with a QA notes block detailing exactly what failed and why: **E1-F3-S3** (Footer — a real, live-browser-confirmed WCAG AA `color-contrast` violation, `text-text-tertiary` at 3.16–3.42:1 against the required 4.5:1, reproducing on all 14 routes), **E3-F3-S1** (About — a real WCAG 1.4.1 `link-in-text-block` violation, the inline portfolio link only 1.12:1 distinguishable from its surrounding text with no underline), **E6-F1-S3** (the accessibility-audit story itself, since the live-browser axe scan found the above 2 real `serious`-impact violations — the jsdom-level scan alone had missed them, underscoring the value of the live-browser run), and **E6-F2-S1** (Vercel deployment — could not independently verify an actual live Vercel preview in this sandboxed, no-credentials environment; downgraded pending a real deploy check). Also fixed 3 test-infrastructure-only issues discovered along the way (none were product bugs): a `devices["iPhone 13"]` Playwright preset silently requiring an uninstalled WebKit browser (fixed by only spreading the viewport/touch fields), an OG-image E2E assertion checking `Content-Type` against a static file server that doesn't MIME-sniff extensionless files (switched to PNG magic-byte verification), and an accessibility-scan false positive from catching `ScrollReveal` content mid-fade-in (fixed by settling scroll animations before scanning). Regression re-check after all fixes: full unit suite (153/153) and E2E suite (28/43, with the 15 failures being exactly the 2 confirmed real defects above, reproducing consistently across two full E2E runs) both stable, no flaky/order-dependent failures observed. `bun run typecheck`, `bun run lint`, and `bun audit` (0 vulnerabilities) all still clean after adding the test suite. `E6-F2-S2` (readme-agent) untouched — out of qa-agent's scope. |
+| 2026-08-19 | qa-agent | **QA gate pass, scoped to exactly 3 stories: E1-F4-S1/S2/S3 (Portfolio Disclosure Modal).** All 3 passed and are now `Status: Done` / `QA Status: Pass`. **E1-F4-S1** (design spec): verified `docs/design-system.md` §9 is complete and internally consistent, and that the shipped `PortfolioDisclosureModal` implementation matches it verbatim (copy, sessionStorage key, timing values, 3 inerted landmark ids, motion values) — no deviations found. **E1-F4-S2** (component build): all 6 ACs verified via new automated tests; security check confirmed the "Get in touch" CTA is a plain `/contact` link with no query string, no tracking params, no secrets. **E1-F4-S3** (qa-agent's own story): added `tests/unit/components/PortfolioDisclosureModal.test.tsx` (16 tests) and `tests/e2e/portfolio-disclosure-modal.spec.ts` (11 tests), plus a 4-test modal-open axe/reduced-motion block appended to `tests/e2e/accessibility.spec.ts` (0 critical/serious violations on `/` and `/services`). **Regression finding:** the new sitewide, ~300ms-after-load modal was intercepting pointer events and inerting the header in 3 pre-existing E2E specs that predate this feature (`accessibility.spec.ts`'s contrast test, `mobile-nav.spec.ts`, `navigation.spec.ts`) — a real test-suite-only regression, no product bug. Fixed by adding `tests/e2e/fixtures.ts` (a shared Playwright fixture pre-seeding the modal's sessionStorage dismissal flag) and switching 6 pre-existing specs that interact with page content shortly after `page.goto()` to import from it instead of `@playwright/test` directly. **Regression counts:** baseline unit 158/158, first E2E run against the merged modal 41/44 (3 failing: 1 pre-existing unrelated `mobile-nav.spec.ts` defect + 2 new modal-caused regressions); after the fixture fix and new tests, unit 174/174 (158 + 16 new) and E2E 58/59 (44 + 15 new), with only the same 1 pre-existing, unrelated `mobile-nav.spec.ts` failure remaining. No new regressions. The 4 previously-failed legacy stories (`E1-F3-S3`, `E3-F3-S1`, `E6-F1-S3`, `E6-F2-S1`) and `E6-F2-S2` were deliberately left untouched — out of scope for this pass. |
+| 2026-08-19 | readme-agent | **Dev cycle completion pass.** Confirmed E1-F4-S1/S2/S3 (Portfolio Disclosure Modal, Sprint 5) remain `Status: Done` / `QA Status: Pass` per qa-agent's 2026-08-19 gate pass — no changes needed. Recounted the Summary table against all 43 story headers: all figures (Total Stories 43, Story Points 137, Done 38 / In Progress 2 / Todo 3, QA Status Pass 38 / Fail 4 / Pending 1, Parallel-Group `parallel` 34) confirmed accurate, no corrections required. Added the `## Final Backlog Review` section, recording the 5 pre-existing out-of-scope items (`E1-F3-S3`, `E3-F3-S1`, `E6-F1-S3`, `E6-F2-S1`, `E6-F2-S2`) as deferred/unchanged — none are part of or blocked on this cycle. **Frontend code review for this cycle passed with no must-fix items.** Two non-blocking nice-to-haves noted for the backlog (not blockers): (1) extract the duplicated `FOCUSABLE_SELECTOR` constant (currently defined separately in `MobileNavPanel` and `PortfolioDisclosureModal`) into a shared a11y util; (2) a low-probability dual-dialog focus-race edge case between the new `PortfolioDisclosureModal` and the pre-existing `MobileNavPanel` if both were ever triggered open simultaneously. Also authored/updated `README.md` (setup, env vars, scripts, testing, architecture summary) per E6-F2-S2's acceptance criteria — that story's own `Status`/`QA Status` are left untouched pending qa-agent verification, per the Definition of Done. |

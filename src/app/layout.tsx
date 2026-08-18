@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
+import { PortfolioDisclosureModal } from "@/components/layout/PortfolioDisclosureModal";
 import { JsonLd } from "@/components/JsonLd";
 import { themeInitScript } from "@/lib/theme";
 import { personProfessionalServiceJsonLd } from "@/lib/seo";
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-full flex flex-col font-sans" suppressHydrationWarning>
         <Nav />
+        <PortfolioDisclosureModal />
         <main id="main-content" className="flex-1">
           {children}
         </main>

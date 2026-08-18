@@ -85,3 +85,12 @@ export interface DiscordWebhookPayload {
   username?: string;
   embeds: DiscordWebhookEmbed[];
 }
+
+export interface PortfolioDisclosureCopy {
+  eyebrow: string;
+  heading: string;
+  body: string;
+  primaryCtaLabel: string;
+  secondaryCtaLabel: string;
+  closeButtonAriaLabel: string;
+}

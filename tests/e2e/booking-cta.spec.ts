@@ -1,4 +1,7 @@
-import { test, expect } from "@playwright/test";
+// Uses tests/e2e/fixtures.ts (not "@playwright/test" directly) so the
+// sitewide PortfolioDisclosureModal (E1-F4-S2) is pre-dismissed via
+// sessionStorage and never intercepts clicks on these unrelated CTA checks.
+import { test, expect } from "./fixtures";
 
 test.describe("Book a call CTA (E5-F2-S1)", () => {
   test("nav 'Book a call' link points to the configured booking URL and opens safely in a new tab", async ({

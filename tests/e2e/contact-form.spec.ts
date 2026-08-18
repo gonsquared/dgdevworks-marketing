@@ -1,4 +1,7 @@
-import { test, expect } from "@playwright/test";
+// Uses tests/e2e/fixtures.ts (not "@playwright/test" directly) so the
+// sitewide PortfolioDisclosureModal (E1-F4-S2) is pre-dismissed via
+// sessionStorage and never intercepts form field interaction/focus.
+import { test, expect } from "./fixtures";
 
 const WEBHOOK_PATTERN = "**/api/webhooks/**";
 

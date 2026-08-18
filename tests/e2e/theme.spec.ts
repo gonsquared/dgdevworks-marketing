@@ -1,4 +1,8 @@
-import { test, expect } from "@playwright/test";
+// Uses tests/e2e/fixtures.ts (not "@playwright/test" directly) so the
+// sitewide PortfolioDisclosureModal (E1-F4-S2) is pre-dismissed via
+// sessionStorage and never inerts the header (hiding the theme toggle from
+// the accessibility tree) mid-test.
+import { test, expect } from "./fixtures";
 
 test.describe("Theme toggle (E1-F2-S2)", () => {
   test("defaults to dark theme with no stored preference", async ({ page }) => {

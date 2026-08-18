@@ -1,3 +1,26 @@
+## Session: 2026-08-18T15:49:22Z
+
+**Skill:** new-dev-story
+**Status:** ✅ Complete
+**Stories:** 0 Done, 0 Failed, 0 Deferred (planning run — 3 new stories added to backlog, 1 In Progress, 2 Todo/Pending)
+
+### Decisions
+- Feature planned: a page-load popup modal disclosing that dgdevworks-marketing is a self-built portfolio project (not a live business with an active client roster), with a CTA linking to `/contact` for interested visitors.
+- New stories added to `docs/dev-stories-tracker.md` under existing Epic 1, new Feature 1.4 "Portfolio Disclosure Modal", Sprint 5: E1-F4-S1 (ui-design-agent, 2 pts), E1-F4-S2 (frontend-coding-agent, 5 pts, Parallel-Group: parallel), E1-F4-S3 (qa-agent, 3 pts).
+- Architecture: software-architect-agent confirmed no architectural changes needed — static-export Next.js site, no backend/API/DB impact; `docs/api-contract.md` read and confirmed accurate as-is, left untouched.
+- DB: no DB impact — db-agent skipped per workflow.
+- UI/UX spec (E1-F4-S1) written to `docs/design-system.md` §9: contact link is a direct `Link href="/contact"` (no existing in-page contact anchor); dismissal is sessionStorage-scoped (once per browser session, key `dgdevworks-portfolio-disclosure-dismissed`, fails open on storage errors); modal is sitewide, mounted in root layout (`src/app/layout.tsx`) as a sibling of `<Nav />` rather than home-page-only, since most real visits enter via non-home routes on this SEO-crawled site. Component reuses MobileNavPanel's accessible-dialog pattern (focus trap, inert background, Esc-to-close, `useReducedMotion` gating) plus a new backdrop/click-outside-to-close pattern not previously present in the codebase.
+- New files planned: `src/components/layout/PortfolioDisclosureModal.tsx`, `src/data/portfolioDisclosure.ts`, new `PortfolioDisclosureCopy` type in `src/data/types.ts`. One existing-file change required: add `id="site-footer-content"` to `src/components/layout/Footer.tsx`'s root element, since this modal must inert three background landmarks (header/main/footer) vs. MobileNavPanel's two.
+- Tracker state: E1-F4-S1 set to Status: In Progress (all 4 ACs checked off, spec complete) — not Done, since Done/Pass is reserved for qa-agent per this tracker's Definition of Done. E1-F4-S2 and E1-F4-S3 remain Todo/Pending, ready for orchestrate-dev.
+
+### Problems & Resolutions
+- None. All three original open questions (contact link target, dismissal persistence, route scope) were explicitly resolved during this session, not deferred.
+
+### Carry Forward
+- E1-F4-S3 (qa-agent) needs the existing live-browser axe scan (`tests/e2e/accessibility.spec.ts`) extended to also scan the modal's open state on at least one route, the same suite that previously caught a Footer contrast defect in its default state — already reflected in the tracker's E1-F4-S3 ACs, flagged here as a real dependency, not optional polish.
+- Carried forward from prior session: `docs/design-system.md` §8's contact-form error copy example is stale (quotes an old em-dash version of the error message that a later session rewrote to remove em dashes sitewide) — minor doc-accuracy nit, non-blocking.
+- Next step: run orchestrate-dev to implement E1-F4-S2 (component build) and E1-F4-S3 (tests). E1-F4-S1 (design spec) is already complete and does not need re-running.
+
 ## Session: 2026-08-17T20:36:05Z
 
 **Skill:** orchestrate-plan
