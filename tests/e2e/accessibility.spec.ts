@@ -69,23 +69,24 @@ test.describe("Accessibility audit — axe scan across all 14 routes (E6-F1-S3)"
 
   test("color contrast passes in both light and dark themes on the home page", async ({ page }) => {
     await page.goto("/");
-    const lightResults = await new AxeBuilder({ page }).withTags(["wcag2aa"]).analyze();
-    const lightContrastViolations = lightResults.violations.filter((v) => v.id === "color-contrast");
-    expect(lightContrastViolations).toEqual([]);
-
-    await page.getByRole("button", { name: "Switch to dark theme" }).click();
-    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+    // Dark is the default theme now — check it first.
     const darkResults = await new AxeBuilder({ page }).withTags(["wcag2aa"]).analyze();
     const darkContrastViolations = darkResults.violations.filter((v) => v.id === "color-contrast");
     expect(darkContrastViolations).toEqual([]);
+
+    await page.getByRole("button", { name: "Switch to light theme" }).click();
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+    const lightResults = await new AxeBuilder({ page }).withTags(["wcag2aa"]).analyze();
+    const lightContrastViolations = lightResults.violations.filter((v) => v.id === "color-contrast");
+    expect(lightContrastViolations).toEqual([]);
   });
 
   test("keyboard navigation reaches the theme toggle and activates it without a mouse", async ({ page }) => {
     await page.goto("/");
-    const toggle = page.getByRole("button", { name: "Switch to dark theme" });
+    const toggle = page.getByRole("button", { name: "Switch to light theme" });
     await toggle.focus();
     await expect(toggle).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
   });
 });

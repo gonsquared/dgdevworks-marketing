@@ -30,7 +30,7 @@ export default function Image() {
               fontFamily: "monospace",
               fontSize: 28,
               letterSpacing: 2,
-              color: "#FF6A45",
+              color: "#00D4FF",
             }}
           >
             [DG]

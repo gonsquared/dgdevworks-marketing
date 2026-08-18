@@ -2,9 +2,9 @@
 
 **Source:** ui-design-agent output from the orchestrate-plan run (2026-08-18), covering stories E1-F2-S1 (color/typography tokens) and E1-F3-S1 (nav/footer UX spec). Persisted here so frontend-coding-agent has a durable reference for Epic 1 stories and beyond.
 
-**Aesthetic direction — "Spec Sheet / Blueprint":** DG DevWorks' working method is spec-first, systematic engineering (this project itself was built from a written, versioned spec). Rather than a generic SaaS-indigo look, the site borrows the visual language of a specification/blueprint document: hairline rules, small mono-set annotation labels (`§01`, `FIG. 02`), and sparing corner-bracket "registration marks" (like CAD/viewfinder ticks) framing only the highest-signal elements (hero visual, the recommended pricing tier, case-study stat callouts). The accent color is a "redline" red-orange — the color an engineer marks up a document with — doing double duty as both the CTA/action color and the error/validation color. Dark mode is literal blueprint paper: deep blueprint-navy background with pale linework text and a glowing redline accent.
+**Aesthetic direction — "Spec Sheet / Blueprint":** DG DevWorks' working method is spec-first, systematic engineering (this project itself was built from a written, versioned spec). Rather than a generic SaaS-indigo look, the site borrows the visual language of a specification/blueprint document: hairline rules, small mono-set annotation labels (`§01`, `FIG. 02`), and sparing corner-bracket "registration marks" (like CAD/viewfinder ticks) framing only the highest-signal elements (hero visual, the recommended pricing tier, case-study stat callouts). The accent color is a cyan/teal (`#007a9e` light / `#00d4ff` dark), aligned with the DG DevWorks portfolio site's palette per docs/superpowers/specs/2026-08-18-portfolio-cyan-theme-reskin-design.md — the blueprint's "spec-review annotation" color, now teal instead of redline. Error/validation states keep a dedicated red-orange `--color-error` token, split out from accent so form errors still read as errors. Dark mode is literal blueprint paper: deep blueprint-navy background with pale linework text and a glowing cyan accent — and dark is now the **default** theme, matching the portfolio.
 
-This deliberately avoids generic AI-design defaults (cream+serif+terracotta, near-black+neon, broadsheet-hairline-columns) while staying inside the approved spec's fixed constraints (light-default, Inter/Space Grotesk/JetBrains Mono, single accent, dark toggle with glow).
+This deliberately avoids generic AI-design defaults (cream+serif+terracotta, near-black+neon, broadsheet-hairline-columns) while staying inside the approved spec's structural constraints (Inter/Space Grotesk/JetBrains Mono, hairline rules, mono annotation labels, corner-bracket registration marks, dark-default toggle with glow).
 
 ---
 
@@ -73,14 +73,14 @@ Light (`:root` / `[data-theme="light"]`):
 --color-text-tertiary: #8A9099
 --color-border: #E3E1DC
 --color-border-strong: #C9C6BE
---color-accent: #C7360F        /* 5.3:1 on white — passes AA normal text */
---color-accent-hover: #A62C0C
---color-accent-bright: #E8431F /* decorative-only: icons, ticks, borders — 3:1 min, NOT for body text */
---color-accent-soft: #FBE7E0
+--color-accent: #007A9E        /* 4.9:1 on white — passes AA normal text */
+--color-accent-hover: #005F7A
+--color-accent-bright: #0089B3 /* decorative-only: icons, ticks, borders — 3:1 min, NOT for body text */
+--color-accent-soft: #E0F4FA
 --color-accent-on-fill: #FFFFFF
 --color-success: #1F8A57
---color-error: #C7360F         /* reuses accent — "redline" metaphor covers both CTA + error */
---color-focus-ring: #C7360F
+--color-error: #C7360F         /* dedicated token, no longer aliases accent — 5.3:1 on white, passes AA */
+--color-focus-ring: #007A9E
 ```
 
 Dark (`[data-theme="dark"]`):
@@ -93,15 +93,15 @@ Dark (`[data-theme="dark"]`):
 --color-text-tertiary: #5E6B80
 --color-border: #253048
 --color-border-strong: #34405C
---color-accent: #FF6A45        /* 6.5:1 on bg — passes AA */
---color-accent-hover: #FF8562
---color-accent-bright: #FF6A45
---color-accent-soft: #2A1712
---color-accent-on-fill: #0D1420 /* dark text on bright accent fill — verified 7.4:1 */
+--color-accent: #00D4FF        /* 10.4:1 on bg — passes AA */
+--color-accent-hover: #33DDFF
+--color-accent-bright: #7CE7FF
+--color-accent-soft: #113240
+--color-accent-on-fill: #0D1420 /* dark text on bright accent fill — 10.4:1 */
 --color-success: #34C77E
---color-error: #FF6A45
---color-focus-ring: #FF6A45
---glow-accent: 0 0 24px rgba(255,106,69,0.35)  /* dark-mode-only accent glow, sparing use on primary CTA + hero mark */
+--color-error: #FF6A45          /* dedicated token, no longer aliases accent — 6.5:1 on bg, passes AA */
+--color-focus-ring: #00D4FF
+--glow-accent: 0 0 24px rgba(0,212,255,0.35)  /* dark-mode-only accent glow, sparing use on primary CTA + hero mark */
 ```
 
 ## 5. Nav & footer UX spec (E1-F3-S1)

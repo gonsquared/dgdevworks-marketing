@@ -13,10 +13,10 @@ export const themeInitScript = `
 (function () {
   try {
     var stored = localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)});
-    var theme = stored === "dark" ? "dark" : "light";
+    var theme = stored === "light" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", theme);
   } catch (e) {
-    document.documentElement.setAttribute("data-theme", "light");
+    document.documentElement.setAttribute("data-theme", "dark");
   }
 })();
 `;
@@ -37,9 +37,9 @@ export function applyTheme(theme: Theme): void {
 
 export function readStoredTheme(): Theme {
   try {
-    return localStorage.getItem(THEME_STORAGE_KEY) === "dark" ? "dark" : "light";
+    return localStorage.getItem(THEME_STORAGE_KEY) === "light" ? "light" : "dark";
   } catch {
-    return "light";
+    return "dark";
   }
 }
 
@@ -48,7 +48,7 @@ export function readStoredTheme(): Theme {
  * the classic useState+useEffect+"mounted" flag dance (and its associated
  * setState-in-effect lint warnings) while still giving each theme-dependent
  * component a hydration-safe way to read the real (client-only) theme
- * value: React renders the deterministic server snapshot ("light") through
+ * value: React renders the deterministic server snapshot ("dark") through
  * hydration, then swaps to the real client snapshot in a single follow-up
  * render — the same hydration-mismatch protection a manual `mounted` guard
  * provides, via the framework-native primitive built for this exact case.
@@ -67,5 +67,5 @@ export function getThemeSnapshot(): Theme {
 }
 
 export function getServerThemeSnapshot(): Theme {
-  return "light";
+  return "dark";
 }

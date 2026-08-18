@@ -16,7 +16,7 @@ export interface ThemeToggleProps {
 
 /**
  * Light/dark theme toggle icon button. Reads the current theme via
- * useSyncExternalStore (server snapshot "light" during SSR/hydration,
+ * useSyncExternalStore (server snapshot "dark" during SSR/hydration,
  * swapping to the real client value in one follow-up render) — the
  * framework-native equivalent of a manual `mounted` guard, avoiding
  * hydration mismatches without a useState+useEffect dance.

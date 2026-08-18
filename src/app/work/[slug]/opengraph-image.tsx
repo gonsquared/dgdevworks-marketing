@@ -33,7 +33,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ fontFamily: "monospace", fontSize: 24, color: "#FF6A45" }}>[DG] DevWorks — CASE STUDY</span>
+          <span style={{ fontFamily: "monospace", fontSize: 24, color: "#00D4FF" }}>[DG] DevWorks — CASE STUDY</span>
         </div>
         <div style={{ display: "flex", marginTop: 40, fontSize: 48, fontWeight: 600, lineHeight: 1.15 }}>
           {title}

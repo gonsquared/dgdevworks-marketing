@@ -37,8 +37,10 @@ const LIGHT = {
   surface: "#ffffff",
   textPrimary: "#16191d",
   textSecondary: "#5c6470",
-  accent: "#c7360f",
+  accent: "#007a9e",
+  accentBright: "#0089b3",
   accentOnFill: "#ffffff",
+  error: "#c7360f",
 };
 
 const DARK = {
@@ -46,8 +48,10 @@ const DARK = {
   surface: "#141c2c",
   textPrimary: "#edeff3",
   textSecondary: "#94a0b4",
-  accent: "#ff6a45",
+  accent: "#00d4ff",
+  accentBright: "#7ce7ff",
   accentOnFill: "#0d1420",
+  error: "#ff6a45",
 };
 
 describe("Color contrast — light theme (docs/design-system.md §4/§7)", () => {
@@ -66,6 +70,15 @@ describe("Color contrast — light theme (docs/design-system.md §4/§7)", () =>
   it("accent-on-fill on accent (solid button text) meets at least 4.5:1 AA", () => {
     expect(contrastRatio(LIGHT.accentOnFill, LIGHT.accent)).toBeGreaterThanOrEqual(4.5);
   });
+
+  it("error on surface meets at least 4.5:1 AA", () => {
+    expect(contrastRatio(LIGHT.error, LIGHT.surface)).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it("accent-bright on surface/bg (decorative — corner-bracket registration marks) meets at least 3:1 (WCAG 1.4.11 non-text)", () => {
+    expect(contrastRatio(LIGHT.accentBright, LIGHT.surface)).toBeGreaterThanOrEqual(3.0);
+    expect(contrastRatio(LIGHT.accentBright, LIGHT.bg)).toBeGreaterThanOrEqual(3.0);
+  });
 });
 
 describe("Color contrast — dark theme (docs/design-system.md §4/§7)", () => {
@@ -83,5 +96,14 @@ describe("Color contrast — dark theme (docs/design-system.md §4/§7)", () => 
 
   it("accent-on-fill on accent (solid button text) meets at least 4.5:1 AA", () => {
     expect(contrastRatio(DARK.accentOnFill, DARK.accent)).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it("error on bg meets at least 4.5:1 AA", () => {
+    expect(contrastRatio(DARK.error, DARK.bg)).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it("accent-bright on surface/bg (decorative — corner-bracket registration marks) meets at least 3:1 (WCAG 1.4.11 non-text)", () => {
+    expect(contrastRatio(DARK.accentBright, DARK.surface)).toBeGreaterThanOrEqual(3.0);
+    expect(contrastRatio(DARK.accentBright, DARK.bg)).toBeGreaterThanOrEqual(3.0);
   });
 });

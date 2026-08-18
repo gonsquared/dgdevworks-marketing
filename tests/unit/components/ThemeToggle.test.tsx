@@ -12,27 +12,27 @@ describe("ThemeToggle (E1-F2-S2)", () => {
 
   it("has an accessible name reflecting the *next* theme, not just an icon", () => {
     render(<ThemeToggle />);
-    // Defaults to light (server snapshot / no stored preference).
-    expect(screen.getByRole("button", { name: "Switch to dark theme" })).toBeInTheDocument();
+    // Defaults to dark (server snapshot / no stored preference).
+    expect(screen.getByRole("button", { name: "Switch to light theme" })).toBeInTheDocument();
   });
 
   it("conveys state via aria-pressed", () => {
     render(<ThemeToggle />);
     const btn = screen.getByRole("button");
-    expect(btn).toHaveAttribute("aria-pressed", "false");
+    expect(btn).toHaveAttribute("aria-pressed", "true");
   });
 
   it("clicking toggles the theme, updates data-theme on <html>, and persists to localStorage", async () => {
     render(<ThemeToggle />);
-    const btn = screen.getByRole("button", { name: "Switch to dark theme" });
+    const btn = screen.getByRole("button", { name: "Switch to light theme" });
 
     await userEvent.click(btn);
 
-    expect(document.documentElement.getAttribute("data-theme")).toBe("dark");
-    expect(window.localStorage.getItem(THEME_STORAGE_KEY)).toBe("dark");
-    expect(await screen.findByRole("button", { name: "Switch to light theme" })).toHaveAttribute(
+    expect(document.documentElement.getAttribute("data-theme")).toBe("light");
+    expect(window.localStorage.getItem(THEME_STORAGE_KEY)).toBe("light");
+    expect(await screen.findByRole("button", { name: "Switch to dark theme" })).toHaveAttribute(
       "aria-pressed",
-      "true"
+      "false"
     );
   });
 
