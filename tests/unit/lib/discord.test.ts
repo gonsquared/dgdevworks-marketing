@@ -48,7 +48,7 @@ describe("src/lib/discord.ts (E5-F1-S2 Discord webhook contract, docs/api-contra
     expect(init.headers["Content-Type"]).toBe("application/json");
 
     const body = JSON.parse(init.body);
-    expect(body.embeds[0].color).toBe(31390);
+    expect(body.embeds[0].color).toBe(5390995);
     expect(Array.isArray(body.embeds)).toBe(true);
     const fields = body.embeds[0].fields;
     expect(fields.find((f: { name: string }) => f.name === "Name").value).toBe("Jane Founder");

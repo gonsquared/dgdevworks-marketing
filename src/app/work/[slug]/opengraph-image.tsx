@@ -27,13 +27,13 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          background: "#0D1420",
+          background: "#0C0A16",
           color: "#EDEFF3",
           fontFamily: "sans-serif",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ fontFamily: "monospace", fontSize: 24, color: "#00D4FF" }}>[DG] DevWorks · CASE STUDY</span>
+          <span style={{ fontFamily: "monospace", fontSize: 24, color: "#B9A3FF" }}>[DG] DevWorks · CASE STUDY</span>
         </div>
         <div style={{ display: "flex", marginTop: 40, fontSize: 48, fontWeight: 600, lineHeight: 1.15 }}>
           {title}
