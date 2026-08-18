@@ -1,3 +1,27 @@
+## Session: 2026-08-18T18:19:33Z
+
+**Skill:** orchestrate-dev
+**Status:** ✅ Complete
+**Stories:** 3 Done, 0 Failed, 0 Deferred (E1-F4-S1, E1-F4-S2, E1-F4-S3 — QA Status: Pass)
+
+### Decisions
+- Implemented a sitewide Portfolio Disclosure Modal shown on first page load, informing visitors this is a portfolio project, with a CTA linking to /contact.
+- Two non-blocking nice-to-haves logged as backlog rather than implemented now: (1) extract duplicated FOCUSABLE_SELECTOR constant (currently duplicated in PortfolioDisclosureModal.tsx and MobileNavPanel.tsx) into a shared src/lib/a11y.ts; (2) accept the rare, low-impact edge case where the portfolio modal and MobileNavPanel could theoretically both be open simultaneously since MobileNavPanel isn't inerted by the portfolio modal.
+- Commit-only cycle: user explicitly chose to commit locally without pushing, opening a PR, or running a Vercel deploy this run.
+
+### Problems & Resolutions
+- QA gate: qa-agent ran full regression + new coverage (16 new unit tests, 11 new E2E tests). Result: 174/174 unit tests passing, 58/59 E2E passing (1 pre-existing unrelated mobile-nav.spec.ts focus-trap flake, out of scope, already tracked in Final Backlog Review).
+- Independent verification (outside qa-agent) caught a real ESLint react-hooks/rules-of-hooks false-positive in tests/e2e/fixtures.ts, where a Playwright fixture parameter named `use` was misidentified as a React hook. Resolved with a scoped eslint-disable-next-line comment.
+- Independent verification also caught an intermittent axe-accessibility failure in tests/e2e/accessibility.spec.ts (modal open on /services) that only reproduced under full-suite CPU contention, never in isolation. Root-caused via systematic-debugging to a timing race: the test asserted dialog visibility and ran the axe scan immediately, before Framer Motion's 180-200ms opacity transition settled, so axe occasionally scanned a mid-fade DOM state and reported a transient violation. Fixed by adding a condition-based wait (`toHaveCSS("opacity", "1")`) before the axe scan in both modal-open axe tests. Verified fixed across 5 repeated full-suite runs (including 2 at --workers=8) with zero recurrence.
+- frontend-code-review-agent approved the change with no must-fix items.
+- readme-agent finalized docs/dev-stories-tracker.md, adding a Final Backlog Review section listing 5 pre-existing out-of-scope defects (E1-F3-S3, E3-F3-S1, E6-F1-S3, E6-F2-S1, E6-F2-S2), and fully rewrote README.md (previously generic create-next-app boilerplate).
+- docs-agent created SPECS.md from scratch (did not previously exist) with all 10 standard sections and 43 REQ IDs covering all 6 epics.
+
+### Carry Forward
+- Work is committed locally (commit 215efae "Add sitewide portfolio disclosure modal" on branch master) but NOT pushed, no PR opened, no Vercel deploy run — confirm with the user in a future session whether they want it pushed/PR'd before assuming it already is.
+- 5 pre-existing out-of-scope backlog defects remain unresolved: E1-F3-S3, E3-F3-S1, E6-F1-S3, E6-F2-S1, E6-F2-S2.
+- Two non-blocking review nice-to-haves are undone backlog items (not urgent): shared FOCUSABLE_SELECTOR constant extraction; dual-dialog (portfolio modal + MobileNavPanel) edge case.
+
 ## Session: 2026-08-18T15:49:22Z
 
 **Skill:** new-dev-story
