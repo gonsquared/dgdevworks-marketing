@@ -25,7 +25,7 @@ export const pricingFaq: FAQItem[] = [
   {
     question: "Are these prices final?",
     answer:
-      "No — all figures on this page are indicative, pending a scoping call. They reflect current market rates for senior freelance engineering work, not a locked-in quote.",
+      "No — all figures on this page are indicative, pending a scoping call. Actual pricing stays flexible and depends on the scope of your project, not a locked-in quote.",
   },
 ];
 

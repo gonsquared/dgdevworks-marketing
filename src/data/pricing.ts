@@ -6,13 +6,12 @@ import type { PricingData } from "./types";
  * "Open Item" in the design spec; replace before public launch.
  */
 export const pricing: PricingData = {
-  // $101/hr average senior SWE contract rate minus 10%, rounded.
-  hourlyRate: 90,
+  hourlyRate: 50,
   packages: [
     {
       slug: "marketing-sites",
       name: "Marketing / Landing Site",
-      priceLabel: "$3,500–$6,500",
+      priceLabel: "$2,500–$3,500",
       timeframe: "1–2 weeks",
       rangeNote:
         "Scales with page count and content complexity — roughly 40–70 hours at the hourly rate.",
@@ -20,7 +19,7 @@ export const pricing: PricingData = {
     {
       slug: "mvp-development",
       name: "MVP / Product Build",
-      priceLabel: "Starting at $12,000",
+      priceLabel: "Starting at $8,400",
       timeframe: "4–8 weeks",
       rangeNote:
         "The floor for a lean, single-core-feature MVP. Scope calls typically land above the floor once integrations and auth are factored in.",
@@ -28,7 +27,7 @@ export const pricing: PricingData = {
     {
       slug: "modernization",
       name: "Legacy Modernization / Migration",
-      priceLabel: "Starting at $8,000 — custom quote",
+      priceLabel: "Starting at $5,600 — custom quote",
       timeframe: "Varies by scope",
       rangeNote:
         "Migration scope varies too much for a fixed range — every quote follows a technical audit of the existing system.",
@@ -36,7 +35,7 @@ export const pricing: PricingData = {
     {
       slug: "fractional",
       name: "Fractional / Embedded Senior Engineer",
-      priceLabel: "$3,500–$7,000/mo",
+      priceLabel: "$2,450–$4,900/mo",
       timeframe: "Ongoing, month to month",
       rangeNote:
         "Reflects roughly 10–20 hours/week at the hourly rate — scoped to your team's cadence, not a fixed headcount contract.",

@@ -49,8 +49,8 @@ export default function PricingPage() {
 
         <div className="mt-10 rounded-md border border-accent bg-accent-soft px-5 py-4">
           <p className="text-ui text-text-primary">
-            All figures on this page are <strong>indicative, pending a scoping call</strong> — they
-            reflect current market rates for senior freelance engineering work, not a locked-in quote.
+            All figures on this page are <strong>indicative, pending a scoping call</strong> — actual
+            pricing stays flexible and depends on the scope of your project, not a locked-in quote.
           </p>
         </div>
       </Section>

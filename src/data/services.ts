@@ -28,7 +28,7 @@ export const services: Service[] = [
     ],
     idealClient:
       "Founders with a validated idea (or a first customer waiting) who need a working product shipped fast, without hiring a full team first.",
-    priceLabel: "Starting at $12,000",
+    priceLabel: "Starting at $8,400",
     relatedCaseStudySlugs: ["retail-pos-platform", "stock-exchange-data-migration"],
   },
   {
@@ -51,7 +51,7 @@ export const services: Service[] = [
     ],
     idealClient:
       "Founders who need a site that converts visitors into leads or customers — not a generic template, and not a six-week agency process.",
-    priceLabel: "$3,500–$6,500",
+    priceLabel: "$2,500–$3,500",
     relatedCaseStudySlugs: ["hardware-brand-partner-portals"],
   },
   {
@@ -74,7 +74,7 @@ export const services: Service[] = [
     ],
     idealClient:
       "Founders or teams carrying a legacy system that's now the bottleneck — slow to change, risky to touch, or blocking new hires from being productive.",
-    priceLabel: "Starting at $8,000 — custom quote",
+    priceLabel: "Starting at $5,600 — custom quote",
     relatedCaseStudySlugs: ["bank-platform-modernization", "stock-exchange-data-migration"],
   },
   {
@@ -97,7 +97,7 @@ export const services: Service[] = [
     ],
     idealClient:
       "Founders with an early engineering team who need senior-level judgment on tap, without a full-time senior hire yet.",
-    priceLabel: "$3,500–$7,000/mo",
+    priceLabel: "$2,450–$4,900/mo",
     relatedCaseStudySlugs: ["bank-platform-modernization"],
   },
 ];
