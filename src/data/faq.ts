@@ -43,7 +43,7 @@ export const contactFaq: FAQItem[] = [
   {
     question: "Do I need a fully-formed spec before reaching out?",
     answer:
-      "No. Most founders start with a rough idea or a pain point. Scoping it into something buildable is part of the first conversation.",
+      "No. Most projects start as a rough idea or a pain point. Scoping it into something buildable is part of the first conversation.",
   },
 ];
 

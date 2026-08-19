@@ -6,9 +6,9 @@ describe("Masthead (BROADSHEET home hero, replaces Hero)", () => {
   it("renders the masthead headline, dateline, all 4 info items, and a tiered CTA pair", () => {
     render(<Masthead />);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "The engineer you hire is the engineer who writes the code."
+      "Build. Integrate. Modernize. Scale."
     );
-    expect(screen.getByText(/AVAILABLE FOR NEW WORK/)).toBeInTheDocument();
+    expect(screen.getByText(/AVAILABLE FOR WORK/)).toBeInTheDocument();
     for (const label of ["PRACTICE", "STACK", "ENGAGEMENT", "RESPONSE"]) {
       expect(screen.getByText(label)).toBeInTheDocument();
     }
