@@ -23,7 +23,7 @@ export function Masthead() {
       <div className="flex items-center gap-2 border-b border-rule pb-4">
         <BracketMark className="text-accent h-3.5 w-5" />
         <p className="font-mono-annotation text-text-secondary">
-          DG DEVWORKS · AVAILABLE FOR NEW WORK
+          DG DEVWORKS · AVAILABLE FOR WORK
         </p>
       </div>
 

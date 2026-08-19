@@ -8,7 +8,7 @@ describe("Masthead (BROADSHEET home hero, replaces Hero)", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "Build. Integrate. Modernize. Scale."
     );
-    expect(screen.getByText(/AVAILABLE FOR NEW WORK/)).toBeInTheDocument();
+    expect(screen.getByText(/AVAILABLE FOR WORK/)).toBeInTheDocument();
     for (const label of ["PRACTICE", "STACK", "ENGAGEMENT", "RESPONSE"]) {
       expect(screen.getByText(label)).toBeInTheDocument();
     }
