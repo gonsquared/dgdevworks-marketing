@@ -29,7 +29,7 @@ test.describe("Critical flow: Home -> Service -> Case study -> back", () => {
     await expect(page).toHaveURL(new RegExp(caseStudyHref!.replace(/\//g, "\\/")));
 
     // Case study -> back to the related service via its cross-link.
-    const relatedServiceLink = page.getByRole("link", { name: /→$/ }).first();
+    const relatedServiceLink = page.locator('a[href^="/services/"]').first();
     await expect(relatedServiceLink).toBeVisible();
     await relatedServiceLink.click();
     await expect(page).toHaveURL(/\/services\//);
