@@ -12,8 +12,10 @@ test.describe("Critical flow: Home -> Service -> Case study -> back", () => {
     await page.goto("/");
     await expect(page).toHaveTitle(/DG DevWorks/);
 
-    // Home -> a specific service via the services overview cards.
-    await page.getByRole("link", { name: "View service →" }).first().click();
+    // Home -> a specific service via the services index rows. Selecting by
+    // href pattern (not link text) so this stays correct regardless of
+    // which component renders the row.
+    await page.locator('a[href^="/services/"]').first().click();
     await expect(page).toHaveURL(/\/services\//);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
