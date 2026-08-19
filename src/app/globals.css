@@ -37,7 +37,6 @@
   --color-focus-ring: #524293;
   --color-rule: #eeebf6;
   --color-wash: #f6f6fa;
-  --shadow-glow-accent: none;
   color-scheme: light;
 }
 
@@ -60,7 +59,6 @@
   --color-focus-ring: #b9a3ff;
   --color-rule: #211b36;
   --color-wash: #211936;
-  --shadow-glow-accent: 0 0 24px rgba(185, 163, 255, 0.4);
   color-scheme: dark;
 }
 
