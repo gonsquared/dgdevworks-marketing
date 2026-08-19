@@ -50,7 +50,7 @@ export function personProfessionalServiceJsonLd() {
         "@id": `${siteUrl}/#person`,
         name: "Daryll",
         url: siteUrl,
-        jobTitle: "Senior Full-Stack Engineer",
+        jobTitle: "Software Engineer",
         sameAs: [business.socialLinks.linkedin, business.socialLinks.github, business.socialLinks.portfolio],
       },
       {

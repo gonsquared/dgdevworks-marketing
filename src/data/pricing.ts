@@ -34,7 +34,7 @@ export const pricing: PricingData = {
     },
     {
       slug: "fractional",
-      name: "Fractional / Embedded Senior Engineer",
+      name: "Fractional / Embedded Software Engineer",
       priceLabel: "$2,450–$4,900/mo",
       timeframe: "Ongoing, month to month",
       rangeNote:

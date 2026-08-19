@@ -144,8 +144,8 @@
   .heading-masthead {
     font-family: var(--font-heading);
     font-weight: 400;
-    font-size: clamp(3.25rem, 2rem + 6vw, 6.5rem);
-    line-height: 0.94;
+    font-size: clamp(2.75rem, 2rem + 3.6vw, 5rem);
+    line-height: 0.98;
     letter-spacing: -0.03em;
   }
 

@@ -10,9 +10,9 @@ export const business: BusinessInfo = {
   brandName: "DG DevWorks",
   tagline: "Bank-grade engineering discipline, delivered at founder speed.",
   positioningCopy:
-    "DG DevWorks is a one-person senior engineering practice: no subcontracting, no account-manager layer, no junior developer cutting their teeth on your codebase. I've spent years shipping production software for regulated banks and global hardware brands. Founders get that same discipline, at the speed an early-stage company actually needs.",
+    "DG DevWorks is a one-person engineering practice: no subcontracting, no account-manager layer, no junior developer learning on your codebase. I've spent years shipping production software for regulated banks and global hardware brands, where a bad release is a compliance incident rather than a quick patch. Founders get that same discipline, at the speed an early-stage company actually needs.",
   bookingUrl: getBookingUrl(),
-  contactEmail: "hello@dgdevworks.com",
+  contactEmail: "daryll@dgdevworks.com",
   socialLinks: {
     linkedin: "https://linkedin.com/in/gonsquared",
     github: "https://github.com/gonsquared",
@@ -21,7 +21,7 @@ export const business: BusinessInfo = {
   trustLine:
     "Your info is only used to respond to your inquiry. No spam, no third parties.",
   footerTrustLine:
-    "One senior engineer, start to finish. No subcontracting, no hand-offs.",
+    "One software engineer, start to finish. No subcontracting, no hand-offs.",
 };
 
 export default business;

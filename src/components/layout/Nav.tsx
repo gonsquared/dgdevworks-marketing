@@ -68,7 +68,7 @@ export function Nav() {
 
         <nav aria-label="Primary" className="hidden md:block">
           <ul className="flex items-center gap-7">
-            {navLinks.map((link, index) => {
+            {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <li key={link.href}>
@@ -76,19 +76,10 @@ export function Nav() {
                     href={link.href}
                     aria-current={isActive ? "page" : undefined}
                     className={clsx(
-                      "group relative flex items-center gap-1.5 py-2 text-ui text-text-secondary transition-colors hover:text-text-primary",
+                      "group relative flex items-center py-2 text-ui text-text-secondary transition-colors hover:text-text-primary",
                       isActive && "text-text-primary"
                     )}
                   >
-                    <span
-                      aria-hidden="true"
-                      className={clsx(
-                        "font-mono-annotation",
-                        isActive ? "text-accent" : "text-text-secondary group-hover:text-text-primary"
-                      )}
-                    >
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
                     {link.label}
                     <span
                       aria-hidden="true"
