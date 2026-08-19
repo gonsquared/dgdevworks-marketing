@@ -4,7 +4,7 @@ import type { PricingPackage } from "@/data/types";
 
 export interface PricingCardProps {
   pkg: PricingPackage;
-  /** Marks the recommended tier with an accent border. */
+  /** Marks the recommended tier with an inset accent ring. */
   recommended?: boolean;
 }
 
