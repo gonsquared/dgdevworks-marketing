@@ -19,4 +19,14 @@ describe("ProofStrip (BROADSHEET home trust layer)", () => {
       expect(within(link!).getByText(cs.headlineStat!.label)).toBeInTheDocument();
     }
   });
+
+  it("gives each link a non-concatenated accessible name (value and label separated)", () => {
+    render(<ProofStrip />);
+    for (const cs of caseStudies) {
+      const link = screen.getByRole("link", {
+        name: `${cs.headlineStat!.value}: ${cs.headlineStat!.label}`,
+      });
+      expect(link).toHaveAttribute("href", `/work/${cs.slug}`);
+    }
+  });
 });

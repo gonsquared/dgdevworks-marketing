@@ -15,10 +15,15 @@ export function ProofStrip() {
         <Link
           key={cs.slug}
           href={`/work/${cs.slug}`}
+          aria-label={`${cs.headlineStat!.value}: ${cs.headlineStat!.label}`}
           className="group flex flex-col gap-1 border-b border-l border-rule px-5 py-6 transition-colors duration-150 first:border-l-0 hover:bg-wash focus-visible:bg-wash md:border-b-0"
         >
-          <span className="font-mono-figure text-accent text-3xl md:text-4xl">{cs.headlineStat!.value}</span>
-          <span className="text-ui text-text-secondary">{cs.headlineStat!.label}</span>
+          <span aria-hidden="true" className="font-mono-figure text-accent text-3xl md:text-4xl">
+            {cs.headlineStat!.value}
+          </span>
+          <span aria-hidden="true" className="text-ui text-text-secondary">
+            {cs.headlineStat!.label}
+          </span>
         </Link>
       ))}
     </div>
