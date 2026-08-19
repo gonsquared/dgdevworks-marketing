@@ -68,11 +68,11 @@ export default async function ServiceDetailPage({
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <h1 className="heading-display">{service.title}</h1>
-            <p className="text-body-lead text-text-secondary mt-4">{service.summary}</p>
+            <p className="text-body-lead text-text-secondary mt-4 max-w-2xl">{service.summary}</p>
           </div>
 
           <div className="lg:col-span-4 lg:col-start-9">
-            <div className="lg:sticky lg:top-24">
+            <div className="lg:sticky lg:top-[5.5rem]">
               <p className="font-mono-figure text-accent">{service.priceLabel}</p>
               {pricingPackage && <p className="text-ui text-text-secondary mt-1">{pricingPackage.timeframe}</p>}
               <Button href={bookingUrl} external variant="solid" size="lg" className="mt-6 w-full">
