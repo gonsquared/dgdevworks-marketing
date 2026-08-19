@@ -18,7 +18,7 @@ export function IndexRail({ number, label, className }: IndexRailProps) {
   return (
     <div
       className={clsx(
-        "flex items-baseline gap-2 lg:sticky lg:top-[5.5rem] lg:flex-col lg:items-start lg:gap-1",
+        "flex items-baseline gap-2 xl:sticky xl:top-[5.5rem] xl:flex-col xl:items-start xl:gap-1",
         className
       )}
     >

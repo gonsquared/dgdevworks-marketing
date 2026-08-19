@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Surface } from "@/components/ui/Surface";
 import { Section, Container } from "@/components/ui/Section";
-import { IndexRail } from "@/components/ui/IndexRail";
 
 describe("Surface primitive (BROADSHEET foundation, replaces Card)", () => {
   it("defaults to the plain variant: no panel border/radius classes", () => {

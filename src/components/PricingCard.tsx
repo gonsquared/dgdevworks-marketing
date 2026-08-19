@@ -11,9 +11,15 @@ export interface PricingCardProps {
 /** Usage: <PricingCard pkg={pkg} recommended /> */
 export function PricingCard({ pkg, recommended = false }: PricingCardProps) {
   return (
-    <Surface variant="panel" className={clsx("flex h-full flex-col", recommended && "border-accent")}>
+    <Surface
+      variant="panel"
+      className={clsx(
+        "flex h-full flex-col",
+        recommended && "shadow-[inset_0_0_0_2px_var(--color-accent)]"
+      )}
+    >
       <h3 className="heading-h4">{pkg.name}</h3>
-      <p className="font-mono-figure text-accent mt-3">{pkg.priceLabel}</p>
+      <p className="font-mono-figure text-accent mt-3 text-2xl">{pkg.priceLabel}</p>
       <p className="text-ui text-text-secondary mt-1">{pkg.timeframe}</p>
       <p className="text-body text-text-secondary mt-4 flex-1">{pkg.rangeNote}</p>
     </Surface>

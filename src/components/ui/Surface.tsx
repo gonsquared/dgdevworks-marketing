@@ -34,7 +34,7 @@ export function Surface({ children, variant = "plain", interactive = false, clas
       className={clsx(
         "relative",
         variantClasses[variant],
-        interactive && "transition-colors duration-150 hover:bg-wash focus-visible:bg-wash",
+        interactive && "transition-colors duration-150 hover:bg-wash focus-within:bg-wash",
         className
       )}
       {...rest}

@@ -9,8 +9,8 @@ describe("IndexRail primitive (BROADSHEET foundation)", () => {
     expect(screen.getByText("PROOF OF WORK")).toBeInTheDocument();
   });
 
-  it("is sticky at the lg breakpoint and inline below it (no JS required for the label to be present)", () => {
+  it("is sticky at the xl breakpoint and inline below it (no JS required for the label to be present)", () => {
     const { container } = render(<IndexRail number="01" label="SERVICES" />);
-    expect(container.firstChild).toHaveClass("lg:sticky");
+    expect(container.firstChild).toHaveClass("xl:sticky");
   });
 });

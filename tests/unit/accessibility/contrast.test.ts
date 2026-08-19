@@ -41,7 +41,7 @@ const LIGHT = {
   accentBright: "#7d68c9",
   accentOnFill: "#ffffff",
   error: "#c7360f",
-  wash: "#f6f6fa",
+  wash: "#e5e1f0",
 };
 
 const DARK = {

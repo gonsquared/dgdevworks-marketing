@@ -57,8 +57,8 @@ export function Section({
   );
 
   const inner = rail ? (
-    <div className="lg:grid lg:grid-cols-[8rem_1fr] lg:gap-10">
-      <IndexRail number={rail.number} label={rail.label} className="mb-6 lg:mb-0" />
+    <div className="xl:grid xl:grid-cols-[8rem_1fr] xl:gap-10">
+      <IndexRail number={rail.number} label={rail.label} className="mb-6 xl:mb-0" />
       <div className="min-w-0">{children}</div>
     </div>
   ) : (

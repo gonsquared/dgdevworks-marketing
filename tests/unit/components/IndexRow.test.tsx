@@ -33,4 +33,16 @@ describe("IndexRow primitive (BROADSHEET foundation)", () => {
     render(<IndexRow href="/work/x" index="02" title="Title" summary="Summary text" />);
     expect(screen.queryByText(/Starting at/)).not.toBeInTheDocument();
   });
+
+  it("renders the title as an h3 by default, or an h2 when headingLevel={2} is set", () => {
+    const { rerender } = render(
+      <IndexRow href="/work/x" index="01" title="Default Heading" summary="Summary text" />
+    );
+    expect(screen.getByRole("heading", { level: 3, name: "Default Heading" })).toBeInTheDocument();
+
+    rerender(
+      <IndexRow href="/work/x" index="01" title="Default Heading" summary="Summary text" headingLevel={2} />
+    );
+    expect(screen.getByRole("heading", { level: 2, name: "Default Heading" })).toBeInTheDocument();
+  });
 });
