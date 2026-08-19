@@ -23,12 +23,12 @@ export function Masthead() {
       <div className="flex items-center gap-2 border-b border-rule pb-4">
         <BracketMark className="text-accent h-3.5 w-5" />
         <p className="font-mono-annotation text-text-secondary">
-          DG DEVWORKS · SOFTWARE ENGINEERING FOR FOUNDERS · AVAILABLE FOR NEW WORK
+          DG DEVWORKS · AVAILABLE FOR NEW WORK
         </p>
       </div>
 
       <h1 className="heading-masthead mt-8 max-w-3xl">
-        The engineer you hire <span className="text-voice">is the engineer who writes the code.</span>
+        Bank-grade engineering discipline, <span className="text-voice">delivered at founder speed.</span>
       </h1>
 
       <div className="mt-10 grid grid-cols-1 gap-8 border-t border-rule pt-8 lg:grid-cols-12">

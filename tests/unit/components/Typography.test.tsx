@@ -20,7 +20,7 @@ describe("Typography scale (BROADSHEET foundation)", () => {
     expect(masthead?.className).not.toBe(display?.className);
   });
 
-  it("exposes a text-voice class for the italic serif signature device", () => {
+  it("exposes a text-voice class for the serif signature device", () => {
     const { getByTestId } = render(
       <span className="text-voice" data-testid="voice">
         the personal clause
