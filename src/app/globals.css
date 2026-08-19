@@ -124,50 +124,70 @@
 }
 
 @layer components {
-  /* Typography scale — docs/design-system.md §4 */
+  /* Typography scale — docs/superpowers/specs/2026-08-19-broadsheet-redesign-design.md §2.2
+     Instrument Serif ships weight 400 only — never set font-weight above 400
+     on anything using var(--font-heading); it will synthesize a fake bold. */
+  .heading-masthead {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(3.25rem, 2rem + 6vw, 6.5rem);
+    line-height: 0.94;
+    letter-spacing: -0.03em;
+  }
+
   .heading-display {
     font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: clamp(2.75rem, 2.2rem + 2.2vw, 3.5rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    font-weight: 400;
+    font-size: clamp(2.5rem, 1.8rem + 3.2vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
   }
 
   .heading-h2 {
     font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: clamp(2rem, 1.8rem + 0.8vw, 2.25rem);
-    line-height: 1.15;
+    font-weight: 400;
+    font-size: clamp(1.875rem, 1.5rem + 1.6vw, 2.75rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
   }
 
   .heading-h3 {
-    font-family: var(--font-heading);
+    font-family: var(--font-sans);
     font-weight: 600;
-    font-size: 1.375rem;
-    line-height: 1.3;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
   }
 
   .heading-h4 {
-    font-family: var(--font-heading);
+    font-family: var(--font-sans);
     font-weight: 600;
     font-size: 1.125rem;
     line-height: 1.4;
   }
 
-  .text-body-lead {
-    font-size: 1.1875rem;
-    line-height: 1.7;
+  .text-voice {
+    font-family: var(--font-heading);
     font-weight: 400;
+    font-style: italic;
+  }
+
+  .text-body-lead {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    font-weight: 400;
+    max-width: 54ch;
   }
 
   .text-body {
     font-size: 1.0625rem;
-    line-height: 1.65;
+    line-height: 1.7;
     font-weight: 400;
+    max-width: 68ch;
   }
 
   .text-ui {
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     line-height: 1.4;
     font-weight: 500;
   }
@@ -175,17 +195,21 @@
   .font-mono-figure {
     font-family: var(--font-mono);
     font-weight: 500;
-    font-size: clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
+    font-size: clamp(2.25rem, 1.6rem + 2.8vw, 4rem);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
   }
 
   .font-mono-annotation {
     font-family: var(--font-mono);
     font-weight: 500;
     font-size: 0.75rem;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
   }
+}
 
+@layer components {
   /* Corner-bracket "registration marks" — sparing use on highest-signal
      elements only (hero visual, recommended pricing tier, stat callouts). */
   .card-bracket {
