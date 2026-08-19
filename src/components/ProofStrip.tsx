@@ -11,6 +11,10 @@ export function ProofStrip() {
 
   return (
     <div className="grid grid-cols-2 border-t border-rule md:grid-cols-4">
+      {/* Leading-edge cell of each row loses its left rule: below md that's
+          every odd cell (2-col wrap), at md+ it's only the first cell
+          (single 4-col row). Assumes each Link below is a direct,
+          unwrapped grid child with no interspersed elements. */}
       {stats.map((cs) => (
         <Link
           key={cs.slug}
