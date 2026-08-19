@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/ui/Section";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { SpecLabel } from "@/components/ui/SpecLabel";
-import { PricingCard } from "@/components/PricingCard";
+import { PricingTable } from "@/components/PricingTable";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { ClosingRecord } from "@/components/ui/ClosingRecord";
 import { JsonLd } from "@/components/JsonLd";
@@ -22,42 +20,32 @@ export default function PricingPage() {
     <>
       <JsonLd data={faqPageJsonLd(pricingFaq)} />
 
-      <Section className="pt-14 pb-0">
-        <SpecLabel>§00 · PRICING</SpecLabel>
-        <h1 className="heading-display mt-3">Pricing</h1>
+      <Section size="loose" rule="bottom">
+        <h1 className="heading-display">Pricing</h1>
         <p className="text-body-lead text-text-secondary mt-4 max-w-2xl">
           Every engagement starts with a scoping call. The figures below are the range real projects
           of that type tend to land in.
         </p>
 
-        <div className="mt-8 rounded-md border border-border-strong bg-surface-sunken px-5 py-3 inline-block">
+        <div className="mt-8 border-t border-rule pt-4">
           <p className="text-ui text-text-secondary">
-            Hourly rate:{" "}
-            <span className="font-mono-figure text-accent align-middle">${pricing.hourlyRate}/hr</span>
+            Hourly rate: <span className="font-mono-figure text-accent align-middle">${pricing.hourlyRate}/hr</span>
           </p>
         </div>
       </Section>
 
-      <Section>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {pricing.packages.map((pkg, index) => (
-            <ScrollReveal key={pkg.slug} delay={index * 0.05}>
-              <PricingCard pkg={pkg} recommended={index === 0} />
-            </ScrollReveal>
-          ))}
-        </div>
+      <Section rule="bottom">
+        <PricingTable packages={pricing.packages} recommendedSlug="mvp-development" />
 
-        <div className="mt-10 rounded-md border border-accent bg-accent-soft px-5 py-4">
-          <p className="text-ui text-text-primary">
-            All figures on this page are <strong>indicative, pending a scoping call</strong>. Actual
-            pricing stays flexible and depends on the scope of your project, not a locked-in quote.
-          </p>
-        </div>
+        <p className="text-ui text-text-secondary mt-8 max-w-2xl">
+          All figures on this page are{" "}
+          <strong className="text-text-primary">indicative, pending a scoping call</strong>. Actual pricing
+          stays flexible and depends on the scope of your project, not a locked-in quote.
+        </p>
       </Section>
 
-      <Section className="bg-surface">
-        <SpecLabel>FAQ</SpecLabel>
-        <h2 className="heading-h2 mt-3">Pricing questions</h2>
+      <Section rail={{ number: "01", label: "FAQ" }}>
+        <h2 className="heading-h2">Pricing questions</h2>
         <FAQAccordion items={pricingFaq} className="mt-8" />
       </Section>
 
