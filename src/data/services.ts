@@ -28,7 +28,7 @@ export const services: Service[] = [
       "QA pass, deployment, and handoff walkthrough",
     ],
     idealClient:
-      "Founders with a validated idea (or a first customer waiting) who need a working product shipped fast, without hiring a full team first.",
+      "Founders and product teams with a validated idea (or a first customer waiting) who need a working product shipped fast, without hiring a full team first.",
     priceLabel: "Starting at $8,400",
     relatedCaseStudySlugs: ["retail-pos-platform", "stock-exchange-data-migration"],
   },
@@ -52,7 +52,7 @@ export const services: Service[] = [
       "Launch, plus a short post-launch check-in",
     ],
     idealClient:
-      "Founders who need a site that converts visitors into leads or customers, not a generic template, and not a six-week agency process.",
+      "Any business that needs its site to turn visitors into leads or customers, not a generic template, and not a six-week agency process.",
     priceLabel: "$2,500–$3,500",
     relatedCaseStudySlugs: ["hardware-brand-partner-portals"],
   },
@@ -76,7 +76,7 @@ export const services: Service[] = [
       "Cutover, monitoring, and a stabilization period",
     ],
     idealClient:
-      "Founders or teams carrying a legacy system that's now the bottleneck: slow to change, risky to touch, or blocking new hires from being productive.",
+      "Companies and teams carrying a legacy system that's now the bottleneck: slow to change, risky to touch, or blocking new hires from being productive.",
     priceLabel: "Starting at $5,600 (custom quote)",
     relatedCaseStudySlugs: ["bank-platform-modernization", "stock-exchange-data-migration"],
   },
@@ -100,7 +100,7 @@ export const services: Service[] = [
       "Monthly check-in to adjust scope as your team's needs change",
     ],
     idealClient:
-      "Founders with an early engineering team who need senior-level judgment on tap, without a full-time senior hire yet.",
+      "Teams at any stage that need senior-level engineering judgment on tap, without committing to a full-time senior hire.",
     priceLabel: "$2,450–$4,900/mo",
     relatedCaseStudySlugs: ["bank-platform-modernization"],
   },

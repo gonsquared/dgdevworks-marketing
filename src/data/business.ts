@@ -8,9 +8,9 @@ import type { BusinessInfo } from "./types";
  */
 export const business: BusinessInfo = {
   brandName: "DG DevWorks",
-  tagline: "Bank-grade engineering discipline, delivered at founder speed.",
+  tagline: "Bank-grade engineering discipline, without the enterprise timeline.",
   positioningCopy:
-    "DG DevWorks is a one-person engineering practice: no subcontracting, no account-manager layer, no junior developer learning on your codebase. I've spent years shipping production software for regulated banks and global hardware brands, where a bad release is a compliance incident rather than a quick patch. Founders get that same discipline, at the speed an early-stage company actually needs.",
+    "DG DevWorks is a one-person engineering practice: no subcontracting, no account-manager layer, no junior developer learning on your codebase. I've spent years shipping production software for regulated banks and global hardware brands, where a bad release is a compliance incident rather than a quick patch. The same discipline applies whether you're building a first product, scaling one that's outgrown its architecture, modernizing a legacy system, or connecting tools that were never meant to talk to each other.",
   bookingUrl: getBookingUrl(),
   contactEmail: "daryll@dgdevworks.com",
   socialLinks: {

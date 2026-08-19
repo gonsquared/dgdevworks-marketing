@@ -14,9 +14,9 @@ import { pricing } from "@/data/pricing";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Product builds and marketing sites for startup founders",
+  title: "Product builds, modernization, and marketing sites",
   description:
-    "Daryll, software engineer, builds MVPs, marketing sites, legacy modernizations, and fractional engineering engagements for startup founders.",
+    "Daryll, software engineer, builds MVPs, marketing sites, legacy modernizations, and fractional engineering engagements for companies and teams building, modernizing, or scaling software.",
   path: "",
 });
 
@@ -37,7 +37,7 @@ export default function HomePage() {
       </Section>
 
       <Section rail={{ number: "01", label: "SERVICES" }}>
-        <h2 className="heading-h2">What I help founders build</h2>
+        <h2 className="heading-h2">What I get hired to do</h2>
         <div className="mt-8">
           {services.map((service, index) => (
             <ScrollReveal key={service.slug} delay={index * 0.035}>
