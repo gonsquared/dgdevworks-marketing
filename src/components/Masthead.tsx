@@ -27,9 +27,7 @@ export function Masthead() {
         </p>
       </div>
 
-      <h1 className="heading-masthead mt-8 max-w-3xl">
-        Bank-grade engineering discipline, <span className="text-voice">delivered at founder speed.</span>
-      </h1>
+      <h1 className="heading-masthead mt-8 max-w-3xl">Build. Integrate. Modernize. Scale.</h1>
 
       <div className="mt-10 grid grid-cols-1 gap-8 border-t border-rule pt-8 lg:grid-cols-12">
         <p className="text-body-lead text-text-secondary lg:col-span-7">{business.positioningCopy}</p>
