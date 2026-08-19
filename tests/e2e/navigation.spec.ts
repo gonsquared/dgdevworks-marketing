@@ -20,7 +20,9 @@ test.describe("Critical flow: Home -> Service -> Case study -> back", () => {
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
     // Service detail -> a related case study.
-    const relatedCaseStudyLink = page.getByRole("link", { name: /Read case study/ }).first();
+    // Selecting by href pattern (not link text) so this stays correct
+    // regardless of which component renders the row.
+    const relatedCaseStudyLink = page.locator('a[href^="/work/"]').first();
     await expect(relatedCaseStudyLink).toBeVisible();
     const caseStudyHref = await relatedCaseStudyLink.getAttribute("href");
     await relatedCaseStudyLink.click();
