@@ -30,7 +30,7 @@ describe("Surface primitive (BROADSHEET foundation, replaces Card)", () => {
   });
 });
 
-describe("Section/Container primitives (E1-F3-S4)", () => {
+describe("Section/Container primitives (BROADSHEET foundation)", () => {
   it("Section wraps children in a Container by default", () => {
     render(
       <Section data-testid="section">
@@ -49,8 +49,55 @@ describe("Section/Container primitives (E1-F3-S4)", () => {
     expect(screen.getByTestId("section").querySelector("div.mx-auto")).not.toBeInTheDocument();
   });
 
-  it("Container centers content with a max-width class", () => {
+  it("Container centers content with the widened 1280px max-width class", () => {
     render(<Container data-testid="container">content</Container>);
-    expect(screen.getByTestId("container")).toHaveClass("max-w-[1200px]");
+    expect(screen.getByTestId("container")).toHaveClass("max-w-[1280px]");
+  });
+
+  it("size prop selects the vertical rhythm gear (defaults to default)", () => {
+    const { rerender } = render(<Section data-testid="section">x</Section>);
+    expect(screen.getByTestId("section")).toHaveClass("py-20");
+
+    rerender(
+      <Section size="tight" data-testid="section">
+        x
+      </Section>
+    );
+    expect(screen.getByTestId("section")).toHaveClass("py-12");
+
+    rerender(
+      <Section size="loose" data-testid="section">
+        x
+      </Section>
+    );
+    expect(screen.getByTestId("section")).toHaveClass("py-28");
+  });
+
+  it("rule prop renders full-bleed hairline rules at the section boundary", () => {
+    const { rerender } = render(
+      <Section rule="top" data-testid="section">
+        x
+      </Section>
+    );
+    expect(screen.getByTestId("section")).toHaveClass("border-t", "border-rule");
+    expect(screen.getByTestId("section")).not.toHaveClass("border-b");
+
+    rerender(
+      <Section rule="both" data-testid="section">
+        x
+      </Section>
+    );
+    expect(screen.getByTestId("section")).toHaveClass("border-t", "border-b", "border-rule");
+  });
+
+  it("bleed prop spans the section full-bleed while insetting content to the container width", () => {
+    render(
+      <Section bleed data-testid="section">
+        <p>Bled content</p>
+      </Section>
+    );
+    const section = screen.getByTestId("section");
+    expect(section).toHaveClass("grid", "grid-cols-[1fr_min(1280px,100%)_1fr]");
+    expect(screen.getByText("Bled content").closest("div")).toHaveClass("col-start-2", "col-end-3");
   });
 });
