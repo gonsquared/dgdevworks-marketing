@@ -8,9 +8,9 @@ import type { BusinessInfo } from "./types";
  */
 export const business: BusinessInfo = {
   brandName: "DG DevWorks",
-  tagline: "Built by Daryll, senior full-stack engineer for founders.",
+  tagline: "Bank-grade engineering discipline, delivered at founder speed.",
   positioningCopy:
-    "I build your product and the marketing site that sells it. DG DevWorks is a one-person senior engineering practice, no subcontracting and no account-manager layer, for startup founders who need a product built, modernized, or kept moving by someone who's already shipped this before.",
+    "DG DevWorks is a one-person senior engineering practice: no subcontracting, no account-manager layer, no junior developer cutting their teeth on your codebase. I've spent years shipping production software for regulated banks and global hardware brands. Founders get that same discipline, at the speed an early-stage company actually needs.",
   bookingUrl: getBookingUrl(),
   contactEmail: "hello@dgdevworks.com",
   socialLinks: {

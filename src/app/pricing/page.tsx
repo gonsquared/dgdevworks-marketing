@@ -23,8 +23,8 @@ export default function PricingPage() {
       <Section size="loose" rule="bottom">
         <h1 className="heading-display">Pricing</h1>
         <p className="text-body-lead text-text-secondary mt-4 max-w-2xl">
-          Every engagement starts with a scoping call. The figures below are the range real projects
-          of that type tend to land in.
+          Every engagement starts with a scoping call. The figures below reflect where real projects
+          of that type typically land.
         </p>
 
         <div className="mt-8 border-t border-rule pt-4">

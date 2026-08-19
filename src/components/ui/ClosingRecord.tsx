@@ -18,8 +18,8 @@ export interface ClosingRecordProps {
  * Service detail / Pricing page.
  */
 export function ClosingRecord({
-  heading = "Ready to talk about your project?",
-  subheading = "Book a call directly, or send a message and I'll reply within 1–2 business days.",
+  heading = "Ready to scope your project?",
+  subheading = "Book a call and walk away with a clear plan and a firm quote. Prefer email? Send a message instead.",
   className,
 }: ClosingRecordProps) {
   const bookingUrl = getBookingUrl();
