@@ -3,8 +3,8 @@ import { business } from "@/data/business";
 /** Narrative bio for /about — sourced from business.ts + page-level copy. */
 export function AboutStory() {
   return (
-    <div className="prose-content max-w-3xl">
-      <p className="text-body-lead text-text-secondary">{business.tagline}</p>
+    <div className="max-w-3xl">
+      <p className="text-voice border-rule border-l-2 pl-6 text-2xl md:text-3xl">{business.tagline}</p>
 
       <p className="text-body text-text-secondary mt-6">
         I&apos;m Daryll, a senior full-stack engineer who spent years shipping production software
