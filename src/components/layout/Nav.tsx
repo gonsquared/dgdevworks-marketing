@@ -12,10 +12,11 @@ import { navLinks } from "@/lib/navLinks";
 import { getBookingUrl } from "@/lib/env";
 
 /**
- * Sticky global nav: Logotype, desktop link list with active-route
- * underline tick, ThemeToggle, persistent "Book a call" button, and a
- * mobile hamburger that opens the full-height MobileNavPanel dialog.
- * Rendered once in the root layout so it appears on every route.
+ * Sticky global nav: Logotype, desktop link list with a decorative
+ * mono index number + animated accent underline, ThemeToggle, persistent
+ * "Book a call" button, and a mobile hamburger that opens the full-height
+ * MobileNavPanel dialog. Rendered once in the root layout so it appears on
+ * every route.
  */
 export function Nav() {
   const pathname = usePathname();
@@ -43,12 +44,17 @@ export function Nav() {
   }, []);
 
   return (
-    <header
-      className={clsx(
-        "sticky top-0 z-40 h-[72px] border-b bg-bg transition-colors",
-        scrolled ? "border-border-strong" : "border-border"
-      )}
-    >
+    <header className="sticky top-0 z-40 h-16 border-b border-rule bg-bg relative">
+      {/* Full-bleed accent rule that draws in on scroll — replaces the old
+          border-color swap. transform-only animation, no layout cost. */}
+      <div
+        aria-hidden="true"
+        className={clsx(
+          "pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-accent transition-transform duration-[420ms] ease-[cubic-bezier(0.2,0.8,0.2,1)]",
+          scrolled ? "scale-x-100" : "scale-x-0"
+        )}
+      />
+
       {/* id targeted by MobileNavPanel to inert the header's own interactive
           content (logo link, book-a-call buttons, hamburger) while the
           mobile dialog is open — the panel itself lives in a sibling node
@@ -56,13 +62,13 @@ export function Nav() {
           the dialog. */}
       <div
         id="site-header-content"
-        className="mx-auto flex h-full w-full max-w-[1200px] items-center justify-between px-6 md:px-8 lg:px-10"
+        className="mx-auto flex h-full w-full max-w-[1280px] items-center justify-between px-6 md:px-8 lg:px-10"
       >
         <Logotype />
 
         <nav aria-label="Primary" className="hidden md:block">
           <ul className="flex items-center gap-7">
-            {navLinks.map((link) => {
+            {navLinks.map((link, index) => {
               const isActive = pathname === link.href;
               return (
                 <li key={link.href}>
@@ -70,17 +76,27 @@ export function Nav() {
                     href={link.href}
                     aria-current={isActive ? "page" : undefined}
                     className={clsx(
-                      "relative py-2 text-ui text-text-secondary transition-colors hover:text-text-primary",
+                      "group relative flex items-center gap-1.5 py-2 text-ui text-text-secondary transition-colors hover:text-text-primary",
                       isActive && "text-text-primary"
                     )}
                   >
+                    <span
+                      aria-hidden="true"
+                      className={clsx(
+                        "font-mono-annotation",
+                        isActive ? "text-accent" : "text-text-secondary group-hover:text-text-primary"
+                      )}
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                     {link.label}
-                    {isActive && (
-                      <span
-                        aria-hidden="true"
-                        className="absolute -bottom-0.5 left-0 h-0.5 w-full bg-accent"
-                      />
-                    )}
+                    <span
+                      aria-hidden="true"
+                      className={clsx(
+                        "absolute -bottom-0.5 left-0 h-0.5 w-full origin-left bg-accent transition-transform duration-300",
+                        isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                      )}
+                    />
                   </Link>
                 </li>
               );
@@ -105,21 +121,17 @@ export function Nav() {
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav-panel"
             onClick={() => setMobileOpen(true)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-text-primary md:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-[3px] border border-border text-text-primary md:hidden"
           >
-            <span aria-hidden="true" className="text-lg leading-none">
-              ☰
-            </span>
+            <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4" fill="none">
+              <path d="M2.5 6h15M2.5 14h15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
           </button>
         </div>
       </div>
 
       <div id="mobile-nav-panel">
-        <MobileNavPanel
-          open={mobileOpen}
-          onClose={() => setMobileOpen(false)}
-          triggerRef={hamburgerRef}
-        />
+        <MobileNavPanel open={mobileOpen} onClose={() => setMobileOpen(false)} triggerRef={hamburgerRef} />
       </div>
     </header>
   );

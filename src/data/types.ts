@@ -19,6 +19,9 @@ export interface Service {
   slug: ServiceSlug;
   title: string;
   summary: string;
+  /** First-person framing of idealClient, for the services-index situational
+   * chooser. Optional and additive. */
+  situation?: string;
   includes: string[];
   process: string[];
   idealClient: string;
@@ -32,6 +35,10 @@ export interface CaseStudy {
   challenge: string;
   approach: string;
   impact: string[];
+  /** A single quantified figure pulled from impact[], for the home page
+   * proof strip and the case-study index/lead rendering. Optional and
+   * additive — never fabricated beyond what impact[] already states. */
+  headlineStat?: { value: string; label: string };
   relatedServiceSlugs: ServiceSlug[];
 }
 

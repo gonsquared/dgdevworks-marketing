@@ -59,4 +59,16 @@ describe("src/data/services.ts (E2-F1-S1)", () => {
     const slugs = services.map((s) => s.slug);
     expect(new Set(slugs).size).toBe(slugs.length);
   });
+
+  it("every entry has a situation string for the services-index chooser", () => {
+    const EXPECTED: Record<ServiceSlug, string> = {
+      "mvp-development": "I have an idea and no code yet.",
+      "marketing-sites": "I need a site that actually converts.",
+      modernization: "I have a system that's slow to change and risky to touch.",
+      fractional: "I have a team that needs senior judgment on tap.",
+    };
+    for (const service of services) {
+      expect(service.situation, `${service.slug} is missing situation`).toBe(EXPECTED[service.slug]);
+    }
+  });
 });

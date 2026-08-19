@@ -69,4 +69,17 @@ describe("Nav (E1-F3-S2)", () => {
     expect(headerContent).not.toHaveAttribute("aria-hidden");
     expect(hamburger).toHaveFocus();
   });
+
+  it("uses the 64px BROADSHEET header height", () => {
+    render(<Nav />);
+    const header = screen.getByRole("banner");
+    expect(header).toHaveClass("h-16");
+  });
+
+  it("hamburger renders an SVG icon, not the old text glyph", () => {
+    render(<Nav />);
+    const hamburger = screen.getByRole("button", { name: "Open navigation menu" });
+    expect(hamburger.querySelector("svg")).not.toBeNull();
+    expect(screen.queryByText("☰")).not.toBeInTheDocument();
+  });
 });

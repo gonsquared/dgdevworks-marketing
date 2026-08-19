@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Section } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { CTABand } from "@/components/ui/CTABand";
-import { SpecLabel } from "@/components/ui/SpecLabel";
-import { Card } from "@/components/ui/Card";
-import { CaseStudyCard } from "@/components/CaseStudyCard";
+import { ClosingRecord } from "@/components/ui/ClosingRecord";
+import { IndexRow } from "@/components/ui/IndexRow";
+import { Figure } from "@/components/ui/Figure";
+import { Button } from "@/components/ui/Button";
 import { JsonLd } from "@/components/JsonLd";
 import { services, getServiceBySlug } from "@/data/services";
 import { getCaseStudyBySlug } from "@/data/caseStudies";
+import { pricing } from "@/data/pricing";
 import { buildMetadata, serviceJsonLd } from "@/lib/seo";
+import { getBookingUrl } from "@/lib/env";
 
 interface ServicePageParams {
   slug: string;
@@ -55,76 +57,80 @@ export default async function ServiceDetailPage({
   const relatedCaseStudies = service.relatedCaseStudySlugs
     .map((s) => getCaseStudyBySlug(s))
     .filter((cs): cs is NonNullable<typeof cs> => Boolean(cs));
+  const pricingPackage = pricing.packages.find((pkg) => pkg.slug === service.slug);
+  const bookingUrl = getBookingUrl();
 
   return (
     <>
       <JsonLd data={serviceJsonLd(service)} />
 
-      <Section className="pt-14 pb-0">
-        <SpecLabel>SERVICE DETAIL</SpecLabel>
-        <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <h1 className="heading-display">{service.title}</h1>
-          <p className="font-mono-figure text-accent">{service.priceLabel}</p>
-        </div>
-        <p className="text-body-lead text-text-secondary mt-4 max-w-2xl">{service.summary}</p>
-      </Section>
+      <Section size="loose" rule="bottom">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <h1 className="heading-display">{service.title}</h1>
+            <p className="text-body-lead text-text-secondary mt-4 max-w-2xl">{service.summary}</p>
+          </div>
 
-      <Section>
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-          <ScrollReveal>
-            <h2 className="heading-h2">What&apos;s included</h2>
-            <ul className="mt-6 flex flex-col gap-3">
-              {service.includes.map((item) => (
-                <li key={item} className="text-body text-text-secondary flex gap-3">
-                  <span aria-hidden="true" className="text-accent">
-                    —
-                  </span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.1}>
-            <h2 className="heading-h2">Process</h2>
-            <ol className="mt-6 flex flex-col gap-4">
-              {service.process.map((step, index) => (
-                <li key={step} className="flex gap-4">
-                  <span className="font-mono-annotation text-accent shrink-0">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-body text-text-secondary">{step}</span>
-                </li>
-              ))}
-            </ol>
-          </ScrollReveal>
+          <div className="lg:col-span-4 lg:col-start-9">
+            <div className="lg:sticky lg:top-[5.5rem]">
+              <p className="font-mono-figure text-accent">{service.priceLabel}</p>
+              {pricingPackage && <p className="text-ui text-text-secondary mt-1">{pricingPackage.timeframe}</p>}
+              <Button href={bookingUrl} external variant="solid" size="lg" className="mt-6 w-full">
+                Book a call
+              </Button>
+            </div>
+          </div>
         </div>
       </Section>
 
-      <Section className="bg-surface">
+      <Section rule="bottom">
+        <h2 className="heading-h2">Process</h2>
+        <div className="mt-8">
+          <Figure variant="phase-track" steps={service.process} />
+        </div>
+      </Section>
+
+      <Section rule="bottom">
+        <h2 className="heading-h2">What&apos;s included</h2>
+        <ul className="mt-8 grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2">
+          {service.includes.map((item) => (
+            <li key={item} className="text-body text-text-secondary flex gap-3 border-t border-rule pt-4">
+              <span aria-hidden="true" className="text-accent">
+                —
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section rule="bottom">
         <ScrollReveal>
-          <Card bracket>
-            <h2 className="heading-h3">Ideal client</h2>
-            <p className="text-body text-text-secondary mt-3">{service.idealClient}</p>
-          </Card>
+          <p className="text-voice text-2xl md:text-3xl">&ldquo;{service.idealClient}&rdquo;</p>
+          <p className="font-mono-annotation text-text-secondary mt-4">IDEAL CLIENT</p>
         </ScrollReveal>
       </Section>
 
       {relatedCaseStudies.length > 0 && (
-        <Section>
-          <SpecLabel>RELATED WORK</SpecLabel>
-          <h2 className="heading-h2 mt-3">Proof this works</h2>
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {relatedCaseStudies.map((caseStudy) => (
-              <ScrollReveal key={caseStudy.slug}>
-                <CaseStudyCard caseStudy={caseStudy} />
+        <Section rail={{ number: "01", label: "RELATED WORK" }}>
+          <h2 className="heading-h2">Proof this works</h2>
+          <div className="mt-8">
+            {relatedCaseStudies.map((caseStudy, index) => (
+              <ScrollReveal key={caseStudy.slug} delay={index * 0.035}>
+                <IndexRow
+                  href={`/work/${caseStudy.slug}`}
+                  index={String(index + 1).padStart(2, "0")}
+                  title={caseStudy.title}
+                  summary={caseStudy.challenge}
+                  meta={caseStudy.headlineStat?.value}
+                />
               </ScrollReveal>
             ))}
           </div>
         </Section>
       )}
 
-      <CTABand />
+      <ClosingRecord />
     </>
   );
 }

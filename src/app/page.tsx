@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Hero } from "@/components/Hero";
-import { ServiceCard } from "@/components/ServiceCard";
-import { CaseStudyCard } from "@/components/CaseStudyCard";
-import { PricingCard } from "@/components/PricingCard";
+import { Masthead } from "@/components/Masthead";
+import { ProofStrip } from "@/components/ProofStrip";
+import { CaseStudyLead } from "@/components/CaseStudyLead";
+import { PricingTable } from "@/components/PricingTable";
+import { IndexRow } from "@/components/ui/IndexRow";
 import { Section } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { CTABand } from "@/components/ui/CTABand";
-import { SpecLabel } from "@/components/ui/SpecLabel";
+import { ClosingRecord } from "@/components/ui/ClosingRecord";
 import { services } from "@/data/services";
-import { caseStudies } from "@/data/caseStudies";
+import { caseStudies, getCaseStudyBySlug } from "@/data/caseStudies";
 import { pricing } from "@/data/pricing";
 import { buildMetadata } from "@/lib/seo";
 
@@ -20,58 +20,71 @@ export const metadata: Metadata = buildMetadata({
   path: "",
 });
 
+const LEAD_CASE_STUDY_SLUG = "stock-exchange-data-migration";
+
 export default function HomePage() {
+  const leadCaseStudy = getCaseStudyBySlug(LEAD_CASE_STUDY_SLUG)!;
+  const otherCaseStudies = caseStudies.filter((cs) => cs.slug !== LEAD_CASE_STUDY_SLUG);
+
   return (
     <>
-      <Section className="pt-6 pb-0 md:pt-8">
-        <Hero />
+      <Section size="loose" rule="bottom">
+        <Masthead />
       </Section>
 
-      <Section>
-        <SpecLabel>§01 · SERVICES</SpecLabel>
-        <h2 className="heading-h2 mt-3">What I help founders build</h2>
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <Section bare rule="bottom">
+        <ProofStrip />
+      </Section>
+
+      <Section rail={{ number: "01", label: "SERVICES" }}>
+        <h2 className="heading-h2">What I help founders build</h2>
+        <div className="mt-8">
           {services.map((service, index) => (
-            <ScrollReveal key={service.slug} delay={index * 0.05}>
-              <ServiceCard service={service} index={index} />
+            <ScrollReveal key={service.slug} delay={index * 0.035}>
+              <IndexRow
+                href={`/services/${service.slug}`}
+                index={String(index + 1).padStart(2, "0")}
+                title={service.title}
+                summary={service.summary}
+                meta={service.priceLabel}
+              />
+            </ScrollReveal>
+          ))}
+        </div>
+        <Link href="/services" className="text-ui text-accent mt-6 inline-block hover:text-accent-hover">
+          See every service →
+        </Link>
+      </Section>
+
+      <Section rule="top" rail={{ number: "02", label: "PROOF OF WORK" }}>
+        <h2 className="heading-h2">Shipped in production, not just planned</h2>
+        <div className="mt-2">
+          <CaseStudyLead caseStudy={leadCaseStudy} />
+          {otherCaseStudies.map((caseStudy, index) => (
+            <ScrollReveal key={caseStudy.slug} delay={index * 0.035}>
+              <IndexRow
+                href={`/work/${caseStudy.slug}`}
+                index={String(index + 1).padStart(2, "0")}
+                title={caseStudy.title}
+                summary={caseStudy.challenge}
+                meta={caseStudy.headlineStat?.value}
+              />
             </ScrollReveal>
           ))}
         </div>
       </Section>
 
-      <Section className="bg-surface">
-        <SpecLabel>§02 · PROOF OF WORK</SpecLabel>
-        <h2 className="heading-h2 mt-3">Shipped in production, not just planned</h2>
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {caseStudies.slice(0, 2).map((caseStudy, index) => (
-            <ScrollReveal key={caseStudy.slug} delay={index * 0.05}>
-              <CaseStudyCard caseStudy={caseStudy} />
-            </ScrollReveal>
-          ))}
-        </div>
+      <Section rule="top" rail={{ number: "03", label: "PRICING" }}>
+        <h2 className="heading-h2">Indicative pricing, pending a scoping call</h2>
         <div className="mt-8">
-          <Link href="/work" className="text-ui text-accent hover:text-accent-hover">
-            See all case studies →
-          </Link>
+          <PricingTable packages={pricing.packages} recommendedSlug="mvp-development" />
         </div>
+        <Link href="/pricing" className="text-ui text-accent mt-6 inline-block hover:text-accent-hover">
+          See full pricing details →
+        </Link>
       </Section>
 
-      <Section>
-        <SpecLabel>§03 · PRICING</SpecLabel>
-        <h2 className="heading-h2 mt-3">Indicative pricing, pending a scoping call</h2>
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {pricing.packages.map((pkg) => (
-            <PricingCard key={pkg.slug} pkg={pkg} />
-          ))}
-        </div>
-        <div className="mt-8">
-          <Link href="/pricing" className="text-ui text-accent hover:text-accent-hover">
-            See full pricing details →
-          </Link>
-        </div>
-      </Section>
-
-      <CTABand />
+      <ClosingRecord />
     </>
   );
 }

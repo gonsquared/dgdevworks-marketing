@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { ScrollReveal, REVEAL_OFFSET, REVEAL_DURATION } from "@/components/ui/ScrollReveal";
 
 describe("ScrollReveal (E1-F3-S4 scroll-triggered animation wrapper)", () => {
   afterEach(() => {
@@ -35,5 +35,10 @@ describe("ScrollReveal (E1-F3-S4 scroll-triggered animation wrapper)", () => {
     );
     // Should still render content synchronously with no crash under reduced motion.
     expect(screen.getByText("Reduced-motion content")).toBeInTheDocument();
+  });
+
+  it("uses the BROADSHEET-tuned motion defaults (300ms duration, 12px offset)", () => {
+    expect(REVEAL_DURATION).toBe(0.3);
+    expect(REVEAL_OFFSET).toBe(12);
   });
 });

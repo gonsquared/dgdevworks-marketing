@@ -12,20 +12,24 @@ test.describe("Critical flow: Home -> Service -> Case study -> back", () => {
     await page.goto("/");
     await expect(page).toHaveTitle(/DG DevWorks/);
 
-    // Home -> a specific service via the services overview cards.
-    await page.getByRole("link", { name: "View service →" }).first().click();
+    // Home -> a specific service via the services index rows. Selecting by
+    // href pattern (not link text) so this stays correct regardless of
+    // which component renders the row.
+    await page.locator('a[href^="/services/"]').first().click();
     await expect(page).toHaveURL(/\/services\//);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
     // Service detail -> a related case study.
-    const relatedCaseStudyLink = page.getByRole("link", { name: /Read case study/ }).first();
+    // Selecting by href pattern (not link text) so this stays correct
+    // regardless of which component renders the row.
+    const relatedCaseStudyLink = page.locator('a[href^="/work/"]').first();
     await expect(relatedCaseStudyLink).toBeVisible();
     const caseStudyHref = await relatedCaseStudyLink.getAttribute("href");
     await relatedCaseStudyLink.click();
     await expect(page).toHaveURL(new RegExp(caseStudyHref!.replace(/\//g, "\\/")));
 
     // Case study -> back to the related service via its cross-link.
-    const relatedServiceLink = page.getByRole("link", { name: /→$/ }).first();
+    const relatedServiceLink = page.locator('a[href^="/services/"]').first();
     await expect(relatedServiceLink).toBeVisible();
     await relatedServiceLink.click();
     await expect(page).toHaveURL(/\/services\//);

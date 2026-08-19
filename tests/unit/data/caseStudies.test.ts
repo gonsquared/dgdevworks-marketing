@@ -62,6 +62,19 @@ describe("src/data/caseStudies.ts (E2-F1-S2)", () => {
     const slugs = caseStudies.map((cs) => cs.slug);
     expect(new Set(slugs).size).toBe(slugs.length);
   });
+
+  it("every entry has a headlineStat derived from its own impact copy, with non-empty value/label", () => {
+    const EXPECTED: Record<CaseStudySlug, { value: string; label: string }> = {
+      "bank-platform-modernization": { value: "0", label: "unplanned downtime during migration" },
+      "hardware-brand-partner-portals": { value: "2", label: "portals migrated, zero content loss" },
+      "retail-pos-platform": { value: "2", label: "markets localized (Arabic RTL + Spanish)" },
+      "stock-exchange-data-migration": { value: "40%", label: "faster query performance" },
+    };
+    for (const cs of caseStudies) {
+      expect(cs.headlineStat, `${cs.slug} is missing headlineStat`).toBeDefined();
+      expect(cs.headlineStat).toEqual(EXPECTED[cs.slug]);
+    }
+  });
 });
 
 describe("case study <-> service cross-link mapping table (spec: docs/superpowers/specs/2026-08-18-dgdevworks-marketing-site-design.md)", () => {

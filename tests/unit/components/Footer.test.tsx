@@ -43,4 +43,10 @@ describe("Footer (E1-F3-S3)", () => {
     expect(screen.getByRole("navigation", { name: "Site" })).toBeInTheDocument();
     expect(screen.getByRole("navigation", { name: "Connect" })).toBeInTheDocument();
   });
+
+  it("uses an asymmetric 5/2/2/3 column layout at the lg breakpoint (BROADSHEET chrome)", () => {
+    const { container } = render(<Footer />);
+    const grid = container.querySelector(".grid");
+    expect(grid).toHaveClass("lg:grid-cols-12");
+  });
 });

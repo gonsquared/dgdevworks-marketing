@@ -22,6 +22,7 @@ export const caseStudies: CaseStudy[] = [
       "Strengthened the security posture with JWT auth and centralized secrets management",
       "Kept delivery on track via Scrum leadership across a multi-phase migration",
     ],
+    headlineStat: { value: "0", label: "unplanned downtime during migration" },
     relatedServiceSlugs: ["modernization", "fractional"],
   },
   {
@@ -37,6 +38,7 @@ export const caseStudies: CaseStudy[] = [
       "Brought markup up to WCAG accessibility standards",
       "Rebuilt SEO fundamentals (metadata, structured markup) for better discoverability",
     ],
+    headlineStat: { value: "2", label: "portals migrated, zero content loss" },
     relatedServiceSlugs: ["marketing-sites"],
   },
   {
@@ -51,6 +53,7 @@ export const caseStudies: CaseStudy[] = [
       "Delivered full RTL layout support for Arabic, plus Spanish localization",
       "Expanded Cypress/Cucumber regression coverage, reducing manual QA cycles",
     ],
+    headlineStat: { value: "2", label: "markets localized (Arabic RTL + Spanish)" },
     relatedServiceSlugs: ["mvp-development"],
   },
   {
@@ -65,6 +68,7 @@ export const caseStudies: CaseStudy[] = [
       "Rebuilt the exchange's live feed parser on the new stack",
       "Achieved a 40% improvement in query performance after migration",
     ],
+    headlineStat: { value: "40%", label: "faster query performance" },
     relatedServiceSlugs: ["mvp-development", "modernization"],
   },
 ];

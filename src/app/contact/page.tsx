@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/ui/Section";
 import { SpecLabel } from "@/components/ui/SpecLabel";
-import { Card } from "@/components/ui/Card";
+import { Surface } from "@/components/ui/Surface";
 import { Button } from "@/components/ui/Button";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { ContactForm } from "@/components/ContactForm";
@@ -32,15 +32,15 @@ export default function ContactPage() {
 
         <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[1.2fr_1fr]">
           <div>
-            <Card>
+            <Surface variant="panel">
               <h2 className="heading-h3">Send a message</h2>
               <ContactForm />
-            </Card>
+            </Surface>
             <TrustLine className="mt-4">{business.trustLine}</TrustLine>
           </div>
 
           <div className="flex flex-col gap-8">
-            <Card bracket>
+            <Surface variant="panel">
               <h2 className="heading-h3">Prefer to talk it through?</h2>
               <p className="text-body text-text-secondary mt-3">
                 Book time directly on the calendar. No back-and-forth over email.
@@ -48,7 +48,7 @@ export default function ContactPage() {
               <Button href={bookingUrl} external variant="solid" size="lg" className="mt-5">
                 Book a call
               </Button>
-            </Card>
+            </Surface>
 
             <div>
               <SpecLabel>FAQ</SpecLabel>
