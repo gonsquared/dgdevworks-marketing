@@ -1,19 +1,20 @@
 import Link from "next/link";
 import clsx from "clsx";
+import { BracketMark } from "./BracketMark";
 
 export interface LogotypeProps {
   className?: string;
 }
 
-/** `[DG]` mono bracket mark + "DevWorks" in Space Grotesk — reused in Nav, Footer, and root OG image. */
+/** BracketMark + "DevWorks" in Instrument Serif — reused in Nav, Footer, and root OG image. */
 export function Logotype({ className }: LogotypeProps) {
   return (
     <Link
       href="/"
-      className={clsx("inline-flex items-center gap-1.5 heading-h4 text-text-primary", className)}
+      className={clsx("inline-flex items-center gap-2 heading-h4 text-text-primary", className)}
       aria-label="DG DevWorks, home"
     >
-      <span className="font-mono-annotation text-accent normal-case tracking-normal">[DG]</span>
+      <BracketMark className="text-accent h-4 w-6" />
       <span>DevWorks</span>
     </Link>
   );
