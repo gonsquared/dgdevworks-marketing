@@ -41,6 +41,7 @@ const LIGHT = {
   accentBright: "#7d68c9",
   accentOnFill: "#ffffff",
   error: "#c7360f",
+  wash: "#f6f6fa",
 };
 
 const DARK = {
@@ -52,6 +53,7 @@ const DARK = {
   accentBright: "#e4d8ff",
   accentOnFill: "#0c0a16",
   error: "#ff6a45",
+  wash: "#211936",
 };
 
 describe("Color contrast — light theme (docs/design-system.md §4/§7)", () => {
@@ -79,6 +81,10 @@ describe("Color contrast — light theme (docs/design-system.md §4/§7)", () =>
     expect(contrastRatio(LIGHT.accentBright, LIGHT.surface)).toBeGreaterThanOrEqual(3.0);
     expect(contrastRatio(LIGHT.accentBright, LIGHT.bg)).toBeGreaterThanOrEqual(3.0);
   });
+
+  it("text-primary on the new hover wash meets 4.5:1 AA (ruled-row hover background)", () => {
+    expect(contrastRatio(LIGHT.textPrimary, LIGHT.wash)).toBeGreaterThanOrEqual(4.5);
+  });
 });
 
 describe("Color contrast — dark theme (docs/design-system.md §4/§7)", () => {
@@ -105,5 +111,9 @@ describe("Color contrast — dark theme (docs/design-system.md §4/§7)", () => 
   it("accent-bright on surface/bg (decorative — corner-bracket registration marks) meets at least 3:1 (WCAG 1.4.11 non-text)", () => {
     expect(contrastRatio(DARK.accentBright, DARK.surface)).toBeGreaterThanOrEqual(3.0);
     expect(contrastRatio(DARK.accentBright, DARK.bg)).toBeGreaterThanOrEqual(3.0);
+  });
+
+  it("text-primary on the new hover wash meets 4.5:1 AA (ruled-row hover background)", () => {
+    expect(contrastRatio(DARK.textPrimary, DARK.wash)).toBeGreaterThanOrEqual(4.5);
   });
 });
