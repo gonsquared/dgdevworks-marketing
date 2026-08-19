@@ -85,8 +85,8 @@
   --color-wash: var(--color-wash);
 
   --font-sans: var(--font-inter);
-  --font-heading: var(--font-space-grotesk);
-  --font-mono: var(--font-jetbrains-mono);
+  --font-heading: var(--font-instrument-serif);
+  --font-mono: var(--font-ibm-plex-mono);
 }
 
 @layer base {
