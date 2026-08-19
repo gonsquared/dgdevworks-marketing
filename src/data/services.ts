@@ -13,6 +13,7 @@ export const services: Service[] = [
     title: "MVP / Product Build",
     summary:
       "A full-stack build from idea to shipped product. Frontend, backend, database, and deployment, all handled end to end by one senior engineer.",
+    situation: "I have an idea and no code yet.",
     includes: [
       "Technical scoping and architecture plan before any code is written",
       "Full-stack build: frontend, backend, database schema, and deployment pipeline",
@@ -36,6 +37,7 @@ export const services: Service[] = [
     title: "Marketing / Landing Site Build",
     summary:
       "Fast, conversion-focused marketing sites built to sell. This site is the proof of the craft.",
+    situation: "I need a site that actually converts.",
     includes: [
       "Conversion-focused copy structure and page flow, not just visual design",
       "Fully responsive, accessible (WCAG-conscious) implementation",
@@ -59,6 +61,7 @@ export const services: Service[] = [
     title: "Legacy Modernization / Migration",
     summary:
       "Migrating aging stacks (PHP, Angular, monoliths, Django, brittle API gateways) to a modern Next.js and microservices foundation.",
+    situation: "I have a system that's slow to change and risky to touch.",
     includes: [
       "Audit of the existing system and a phased migration plan that avoids a risky big-bang rewrite",
       "Incremental migration to Next.js / microservices architecture",
@@ -82,6 +85,7 @@ export const services: Service[] = [
     title: "Fractional / Embedded Senior Engineer",
     summary:
       "A part-time, ongoing senior engineer embedded in your team: code review, mentoring, and Agile/Scrum leadership.",
+    situation: "I have a team that needs senior judgment on tap.",
     includes: [
       "Regular code review and architectural guidance for your existing team",
       "Mentoring for junior/mid-level engineers",

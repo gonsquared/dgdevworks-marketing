@@ -19,6 +19,9 @@ export interface Service {
   slug: ServiceSlug;
   title: string;
   summary: string;
+  /** First-person framing of idealClient, for the services-index situational
+   * chooser. Optional and additive. */
+  situation?: string;
   includes: string[];
   process: string[];
   idealClient: string;

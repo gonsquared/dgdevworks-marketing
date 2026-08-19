@@ -35,7 +35,7 @@ function getOffset(direction: ScrollRevealProps["direction"]) {
  * non-animated state (hard requirement, not optional polish).
  *
  * Usage:
- *   <ScrollReveal><ServiceCard ... /></ScrollReveal>
+ *   <ScrollReveal><IndexRow ... /></ScrollReveal>
  *   <ScrollReveal direction="left" delay={0.1}>...</ScrollReveal>
  */
 export function ScrollReveal({
