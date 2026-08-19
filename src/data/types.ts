@@ -32,6 +32,10 @@ export interface CaseStudy {
   challenge: string;
   approach: string;
   impact: string[];
+  /** A single quantified figure pulled from impact[], for the home page
+   * proof strip and the case-study index/lead rendering. Optional and
+   * additive — never fabricated beyond what impact[] already states. */
+  headlineStat?: { value: string; label: string };
   relatedServiceSlugs: ServiceSlug[];
 }
 
