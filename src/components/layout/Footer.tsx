@@ -13,10 +13,10 @@ const YEAR = new Date().getFullYear();
  */
 export function Footer() {
   return (
-    <footer id="site-footer-content" role="contentinfo" className="border-t border-border bg-surface">
+    <footer id="site-footer-content" role="contentinfo" className="border-t border-rule bg-surface">
       <Container>
-        <div className="grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
+        <div className="grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-12">
+          <div className="lg:col-span-5">
             <Logotype />
             <p className="text-body text-text-secondary mt-4 max-w-xs">{business.tagline}</p>
             <a
@@ -27,7 +27,7 @@ export function Footer() {
             </a>
           </div>
 
-          <nav aria-label="Site">
+          <nav aria-label="Site" className="lg:col-span-2">
             <p className="font-mono-annotation text-text-secondary">{"// SITE"}</p>
             <ul className="mt-4 flex flex-col gap-3">
               {navLinks.map((link) => (
@@ -40,7 +40,7 @@ export function Footer() {
             </ul>
           </nav>
 
-          <nav aria-label="Connect">
+          <nav aria-label="Connect" className="lg:col-span-2">
             <p className="font-mono-annotation text-text-secondary">{"// CONNECT"}</p>
             <ul className="mt-4 flex flex-col gap-3">
               <li>
@@ -79,7 +79,7 @@ export function Footer() {
             </ul>
           </nav>
 
-          <div>
+          <div className="lg:col-span-3">
             <p className="font-mono-annotation text-text-secondary">{"// TRUST"}</p>
             <p className="text-ui text-text-secondary mt-4">{business.footerTrustLine}</p>
             <a
@@ -94,7 +94,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-border py-6">
+        <div className="border-t border-rule py-6">
           <p className="font-mono-annotation text-text-secondary normal-case tracking-normal">
             © {YEAR} DG DevWorks. All rights reserved.
           </p>
