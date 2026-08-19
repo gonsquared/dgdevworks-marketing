@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Card } from "@/components/ui/Card";
+import { Surface } from "@/components/ui/Surface";
 import { SpecLabel } from "@/components/ui/SpecLabel";
 import type { Service } from "@/data/types";
 
@@ -12,7 +12,7 @@ export interface ServiceCardProps {
 /** Usage: <ServiceCard service={service} index={0} /> */
 export function ServiceCard({ service, index }: ServiceCardProps) {
   return (
-    <Card className="flex h-full flex-col">
+    <Surface variant="panel" className="flex h-full flex-col">
       {typeof index === "number" && <SpecLabel>{`§0${index + 1}`}</SpecLabel>}
       <h3 className="heading-h3 mt-2">{service.title}</h3>
       <p className="text-body text-text-secondary mt-2 flex-1">{service.summary}</p>
@@ -25,6 +25,6 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
       >
         View service →
       </Link>
-    </Card>
+    </Surface>
   );
 }

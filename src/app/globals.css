@@ -206,31 +206,3 @@
     text-transform: uppercase;
   }
 }
-
-@layer components {
-  /* Corner-bracket "registration marks" — sparing use on highest-signal
-     elements only (hero visual, recommended pricing tier, stat callouts). */
-  .card-bracket {
-    position: relative;
-  }
-  .card-bracket::before,
-  .card-bracket::after {
-    content: "";
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    pointer-events: none;
-  }
-  .card-bracket::before {
-    top: -1px;
-    left: -1px;
-    border-top: 2px solid var(--color-accent-bright);
-    border-left: 2px solid var(--color-accent-bright);
-  }
-  .card-bracket::after {
-    bottom: -1px;
-    right: -1px;
-    border-bottom: 2px solid var(--color-accent-bright);
-    border-right: 2px solid var(--color-accent-bright);
-  }
-}

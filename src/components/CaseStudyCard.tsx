@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Card } from "@/components/ui/Card";
+import { Surface } from "@/components/ui/Surface";
 import { AbstractVisual } from "@/components/AbstractVisual";
 import type { CaseStudy } from "@/data/types";
 
@@ -10,7 +10,7 @@ export interface CaseStudyCardProps {
 /** Usage: <CaseStudyCard caseStudy={caseStudy} /> */
 export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
   return (
-    <Card className="flex h-full flex-col overflow-hidden p-0">
+    <Surface variant="panel" className="flex h-full flex-col overflow-hidden p-0">
       <div className="aspect-[5/3]">
         <AbstractVisual variant={caseStudy.slug} label={`${caseStudy.title} illustrative graphic`} />
       </div>
@@ -24,6 +24,6 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
           Read case study →
         </Link>
       </div>
-    </Card>
+    </Surface>
   );
 }

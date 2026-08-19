@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { CTABand } from "@/components/ui/CTABand";
 import { SpecLabel } from "@/components/ui/SpecLabel";
-import { Card } from "@/components/ui/Card";
+import { Surface } from "@/components/ui/Surface";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 import { JsonLd } from "@/components/JsonLd";
 import { services, getServiceBySlug } from "@/data/services";
@@ -103,10 +103,10 @@ export default async function ServiceDetailPage({
 
       <Section className="bg-surface">
         <ScrollReveal>
-          <Card bracket>
+          <Surface variant="panel">
             <h2 className="heading-h3">Ideal client</h2>
             <p className="text-body text-text-secondary mt-3">{service.idealClient}</p>
-          </Card>
+          </Surface>
         </ScrollReveal>
       </Section>
 
