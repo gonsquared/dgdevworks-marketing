@@ -4,7 +4,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SpecLabel } from "@/components/ui/SpecLabel";
 import { PricingCard } from "@/components/PricingCard";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
-import { CTABand } from "@/components/ui/CTABand";
+import { ClosingRecord } from "@/components/ui/ClosingRecord";
 import { JsonLd } from "@/components/JsonLd";
 import { pricing } from "@/data/pricing";
 import { pricingFaq } from "@/data/faq";
@@ -61,7 +61,7 @@ export default function PricingPage() {
         <FAQAccordion items={pricingFaq} className="mt-8" />
       </Section>
 
-      <CTABand />
+      <ClosingRecord />
     </>
   );
 }

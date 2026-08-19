@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Section } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { CTABand } from "@/components/ui/CTABand";
+import { ClosingRecord } from "@/components/ui/ClosingRecord";
 import { SpecLabel } from "@/components/ui/SpecLabel";
 import { Surface } from "@/components/ui/Surface";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
@@ -124,7 +124,7 @@ export default async function ServiceDetailPage({
         </Section>
       )}
 
-      <CTABand />
+      <ClosingRecord />
     </>
   );
 }
