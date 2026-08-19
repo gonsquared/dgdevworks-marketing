@@ -119,7 +119,7 @@ export default async function CaseStudyDetailPage({
       )}
 
       <Section rule="top">
-        <p className="text-body text-text-secondary">Interested in something similar?</p>
+        <p className="text-body text-text-secondary">Recognize a challenge like this in your own stack?</p>
         <Button href={getBookingUrl()} external className="mt-4" size="lg">
           Book a call
         </Button>
