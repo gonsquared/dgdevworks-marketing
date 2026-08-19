@@ -23,7 +23,7 @@ export default function ServicesIndexPage() {
       </Section>
 
       <Section rule="bottom">
-        <p className="font-mono-annotation text-text-secondary">WHICH ONE ARE YOU?</p>
+        <h2 className="font-mono-annotation text-text-secondary">WHICH ONE ARE YOU?</h2>
         <div className="mt-4">
           {services.map((service, index) => (
             <IndexRow
