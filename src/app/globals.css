@@ -112,6 +112,22 @@
 
   body {
     background-color: var(--color-bg);
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        color-mix(in srgb, var(--color-text-primary) 2.5%, transparent) 0,
+        color-mix(in srgb, var(--color-text-primary) 2.5%, transparent) 1px,
+        transparent 1px,
+        transparent 48px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--color-text-primary) 2.5%, transparent) 0,
+        color-mix(in srgb, var(--color-text-primary) 2.5%, transparent) 1px,
+        transparent 1px,
+        transparent 48px
+      );
+    background-size: 48px 48px;
     color: var(--color-text-primary);
   }
 
