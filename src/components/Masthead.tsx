@@ -22,12 +22,12 @@ export function Masthead() {
     <div className="flex flex-col">
       <div className="border-b border-rule pb-4">
         <p className="font-mono-annotation text-text-secondary">
-          DG DEVWORKS · SENIOR FULL-STACK ENGINEERING · AVAILABLE FOR NEW WORK
+          DG DEVWORKS · FULL-STACK ENGINEERING · AVAILABLE FOR NEW WORK
         </p>
       </div>
 
       <h1 className="heading-masthead mt-8 max-w-4xl">
-        I build your product, <span className="text-voice">and the marketing site that sells it.</span>
+        I build your product, <span className="text-voice not-italic">and the marketing site that sells it.</span>
       </h1>
 
       <div className="mt-10 grid grid-cols-1 gap-10 border-t border-rule pt-8 lg:grid-cols-12">
