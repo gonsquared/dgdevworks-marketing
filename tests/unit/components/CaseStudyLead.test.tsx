@@ -31,4 +31,20 @@ describe("CaseStudyLead (BROADSHEET, one dominant case study block)", () => {
     expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent("Test Case Study");
     expect(screen.queryByText("40%")).not.toBeInTheDocument();
   });
+
+  it("renders the title as an h3 by default, or an h2 when headingLevel={2} is set", () => {
+    const caseStudy = getCaseStudyBySlug("stock-exchange-data-migration")!;
+    const { rerender } = render(<CaseStudyLead caseStudy={caseStudy} />);
+    expect(screen.getByRole("heading", { level: 3, name: caseStudy.title })).toBeInTheDocument();
+
+    rerender(<CaseStudyLead caseStudy={caseStudy} headingLevel={2} />);
+    expect(screen.getByRole("heading", { level: 2, name: caseStudy.title })).toBeInTheDocument();
+  });
+
+  it("hides the decorative arrow from the link's accessible name and disambiguates it by title", () => {
+    const caseStudy = getCaseStudyBySlug("stock-exchange-data-migration")!;
+    render(<CaseStudyLead caseStudy={caseStudy} />);
+    const link = screen.getByRole("link", { name: `Read the record for ${caseStudy.title}` });
+    expect(link).toHaveAttribute("href", "/work/stock-exchange-data-migration");
+  });
 });
