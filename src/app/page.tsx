@@ -16,7 +16,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Product builds and marketing sites for startup founders",
   description:
-    "Daryll, senior full-stack engineer, builds MVPs, marketing sites, legacy modernizations, and fractional engineering engagements for startup founders.",
+    "Daryll, software engineer, builds MVPs, marketing sites, legacy modernizations, and fractional engineering engagements for startup founders.",
   path: "",
 });
 

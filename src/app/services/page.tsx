@@ -8,7 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Services",
   description:
-    "Four ways to work with DG DevWorks: MVP/product builds, marketing site builds, legacy modernization, and fractional senior engineering.",
+    "Four ways to work with DG DevWorks: MVP/product builds, marketing site builds, legacy modernization, and fractional engineering.",
   path: "/services",
 });
 

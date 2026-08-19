@@ -7,7 +7,7 @@ export function AboutStory() {
       <p className="text-voice border-rule border-l-2 pl-6 text-2xl md:text-3xl">{business.tagline}</p>
 
       <p className="text-body text-text-secondary mt-6">
-        I&apos;m Daryll, a senior full-stack engineer who spent years shipping production software
+        I&apos;m Daryll, a software engineer who spent years shipping production software
         for regulated banks, global hardware brands, and fast-moving product teams. DG DevWorks is where
         that same discipline gets applied
         to founder-scale projects: spec-first, systematic, and built to hand off cleanly rather than
@@ -17,8 +17,8 @@ export function AboutStory() {
       <p className="text-body text-text-secondary mt-4">
         I work with startup founders specifically, not agencies looking to subcontract and not local
         businesses that need a brochure site. Founders come to me with a product that needs to get built,
-        a legacy system that&apos;s become the bottleneck, or a team that needs a senior engineer&apos;s
-        judgment without a full-time senior hire yet. That&apos;s the work I&apos;m built for.
+        a legacy system that&apos;s become the bottleneck, or a team that needs a software engineer&apos;s
+        judgment without a full-time hire yet. That&apos;s the work I&apos;m built for.
       </p>
 
       <p className="text-body text-text-secondary mt-4">

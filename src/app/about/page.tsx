@@ -9,7 +9,7 @@ import { getBookingUrl } from "@/lib/env";
 export const metadata: Metadata = buildMetadata({
   title: "About",
   description:
-    "Daryll's story and the DG DevWorks framing: a one-person senior engineering practice built for startup founders.",
+    "Daryll's story and the DG DevWorks framing: a one-person engineering practice built for startup founders.",
   path: "/about",
 });
 

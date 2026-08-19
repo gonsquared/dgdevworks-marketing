@@ -12,7 +12,7 @@ export const services: Service[] = [
     slug: "mvp-development",
     title: "MVP / Product Build",
     summary:
-      "A full-stack build from idea to shipped product. Frontend, backend, database, and deployment, all handled end to end by one senior engineer.",
+      "A full-stack build from idea to shipped product. Frontend, backend, database, and deployment, all handled end to end by one software engineer.",
     situation: "I have an idea and no code yet.",
     includes: [
       "Technical scoping and architecture plan before any code is written",
@@ -82,9 +82,9 @@ export const services: Service[] = [
   },
   {
     slug: "fractional",
-    title: "Fractional / Embedded Senior Engineer",
+    title: "Fractional / Embedded Software Engineer",
     summary:
-      "A part-time, ongoing senior engineer embedded in your team: code review, mentoring, and Agile/Scrum leadership.",
+      "A part-time, ongoing software engineer embedded in your team: code review, mentoring, and Agile/Scrum leadership.",
     situation: "I have a team that needs senior judgment on tap.",
     includes: [
       "Regular code review and architectural guidance for your existing team",
