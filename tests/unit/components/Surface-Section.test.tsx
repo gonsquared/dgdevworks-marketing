@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Surface } from "@/components/ui/Surface";
 import { Section, Container } from "@/components/ui/Section";
+import { IndexRail } from "@/components/ui/IndexRail";
 
 describe("Surface primitive (BROADSHEET foundation, replaces Card)", () => {
   it("defaults to the plain variant: no panel border/radius classes", () => {
@@ -99,5 +100,25 @@ describe("Section/Container primitives (BROADSHEET foundation)", () => {
     const section = screen.getByTestId("section");
     expect(section).toHaveClass("grid", "grid-cols-[1fr_min(1280px,100%)_1fr]");
     expect(screen.getByText("Bled content").closest("div")).toHaveClass("col-start-2", "col-end-3");
+  });
+
+  it("rail prop renders an IndexRail with the given number and label", () => {
+    render(
+      <Section rail={{ number: "03", label: "PRICING" }} data-testid="section">
+        <p>Section body</p>
+      </Section>
+    );
+    expect(screen.getByText("03")).toBeInTheDocument();
+    expect(screen.getByText("PRICING")).toBeInTheDocument();
+    expect(screen.getByText("Section body")).toBeInTheDocument();
+  });
+
+  it("renders no rail content when the rail prop is omitted", () => {
+    render(
+      <Section data-testid="section">
+        <p>Section body</p>
+      </Section>
+    );
+    expect(screen.queryByText(/^\d{2}$/)).not.toBeInTheDocument();
   });
 });
