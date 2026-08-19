@@ -16,7 +16,7 @@ export const business: BusinessInfo = {
   socialLinks: {
     linkedin: "https://linkedin.com/in/gonsquared",
     github: "https://github.com/gonsquared",
-    portfolio: "https://gonsquared.dev",
+    portfolio: "https://www.dgdevworks.com",
   },
   trustLine:
     "Your info is only used to respond to your inquiry. No spam, no third parties.",
