@@ -12,19 +12,20 @@ export interface ScrollRevealProps {
   direction?: "up" | "left" | "right" | "none";
 }
 
-const OFFSET = 24;
+export const REVEAL_OFFSET = 12;
+export const REVEAL_DURATION = 0.3;
 
 function getOffset(direction: ScrollRevealProps["direction"]) {
   switch (direction) {
     case "left":
-      return { x: -OFFSET, y: 0 };
+      return { x: -REVEAL_OFFSET, y: 0 };
     case "right":
-      return { x: OFFSET, y: 0 };
+      return { x: REVEAL_OFFSET, y: 0 };
     case "none":
       return { x: 0, y: 0 };
     case "up":
     default:
-      return { x: 0, y: OFFSET };
+      return { x: 0, y: REVEAL_OFFSET };
   }
 }
 
@@ -60,7 +61,7 @@ export function ScrollReveal({
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
       variants={variants}
-      transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : delay, ease: "easeOut" }}
+      transition={{ duration: shouldReduceMotion ? 0 : REVEAL_DURATION, delay: shouldReduceMotion ? 0 : delay, ease: "easeOut" }}
     >
       {children}
     </motion.div>
