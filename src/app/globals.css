@@ -83,7 +83,7 @@
   --color-wash: var(--color-wash);
 
   --font-sans: var(--font-inter);
-  --font-heading: var(--font-instrument-serif);
+  --font-heading: var(--font-space-grotesk);
   --font-mono: var(--font-ibm-plex-mono);
 }
 
@@ -139,28 +139,29 @@
 
 @layer components {
   /* Typography scale — docs/superpowers/specs/2026-08-19-broadsheet-redesign-design.md §2.2
-     Instrument Serif ships weight 400 only — never set font-weight above 400
-     on anything using var(--font-heading); it will synthesize a fake bold. */
+     Space Grotesk is variable (wght 300–700) — real weights are available, no
+     synthetic bold risk. Headings use 500; .text-voice stays at 400 so the
+     pull-quote reads as spoken rather than as a headline. */
   .heading-masthead {
     font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: clamp(2.75rem, 2rem + 3.6vw, 5rem);
-    line-height: 0.98;
+    font-weight: 500;
+    font-size: clamp(2.75rem, 2rem + 3.6vw, 4.5rem);
+    line-height: 1.02;
     letter-spacing: -0.03em;
   }
 
   .heading-display {
     font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: clamp(2.5rem, 1.8rem + 3.2vw, 4rem);
+    font-weight: 500;
+    font-size: clamp(2.5rem, 1.8rem + 3.2vw, 3.75rem);
     line-height: 1;
     letter-spacing: -0.025em;
   }
 
   .heading-h2 {
     font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: clamp(1.875rem, 1.5rem + 1.6vw, 2.75rem);
+    font-weight: 500;
+    font-size: clamp(1.875rem, 1.5rem + 1.6vw, 2.5rem);
     line-height: 1.08;
     letter-spacing: -0.02em;
   }
@@ -183,6 +184,7 @@
   .text-voice {
     font-family: var(--font-heading);
     font-weight: 400;
+    letter-spacing: -0.01em;
   }
 
   .text-body-lead {
