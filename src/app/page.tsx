@@ -5,6 +5,7 @@ import { ProofStrip } from "@/components/ProofStrip";
 import { CaseStudyLead } from "@/components/CaseStudyLead";
 import { PricingTable } from "@/components/PricingTable";
 import { IndexRow } from "@/components/ui/IndexRow";
+import { ServiceColumn } from "@/components/ui/ServiceColumn";
 import { Section } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { ClosingRecord } from "@/components/ui/ClosingRecord";
@@ -38,14 +39,13 @@ export default function HomePage() {
 
       <Section rail={{ number: "01", label: "SERVICES" }}>
         <h2 className="heading-h2">What I get hired to do</h2>
-        <div className="mt-8">
+        <div className="mt-8 grid grid-cols-1 border-y border-rule md:grid-cols-4">
           {services.map((service, index) => (
             <ScrollReveal key={service.slug} delay={index * 0.035}>
-              <IndexRow
+              <ServiceColumn
                 href={`/services/${service.slug}`}
                 index={String(index + 1).padStart(2, "0")}
                 title={service.title}
-                summary={service.summary}
                 meta={service.priceLabel}
               />
             </ScrollReveal>
