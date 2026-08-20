@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { BackLink } from "@/components/ui/BackLink";
 import { Section } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { IndexRow } from "@/components/ui/IndexRow";
@@ -63,6 +64,8 @@ export default async function CaseStudyDetailPage({
       <JsonLd data={caseStudyJsonLd(caseStudy)} />
 
       <Section size="loose" rule="bottom">
+        <BackLink href="/work" label="Work" />
+
         <h1 className="heading-display">{caseStudy.title}</h1>
         {caseStudy.headlineStat && (
           <div className="mt-8 flex items-baseline gap-4 border-t border-rule pt-6">
