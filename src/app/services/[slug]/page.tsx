@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { BackLink } from "@/components/ui/BackLink";
 import { Section } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { ClosingRecord } from "@/components/ui/ClosingRecord";
@@ -65,6 +66,8 @@ export default async function ServiceDetailPage({
       <JsonLd data={serviceJsonLd(service)} />
 
       <Section size="loose" rule="bottom">
+        <BackLink href="/services" label="Services" />
+
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <h1 className="heading-display">{service.title}</h1>

@@ -38,7 +38,7 @@ export default function HomePage() {
       </Section>
 
       <Section rail={{ number: "01", label: "SERVICES" }}>
-        <h2 className="heading-h2">What I get hired to do</h2>
+        <h2 className="heading-h2">Ways we can work together</h2>
         <div className="mt-8 grid grid-cols-1 border-y border-rule md:grid-cols-4">
           {services.map((service, index) => (
             <ScrollReveal key={service.slug} delay={index * 0.035}>
