@@ -6,7 +6,7 @@ export interface LogotypeProps {
   className?: string;
 }
 
-/** BracketMark + "DevWorks" in Instrument Serif — reused in Nav, Footer, and root OG image. */
+/** BracketMark + "DevWorks" — text uses `.heading-h4`, which resolves to `--font-sans`/Inter, not `--font-heading`. Reused in Nav, Footer, and root OG image. */
 export function Logotype({ className }: LogotypeProps) {
   return (
     <Link

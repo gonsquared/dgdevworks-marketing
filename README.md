@@ -6,7 +6,8 @@ Marketing/portfolio site for DG DevWorks — a fully static, frontend-only Next.
 
 - **Framework:** Next.js 16 (App Router), TypeScript (`strict: true`)
 - **Runtime / package manager:** [Bun](https://bun.sh) (`bun.lock` present in the repo — this is the only lockfile; use Bun for all installs/scripts)
-- **Styling:** Tailwind CSS v4
+- **Styling:** Tailwind CSS v4, `@theme inline` design tokens in `src/app/globals.css`
+- **Fonts:** Inter (body/sans), Space Grotesk (headings), IBM Plex Mono (monospace/annotations), all loaded via `next/font/google`; see [Typography](#typography) below
 - **Animation:** Framer Motion
 - **Unit/component testing:** Vitest + React Testing Library + jsdom + `vitest-axe`
 - **E2E testing:** Playwright + `@axe-core/playwright`
@@ -62,6 +63,18 @@ tests/
 public/                 Static assets
 out/                    Build output (static export) — generated, not committed
 ```
+
+## Typography
+
+Three typefaces, all loaded via `next/font/google` in `src/app/layout.tsx` and exposed as CSS custom properties, mapped to role tokens in the Tailwind v4 `@theme inline` block in `src/app/globals.css`:
+
+| Role token | Raw variable | Font | Usage |
+| --- | --- | --- | --- |
+| `--font-sans` | `--font-inter` | Inter | Body copy, UI text, `.heading-h3`/`.heading-h4` (weight 600) |
+| `--font-heading` | `--font-space-grotesk` | Space Grotesk | `.heading-masthead`, `.heading-display`, `.heading-h2` (weight 500), `.text-voice` (weight 400) |
+| `--font-mono` | `--font-ibm-plex-mono` | IBM Plex Mono | Monospace figures/annotations (`.font-mono-figure`, `.font-mono-annotation`) |
+
+Space Grotesk replaced Instrument Serif as the heading font (see `docs/dev-stories-tracker.md`, Epic 1 / Feature 1.1). Space Grotesk is loaded as a variable font (weights 300–700 available, no `weight` prop passed to `next/font/google`) rather than a fixed static weight. A future story may move `.heading-h3`/`.heading-h4` from Inter onto `--font-heading`; see the Final Backlog Review in `docs/dev-stories-tracker.md`.
 
 ## Environment Variables
 
@@ -150,7 +163,7 @@ Steps to deploy:
 ## Architecture Summary
 
 - **Next.js 16 App Router, static export.** All 14 routes (11 route templates, including 2 dynamic `[slug]` templates for services and case studies) are pre-rendered at build time via `generateStaticParams()`. No server runtime, no API routes, no middleware.
-- **No backend, no database.** All content (services, case studies, pricing, business/contact info, FAQ, portfolio-disclosure copy) lives in typed TypeScript data files under `src/data/`, imported directly by pages and components. There is no CMS and no persistence layer.
+- **No backend, no database, no API, no Docker.** All content (services, case studies, pricing, business/contact info, FAQ, portfolio-disclosure copy) lives in typed TypeScript data files under `src/data/`, imported directly by pages and components. There is no CMS, no persistence layer, no `app/api/*` route handlers, and no containerization: the project builds to a static export and deploys directly to Vercel (see [Build / Deployment](#build--deployment)).
 - **Contact form → Discord webhook.** The `/contact` form POSTs directly from the browser to a Discord incoming webhook URL (`NEXT_PUBLIC_DISCORD_WEBHOOK_URL`), formatted as an embed. This is the site's only external integration.
 - **Theming.** Light-default / dark-toggle theme implemented via CSS custom properties and a `data-theme` attribute on `<html>`, set by a blocking inline script in the root layout before first paint (no flash of incorrect theme), with preference persisted via `localStorage`.
 - **SEO/AEO/GEO.** Per-route `generateMetadata()`, `app/sitemap.ts` / `app/robots.ts` driven by the same data used for `generateStaticParams()`, per-route Open Graph images (`opengraph-image.tsx`, including 8 dynamic ones for services/case studies), and JSON-LD structured data (`Person`/`ProfessionalService` sitewide, `Service` per service page, `FAQPage` on `/pricing` and `/contact`).
