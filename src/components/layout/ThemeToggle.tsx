@@ -39,7 +39,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       aria-label={label}
       title={label}
       className={clsx(
-        "inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-text-secondary transition-colors hover:border-accent hover:text-accent",
+        "inline-flex h-9 w-9 items-center justify-center rounded-md border border-transparent text-text-secondary transition-colors hover:border-accent hover:text-accent",
         className
       )}
     >
