@@ -56,7 +56,7 @@ export function Nav() {
       />
 
       {/* id targeted by MobileNavPanel to inert the header's own interactive
-          content (logo link, book-a-call buttons, hamburger) while the
+          content (logo link, book-a-call button, hamburger) while the
           mobile dialog is open — the panel itself lives in a sibling node
           below, outside this subtree, so inerting this div never inerts
           the dialog. */}
@@ -97,12 +97,7 @@ export function Nav() {
 
         <div className="flex items-center gap-3">
           <ThemeToggle className="hidden md:inline-flex" />
-          <Button href={bookingUrl} external size="sm" className="hidden md:inline-flex">
-            Book a call
-          </Button>
-
-          {/* Mobile: booking CTA + hamburger stay visible on the bar. */}
-          <Button href={bookingUrl} external size="sm" className="md:hidden">
+          <Button href={bookingUrl} external size="sm">
             Book a call
           </Button>
           <button
