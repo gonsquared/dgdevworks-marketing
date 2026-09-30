@@ -8,8 +8,8 @@ import { getSiteUrl } from "@/lib/env";
 describe("app/sitemap.ts (E4-F1-S2)", () => {
   const entries = sitemap();
 
-  it("statically generates entries for all 14 pre-rendered pages", () => {
-    expect(entries).toHaveLength(14);
+  it("statically generates entries for all 16 pre-rendered pages", () => {
+    expect(entries).toHaveLength(16);
   });
 
   it("includes every static route", () => {

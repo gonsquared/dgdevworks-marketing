@@ -62,7 +62,7 @@ async function assertNoSeriousViolations(container: HTMLElement, route: string) 
   ).toEqual([]);
 }
 
-describe("Accessibility audit — axe scan across all 14 rendered pages (E6-F1-S3)", () => {
+describe("Accessibility audit — axe scan across all 16 rendered pages (E6-F1-S3)", () => {
   it("/ (Home) has no critical/serious axe violations", async () => {
     const { container } = await renderFullPage("/", <HomePage />);
     await assertNoSeriousViolations(container, "/");

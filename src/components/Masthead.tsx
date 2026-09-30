@@ -5,7 +5,7 @@ import { business } from "@/data/business";
 
 const INFO_ITEMS = [
   { label: "PRACTICE", value: "One engineer, no subcontracting" },
-  { label: "STACK", value: "Next.js · TypeScript · Node · Postgres" },
+  { label: "STACK", value: "React · Next.js · Node · Python · Azure" },
   {
     label: "ENGAGEMENT",
     value: "MVP · Marketing site · Modernization · Fractional",
@@ -26,7 +26,7 @@ export function Masthead() {
       <div className="flex items-center gap-2 border-b border-rule pb-4">
         <BracketMark className="text-accent h-3.5 w-5" />
         <p className="font-mono-annotation text-text-secondary">
-          DG DEVWORKS · LET'S WORK TOGETHER
+          DG DEVWORKS · LET&apos;S WORK TOGETHER
         </p>
       </div>
 

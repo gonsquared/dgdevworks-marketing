@@ -1,4 +1,4 @@
-// The 14-route scan, contrast check, and keyboard-nav test below predate the
+// The cross-route scan, contrast check, and keyboard-nav test below predate the
 // sitewide PortfolioDisclosureModal (E1-F4-S2) and are about page content,
 // not the modal — they use tests/e2e/fixtures.ts so the modal is
 // pre-dismissed via sessionStorage and never adds noise to those scans or
@@ -11,7 +11,7 @@ import { test as rawTest } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
 /**
- * E6-F1-S3: live-browser accessibility scan across all 14 pre-rendered
+ * E6-F1-S3: live-browser accessibility scan across all 16 pre-rendered
  * routes, against the actual static export build. This is the authoritative
  * accessibility gate (vs. the jsdom-level axe scan in
  * tests/unit/accessibility/pages-axe.test.tsx, which covers the same DOM
@@ -25,6 +25,8 @@ const ROUTES = [
   "/services/modernization",
   "/services/fractional",
   "/work",
+  "/work/crm-platform-hardening",
+  "/work/network-data-integration",
   "/work/bank-platform-modernization",
   "/work/hardware-brand-partner-portals",
   "/work/retail-pos-platform",
@@ -57,7 +59,7 @@ async function settleScrollRevealAnimations(page: import("@playwright/test").Pag
   await page.waitForTimeout(600);
 }
 
-test.describe("Accessibility audit — axe scan across all 14 routes (E6-F1-S3)", () => {
+test.describe("Accessibility audit — axe scan across all 16 routes (E6-F1-S3)", () => {
   for (const route of ROUTES) {
     test(`${route} has no critical/serious axe violations`, async ({ page }) => {
       await page.goto(route);

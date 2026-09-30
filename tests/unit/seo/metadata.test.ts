@@ -3,7 +3,7 @@ import { buildMetadata } from "@/lib/seo";
 import { services } from "@/data/services";
 import { caseStudies } from "@/data/caseStudies";
 
-// The full 14-page static route inventory per docs/api-contract.md.
+// The full static route inventory: 6 static pages, 4 services, and 6 case studies.
 const STATIC_PAGES = [
   { title: "Home", description: "Home page description", path: "" },
   { title: "Services", description: "Services index description", path: "/services" },
@@ -28,14 +28,14 @@ describe("src/lib/seo.ts buildMetadata (E4-F1-S1 generateMetadata per route)", (
     expect(title.absolute).toContain("DG DevWorks");
   });
 
-  it("every static + dynamic route title/description combination is unique across all 14 pages", () => {
+  it("every static + dynamic route title/description combination is unique across all 16 pages", () => {
     const allRouteMeta = [
       ...STATIC_PAGES,
       ...services.map((s) => ({ title: s.title, description: s.summary, path: `/services/${s.slug}` })),
       ...caseStudies.map((cs) => ({ title: cs.title, description: cs.challenge, path: `/work/${cs.slug}` })),
     ];
 
-    expect(allRouteMeta).toHaveLength(14);
+    expect(allRouteMeta).toHaveLength(16);
 
     const titles = allRouteMeta.map((p) => buildMetadata(p).title as { absolute: string }).map((t) => t.absolute);
     const descriptions = allRouteMeta.map((p) => buildMetadata(p).description);
