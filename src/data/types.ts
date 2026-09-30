@@ -10,6 +10,8 @@ export type ServiceSlug =
   | "fractional";
 
 export type CaseStudySlug =
+  | "crm-platform-hardening"
+  | "network-data-integration"
   | "bank-platform-modernization"
   | "hardware-brand-partner-portals"
   | "retail-pos-platform"

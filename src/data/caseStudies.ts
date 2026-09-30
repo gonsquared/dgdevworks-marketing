@@ -10,6 +10,38 @@ import type { CaseStudy } from "./types";
  */
 export const caseStudies: CaseStudy[] = [
   {
+    slug: "crm-platform-hardening",
+    title: "Hardening a CRM for Secure, Reliable Daily Operations",
+    challenge:
+      "A growing CRM needed stronger security boundaries, more dependable contact and deal workflows, and a deployment foundation that could support continued product development without putting customer data or operational continuity at risk.",
+    approach:
+      "Secured the application by removing exposed credentials, restricting CORS, adding rate limits and security headers, and separating administrative credentials from browser access. Built a configurable Kanban pipeline, a timezone-safe meeting calendar, and attention-focused dashboards; strengthened contact integrity with server-validated duplicate checks, reversible archiving, and complete history; and added Alembic migrations, database-isolation checks, backup scripts, an API contract matrix, and a deployment verification runbook.",
+    impact: [
+      "Established 527 isolated Pytest tests across backend behavior and data boundaries",
+      "Added frontend unit coverage and 43 Playwright end-to-end specifications",
+      "Reduced security exposure with credential isolation, restricted CORS, rate limiting, and security headers",
+      "Made deployment and recovery repeatable with migrations, backups, contract checks, and a verification runbook",
+    ],
+    headlineStat: { value: "527", label: "isolated backend tests" },
+    relatedServiceSlugs: ["mvp-development", "modernization"],
+  },
+  {
+    slug: "network-data-integration",
+    title: "Connecting Network Data Across Enterprise Platforms",
+    challenge:
+      "A network-management application depended on data spread across ServiceNow, GraphQL services, and local tooling. Engineers needed reliable synchronization, faster UI access, and a repeatable local environment while services were moving from proprietary systems to third-party platforms.",
+    approach:
+      "Built and maintained Apache Airflow DAGs that consumed GraphQL query results and synchronized them to a local MongoDB cache. Designed GraphQL queries and APIs as an integration layer between ServiceNow and internal applications, migrated services while preserving compatibility with existing workflows, and automated local setup with shell scripts, Docker containers, and reusable command-line tooling.",
+    impact: [
+      "Improved data availability and enabled faster UI access through a synchronized local cache",
+      "Reduced direct system dependencies with a GraphQL integration layer",
+      "Enabled new engineers to establish functional development environments within their first week of access",
+      "Reduced repetitive operational work through reusable command-line automation",
+    ],
+    headlineStat: { value: "1 week", label: "to a functional local environment" },
+    relatedServiceSlugs: ["modernization", "fractional"],
+  },
+  {
     slug: "bank-platform-modernization",
     title: "Modernizing a Regulated Bank's API and Application Layer",
     challenge:

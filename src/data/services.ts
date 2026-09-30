@@ -30,7 +30,7 @@ export const services: Service[] = [
     idealClient:
       "Teams at any stage that need senior-level engineering judgment on tap, without committing to a full-time senior hire.",
     priceLabel: "$2,450–$4,900/mo",
-    relatedCaseStudySlugs: ["bank-platform-modernization"],
+    relatedCaseStudySlugs: ["network-data-integration", "bank-platform-modernization"],
   },
   {
     slug: "marketing-sites",
@@ -78,7 +78,12 @@ export const services: Service[] = [
     idealClient:
       "Companies and teams carrying a legacy system that's now the bottleneck: slow to change, risky to touch, or blocking new hires from being productive.",
     priceLabel: "Starting at $5,600 (custom quote)",
-    relatedCaseStudySlugs: ["bank-platform-modernization", "stock-exchange-data-migration"],
+    relatedCaseStudySlugs: [
+      "crm-platform-hardening",
+      "network-data-integration",
+      "bank-platform-modernization",
+      "stock-exchange-data-migration",
+    ],
   },
   {
     slug: "mvp-development",
@@ -102,7 +107,11 @@ export const services: Service[] = [
     idealClient:
       "Founders and product teams with a validated idea (or a first customer waiting) who need a working product shipped fast, without hiring a full team first.",
     priceLabel: "Starting at $8,400",
-    relatedCaseStudySlugs: ["retail-pos-platform", "stock-exchange-data-migration"],
+    relatedCaseStudySlugs: [
+      "crm-platform-hardening",
+      "retail-pos-platform",
+      "stock-exchange-data-migration",
+    ],
   },
 ];
 

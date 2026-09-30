@@ -9,11 +9,11 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Work",
   description:
-    "Case studies from regulated banking, global hardware, and fintech platforms: reframed proof of the engineering behind DG DevWorks.",
+    "Case studies from CRM, regulated banking, global hardware, retail, and fintech platforms: proof of the engineering behind DG DevWorks.",
   path: "/work",
 });
 
-const LEAD_CASE_STUDY_SLUG = "stock-exchange-data-migration";
+const LEAD_CASE_STUDY_SLUG = "crm-platform-hardening";
 
 export default function WorkIndexPage() {
   const leadCaseStudy = getCaseStudyBySlug(LEAD_CASE_STUDY_SLUG)!;
