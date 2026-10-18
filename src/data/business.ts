@@ -8,9 +8,9 @@ import type { BusinessInfo } from "./types";
  */
 export const business: BusinessInfo = {
   brandName: "DG DevWorks",
-  tagline: "Solutions built with enterprise discipline.",
+  tagline: "AI and software engineering, built with enterprise discipline.",
   positioningCopy:
-    "DG DevWorks is a one-person engineering practice: no subcontracting, no account-manager layer, no junior developer learning on your codebase. I've spent years shipping production software for regulated banks and global hardware brands, where a bad release is a compliance incident rather than a quick patch. The same discipline applies whether you're building a first product, scaling one that's outgrown its architecture, modernizing a legacy system, or connecting tools that were never meant to talk to each other.",
+    "DG DevWorks is a one-person engineering practice led by Daryll, a senior software engineer with 10+ years of experience across AI engineering, full-stack web applications, API platforms, and legacy modernization. No subcontracting, no account-manager layer, and no junior developer learning on your codebase. The same production discipline used for regulated banks and global hardware brands applies whether you're building a first product, securing and scaling an existing one, modernizing a legacy system, or connecting tools that were never meant to talk to each other.",
   bookingUrl: getBookingUrl(),
   contactEmail: "daryll@dgdevworks.com",
   socialLinks: {

@@ -37,7 +37,7 @@ Sources: `docs/dev-stories-tracker.md` (6 epics, 43 stories, 137 points), `docs/
 | Goal | Success Metric | Target |
 |---|---|---|
 | Convert visiting founders into contact | Contact form submissions + booking-CTA click-throughs | `TODO` — no analytics baseline defined yet; `NEXT_PUBLIC_GA_ID` is wired but no target volume has been set by the business owner |
-| Be discoverable by search and answer/LLM engines | Unique metadata, valid sitemap/robots, valid JSON-LD across all 14 routes | 0 duplicate titles/descriptions; 100% JSON-LD schema validation; all 14 routes indexed |
+| Be discoverable by search and answer/LLM engines | Unique metadata, valid sitemap/robots, valid JSON-LD across all 16 routes | 0 duplicate titles/descriptions; 100% JSON-LD schema validation; all 16 routes indexed |
 | Ship a credible, accessible, production-quality site | Automated accessibility scan (axe) across all routes | 0 critical/serious violations sitewide (currently **not met** — see §7 known gaps) |
 | Demonstrate engineering craft through the build itself | Full automated test coverage (unit + E2E) with a documented CI-equivalent script | 100% of shipped stories backed by passing automated tests, 0 unexplained skips |
 | Be transparent that this is a self-directed portfolio, not a live client storefront | Visitors are shown a clear, low-friction one-time disclosure with a path to contact | 1 disclosure impression per browsing session, sitewide, non-blocking |
@@ -112,7 +112,7 @@ IDs use `REQ-<epic>.<feature>.<seq>`, one requirement per tracker story (story I
 | ID | Requirement | Priority | Notes |
 |---|---|---|---|
 | REQ-2.1.1 | `src/data/services.ts` SHALL export exactly 4 typed service entries (slugs: `mvp-development`, `marketing-sites`, `modernization`, `fractional`) with summary, includes, process, ideal client, price label, and related case-study cross-links matching the approved mapping table. | Must Have | Story E2-F1-S1. Done / Pass. |
-| REQ-2.1.2 | `src/data/caseStudies.ts` SHALL export exactly 4 typed case-study entries (slugs: `bank-platform-modernization`, `hardware-brand-partner-portals`, `retail-pos-platform`, `stock-exchange-data-migration`) in challenge/approach/impact format, containing no proprietary screenshots, internal system names beyond what's already public, or client data, with related-service cross-links matching the approved mapping table. | Must Have | Story E2-F1-S2. Done / Pass. |
+| REQ-2.1.2 | `src/data/caseStudies.ts` SHALL export exactly 6 typed case-study entries (slugs: `crm-platform-hardening`, `network-data-integration`, `bank-platform-modernization`, `hardware-brand-partner-portals`, `retail-pos-platform`, `stock-exchange-data-migration`) in challenge/approach/impact format, containing no proprietary screenshots, internal system names beyond what's already public, or client data, with related-service cross-links matching the approved mapping table. | Must Have | Story E2-F1-S2. Done / Pass; expanded to reflect current resume. |
 | REQ-2.1.3 | `src/data/pricing.ts` SHALL export a typed hourly rate and 4 pricing packages with placeholder values flagged (via code comment) as pending confirmation, consumed identically by the pricing snapshot and full pricing page. | Must Have | Story E2-F1-S3. Done / Pass. |
 | REQ-2.1.4 | `src/data/business.ts` SHALL export brand name, tagline, positioning copy, booking URL (sourced from `NEXT_PUBLIC_BOOKING_URL`), and social links, consumed by Nav, Footer, Home, and About rather than duplicated inline. | Must Have | Story E2-F1-S4. Done / Pass. |
 
@@ -190,14 +190,14 @@ IDs use `REQ-<epic>.<feature>.<seq>`, one requirement per tracker story (story I
 |---|---|---|---|
 | REQ-6.1.1 | Unit tests SHALL verify the shape of `services.ts`, `caseStudies.ts`, `pricing.ts`, and `business.ts`, resolve all cross-referenced slugs, and cover Nav, Footer, ThemeToggle, and at least one UI primitive, runnable via a documented script with all tests passing and none skipped. | Could Have | Story E6-F1-S1. Done / Pass. |
 | REQ-6.1.2 | Live-browser E2E tests SHALL cover the home→service→case-study→back navigation flow, theme-toggle persistence across reload with no flash, contact-form success/validation-error states (webhook mocked), and the booking CTA, all passing against a production-equivalent static export build. | Could Have | Story E6-F1-S2. Done / Pass. |
-| REQ-6.1.3 | An automated accessibility scan (axe) SHALL run against all 14 rendered pages with zero critical/serious violations, keyboard navigation SHALL be verified for nav/theme-toggle/contact-form, and color contrast SHALL be verified for both themes against the token set. | Could Have | Story E6-F1-S3. **Todo / QA Fail** — live-browser axe run found 2 real serious violations (Footer color-contrast per REQ-1.3.3; About link-in-text-block per REQ-3.3.1). Blocked pending both fixes and a re-scan. |
+| REQ-6.1.3 | An automated accessibility scan (axe) SHALL run against all 16 rendered pages with zero critical/serious violations, keyboard navigation SHALL be verified for nav/theme-toggle/contact-form, and color contrast SHALL be verified for both themes against the token set. | Could Have | Story E6-F1-S3. **Todo / QA Fail** — live-browser axe run found 2 real serious violations (Footer color-contrast per REQ-1.3.3; About link-in-text-block per REQ-3.3.1). Blocked pending both fixes and a re-scan. |
 | REQ-6.1.4 | Metadata, sitemap, robots, and all JSON-LD blocks (`Person`/`ProfessionalService`, `Service` ×4, `FAQPage` ×2) SHALL be validated with zero errors across every route, and all 9 Open Graph images SHALL be verified to render with correct per-route content. | Could Have | Story E6-F1-S4. Done / Pass. |
 
 #### Feature 6.2 — Deployment & Documentation
 
 | ID | Requirement | Priority | Notes |
 |---|---|---|---|
-| REQ-6.2.1 | The site SHALL be configured for deployment to Vercel as a static export (`output: 'export'`), with all required environment variables documented as Vercel project settings matching `.env.example`, a production build completing with zero blocking errors/warnings, and a deployed preview verified to serve all 14 pages correctly. | Could Have | Story E6-F2-S1. **Todo / QA Fail** — live Vercel preview could not be independently verified in the sandboxed QA environment (no deploy credentials/egress). Pending a real-deployment check by whoever has Vercel access. |
+| REQ-6.2.1 | The site SHALL be configured for deployment to Vercel as a static export (`output: 'export'`), with all required environment variables documented as Vercel project settings matching `.env.example`, a production build completing with zero blocking errors/warnings, and a deployed preview verified to serve all 16 pages correctly. | Could Have | Story E6-F2-S1. **Todo / QA Fail** — live Vercel preview could not be independently verified in the sandboxed QA environment (no deploy credentials/egress). Pending a real-deployment check by whoever has Vercel access. |
 | REQ-6.2.2 | A README SHALL document local setup, all 5 environment variables (required vs. optional, where to obtain/replace placeholders), the Vercel deployment process, and the spec's pending Open Items (pricing figures, real booking URL, real domain, case-study copy review) as owner follow-ups before public launch. | Could Have | Story E6-F2-S2. **Todo / QA Pending** — `README.md` authored 2026-08-19 by readme-agent per these ACs; not yet verified by qa-agent, so Status/QA Status remain as tracked per the tracker's Definition of Done. |
 
 ---
@@ -211,7 +211,7 @@ IDs use `REQ-<epic>.<feature>.<seq>`, one requirement per tracker story (story I
 | Security | The Discord webhook URL SHALL be treated as a public, client-embedded value (accepted risk of a fully static site) with a honeypot field and reliance on Discord's own rate limiting as spam mitigations. | Must Have | `docs/api-contract.md` Security note; `tests/unit/lib/discord.test.ts`. |
 | Security | All external links (LinkedIn, GitHub, personal portfolio, booking URL) SHALL use `target="_blank" rel="noopener noreferrer"`. | Must Have | `tests/unit/components/Button.test.tsx`, `tests/e2e/booking-cta.spec.ts`. |
 | Security | No `?redirect=`/`?next=`-style open-redirect params, auth, session/logout UX, or PII redisplay SHALL exist anywhere on the site. | Must Have | `tests/unit/security/security.test.ts`; code review. |
-| Accessibility | All 14 routes SHALL pass an automated axe scan with zero critical/serious violations. | Must Have | `tests/e2e/accessibility.spec.ts`. **Currently not met** — see REQ-1.3.3 / REQ-3.3.1 / REQ-6.1.3. |
+| Accessibility | All 16 routes SHALL pass an automated axe scan with zero critical/serious violations. | Must Have | `tests/e2e/accessibility.spec.ts`. **Currently not met** — see REQ-1.3.3 / REQ-3.3.1 / REQ-6.1.3. |
 | Accessibility | All interactive elements SHALL expose a visible focus ring; all dialogs (mobile nav panel, portfolio disclosure modal) SHALL implement a full focus trap, `Esc`-to-close, and focus return on close. | Must Have | `tests/unit/components/MobileNavPanel.test.tsx`, `tests/unit/components/PortfolioDisclosureModal.test.tsx`, corresponding E2E specs. |
 | Accessibility | All motion (scroll-reveal, mobile nav panel, portfolio disclosure modal) SHALL respect `prefers-reduced-motion` with an instant, transform-free fallback. | Must Have | `tests/unit/components/ScrollReveal.test.tsx`; `tests/e2e/accessibility.spec.ts` reduced-motion assertions. |
 | Scalability | The site SHALL require no origin server, database, or backend runtime, and SHALL be servable entirely from a CDN/static host. | Must Have | `vercel.json` static-export config; `docs/api-contract.md` ("No internal backend API exists"). |
@@ -231,12 +231,12 @@ IDs use `REQ-<epic>.<feature>.<seq>`, one requirement per tracker story (story I
 | Animation | Framer Motion | Powers scroll-reveal, mobile nav panel, and portfolio disclosure modal transitions, gated by `useReducedMotion()` throughout. |
 | Fonts | `next/font` (Inter, Space Grotesk, IBM Plex Mono) | Self-hosted, zero-layout-shift font loading consistent with the "Spec Sheet / Blueprint" design direction. Space Grotesk (headings) was selected to read as inviting and technical — see REQ-1.2.3–REQ-1.2.6 for the full selection rationale and reconciliation history, including an interim period where headings shipped in Instrument Serif before this decision. |
 | Package manager / runtime | Bun | Single toolchain for install, dev server, build, lint, typecheck, and test scripts. |
-| Unit testing | Vitest + React Testing Library + jsdom + vitest-axe | jsdom-level component and data-layer coverage, including a fast in-process axe pass across all 14 rendered pages. |
+| Unit testing | Vitest + React Testing Library + jsdom + vitest-axe | jsdom-level component and data-layer coverage, including a fast in-process axe pass across all 16 rendered pages. |
 | E2E testing | Playwright + `@axe-core/playwright` | Authoritative live-Chromium accessibility, navigation, theming, and contact-form coverage against the actual static export build (not the dev server). |
 | Contact delivery | Discord incoming webhook (client-side POST) | Avoids any backend/API route for a fully static site; documented as a public, client-embedded credential with accepted risk (`docs/api-contract.md`). |
 | Hosting | Vercel (static export) | Zero-server-runtime hosting matching `output: 'export'`; `vercel.json` pins `outputDirectory: "out"`. |
 
-**Architecture summary.** The site has no backend, no database, and no `app/api/*` route handlers — all 14 pages are pre-rendered at build time from typed data in `src/data/*.ts`, and the single external integration (the Discord webhook) is called directly from the browser. `software-architect-agent` was not used as a story assignee for this project; architecture decisions were made directly against the approved design spec and implemented by `frontend-coding-agent`/`ui-design-agent`.
+**Architecture summary.** The site has no backend, no database, and no `app/api/*` route handlers — all 16 pages are pre-rendered at build time from typed data in `src/data/*.ts`, and the single external integration (the Discord webhook) is called directly from the browser. `software-architect-agent` was not used as a story assignee for this project; architecture decisions were made directly against the approved design spec and implemented by `frontend-coding-agent`/`ui-design-agent`.
 
 ---
 
@@ -254,7 +254,7 @@ IDs use `REQ-<epic>.<feature>.<seq>`, one requirement per tracker story (story I
 - Pricing figures in `src/data/pricing.ts` (hourly rate $90; package ranges) are explicitly flagged placeholders pending the business owner's confirmation before public launch.
 - `NEXT_PUBLIC_BOOKING_URL` currently resolves to a placeholder Cal.com-style URL, not a real, live booking calendar.
 - `NEXT_PUBLIC_SITE_URL` / production domain has not yet been finalized; canonical URLs and the sitemap depend on this value being correct at deploy time.
-- A live Vercel preview deployment has not yet been independently verified to serve all 14 routes (sandboxed QA environment had no deploy credentials/egress) — see REQ-6.2.1.
+- A live Vercel preview deployment has not yet been independently verified to serve all 16 routes (sandboxed QA environment had no deploy credentials/egress) — see REQ-6.2.1.
 - Case-study copy is assumed to have been reviewed for confidentiality; a final legal/business-owner review pass before public launch is still an open item per REQ-6.2.2.
 
 ---

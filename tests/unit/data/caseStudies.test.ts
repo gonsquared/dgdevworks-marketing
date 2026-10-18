@@ -4,6 +4,8 @@ import { services } from "@/data/services";
 import type { CaseStudySlug } from "@/data/types";
 
 const EXPECTED_SLUGS: CaseStudySlug[] = [
+  "crm-platform-hardening",
+  "network-data-integration",
   "bank-platform-modernization",
   "hardware-brand-partner-portals",
   "retail-pos-platform",
@@ -11,8 +13,8 @@ const EXPECTED_SLUGS: CaseStudySlug[] = [
 ];
 
 describe("src/data/caseStudies.ts (E2-F1-S2)", () => {
-  it("exports exactly 4 entries", () => {
-    expect(caseStudies).toHaveLength(4);
+  it("exports exactly 6 entries", () => {
+    expect(caseStudies).toHaveLength(6);
   });
 
   it("slugs match the spec exactly", () => {
@@ -65,6 +67,8 @@ describe("src/data/caseStudies.ts (E2-F1-S2)", () => {
 
   it("every entry has a headlineStat derived from its own impact copy, with non-empty value/label", () => {
     const EXPECTED: Record<CaseStudySlug, { value: string; label: string }> = {
+      "crm-platform-hardening": { value: "527", label: "isolated backend tests" },
+      "network-data-integration": { value: "1 week", label: "to a functional local environment" },
       "bank-platform-modernization": { value: "0", label: "unplanned downtime during migration" },
       "hardware-brand-partner-portals": { value: "2", label: "portals migrated, zero content loss" },
       "retail-pos-platform": { value: "2", label: "markets localized (Arabic RTL + Spanish)" },
@@ -80,6 +84,8 @@ describe("src/data/caseStudies.ts (E2-F1-S2)", () => {
 describe("case study <-> service cross-link mapping table (spec: docs/superpowers/specs/2026-08-18-dgdevworks-marketing-site-design.md)", () => {
   // Exact primary/secondary mapping table from the approved design spec.
   const EXPECTED_MAPPING: Record<CaseStudySlug, string[]> = {
+    "crm-platform-hardening": ["mvp-development", "modernization"],
+    "network-data-integration": ["modernization", "fractional"],
     "bank-platform-modernization": ["modernization", "fractional"],
     "hardware-brand-partner-portals": ["marketing-sites"],
     "retail-pos-platform": ["mvp-development"],

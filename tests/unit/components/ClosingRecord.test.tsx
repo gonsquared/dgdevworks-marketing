@@ -6,7 +6,7 @@ import { business } from "@/data/business";
 describe("ClosingRecord (BROADSHEET, replaces CTABand)", () => {
   it("renders the default heading/subheading and a tiered dual CTA", () => {
     render(<ClosingRecord />);
-    expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent("Ready to talk about your project?");
+    expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent("Ready to scope your project?");
     const bookLink = screen.getByRole("link", { name: "Book a call" });
     expect(bookLink).toHaveAttribute("target", "_blank");
     expect(bookLink).toHaveAttribute("rel", "noopener noreferrer");

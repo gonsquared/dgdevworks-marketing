@@ -8,9 +8,10 @@ describe("src/data/business.ts (E2-F1-S4)", () => {
 
   it("exports non-empty tagline and positioning copy per the spec's positioning language", () => {
     expect(business.tagline.length).toBeGreaterThan(0);
-    expect(business.tagline).toMatch(/Daryll/);
+    expect(business.tagline).toMatch(/AI and software engineering/i);
     expect(business.positioningCopy.length).toBeGreaterThan(0);
-    expect(business.positioningCopy).toMatch(/marketing site that sells it/i);
+    expect(business.positioningCopy).toMatch(/10\+ years/i);
+    expect(business.positioningCopy).toMatch(/Daryll/i);
   });
 
   it("bookingUrl is a non-empty URL string", () => {

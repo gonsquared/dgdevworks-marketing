@@ -48,9 +48,9 @@ export function personProfessionalServiceJsonLd() {
       {
         "@type": "Person",
         "@id": `${siteUrl}/#person`,
-        name: "Daryll",
+        name: "Daryll B. Gongon",
         url: siteUrl,
-        jobTitle: "Software Engineer",
+        jobTitle: "AI Engineer and Software Engineer",
         sameAs: [business.socialLinks.linkedin, business.socialLinks.github, business.socialLinks.portfolio],
       },
       {

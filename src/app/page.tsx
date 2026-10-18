@@ -17,11 +17,11 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Product builds, modernization, and marketing sites",
   description:
-    "Daryll, software engineer, builds MVPs, marketing sites, legacy modernizations, and fractional engineering engagements for companies and teams building, modernizing, or scaling software.",
+    "Daryll is a senior AI and software engineer building secure full-stack products, modernizing legacy systems, and strengthening engineering delivery for growing teams.",
   path: "",
 });
 
-const LEAD_CASE_STUDY_SLUG = "stock-exchange-data-migration";
+const LEAD_CASE_STUDY_SLUG = "crm-platform-hardening";
 
 export default function HomePage() {
   const leadCaseStudy = getCaseStudyBySlug(LEAD_CASE_STUDY_SLUG)!;

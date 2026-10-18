@@ -10,17 +10,18 @@ export function ProofStrip() {
   const stats = caseStudies.filter((cs) => cs.headlineStat);
 
   return (
-    <div className="grid grid-cols-2 border-t border-rule md:grid-cols-4">
+    <div className="grid grid-cols-2 border-t border-rule md:grid-cols-3 lg:grid-cols-6">
       {/* Leading-edge cell of each row loses its left rule: below md that's
-          every odd cell (2-col wrap), at md+ it's only the first cell
-          (single 4-col row). Assumes each Link below is a direct,
+          every odd cell (2-col wrap), at md that's every fourth cell
+          (3-col wrap), and at lg+ it's only the first cell (single 6-col row).
+          Assumes each Link below is a direct,
           unwrapped grid child with no interspersed elements. */}
       {stats.map((cs) => (
         <Link
           key={cs.slug}
           href={`/work/${cs.slug}`}
           aria-label={`${cs.headlineStat!.value}: ${cs.headlineStat!.label}`}
-          className="group flex flex-col gap-1 border-b border-l border-rule px-5 py-6 transition-colors duration-150 max-md:[&:nth-child(2n+1)]:border-l-0 md:first:border-l-0 hover:bg-wash focus-visible:bg-wash md:border-b-0"
+          className="group flex flex-col gap-1 border-b border-l border-rule px-5 py-6 transition-colors duration-150 max-md:[&:nth-child(2n+1)]:border-l-0 md:[&:nth-child(3n+1)]:border-l-0 lg:[&:nth-child(3n+1)]:border-l lg:first:border-l-0 hover:bg-wash focus-visible:bg-wash lg:border-b-0"
         >
           <span aria-hidden="true" className="font-mono-figure text-accent text-3xl md:text-4xl">
             {cs.headlineStat!.value}
