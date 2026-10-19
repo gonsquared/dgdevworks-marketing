@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Nav } from "@/components/layout/Nav";
@@ -11,22 +11,19 @@ import { personProfessionalServiceJsonLd } from "@/lib/seo";
 import { getGaId, getGoogleVerification, getSiteUrl } from "@/lib/env";
 import { business } from "@/data/business";
 
-const inter = Inter({
-  variable: "--font-inter",
+// Display: Bricolage Grotesque, variable with an optical-size axis so large
+// headings get the tight display cut and small ones stay open and legible.
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
+  axes: ["opsz"],
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+// Text and UI: Instrument Sans, variable weight.
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
   subsets: ["latin"],
-  display: "swap",
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-ibm-plex-mono",
-  subsets: ["latin"],
-  weight: "500",
   display: "swap",
 });
 
@@ -49,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${instrumentSans.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

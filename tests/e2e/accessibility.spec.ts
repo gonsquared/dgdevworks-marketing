@@ -35,11 +35,19 @@ const ROUTES = [
 ];
 
 /**
- * Scrolls the full page height so every ScrollReveal-wrapped section (which
- * animates from opacity:0 until it enters the viewport) has been triggered
- * and settled before the axe scan runs — otherwise the scan can catch
- * content mid-fade-in and report a false-positive contrast violation that a
- * real visitor would never actually see.
+ * Waits for every running CSS/Web animation (the home hero's line-rise and
+ * fade-in, the FAQ reveal) to finish — otherwise axe can sample a text colour
+ * mid-fade and report a false-positive contrast violation that a real
+ * visitor would never actually see.
+ */
+async function waitForAnimationsToFinish(page: import("@playwright/test").Page) {
+  await page.waitForFunction(() => document.getAnimations().every((a) => a.playState !== "running"));
+}
+
+/**
+ * Scrolls the full page height so any scroll-triggered content has been
+ * triggered and settled, then waits for animations to finish, before the axe
+ * scan runs.
  */
 async function settleScrollRevealAnimations(page: import("@playwright/test").Page) {
   await page.evaluate(async () => {
@@ -55,6 +63,7 @@ async function settleScrollRevealAnimations(page: import("@playwright/test").Pag
     window.scrollTo(0, 0);
   });
   await page.waitForTimeout(600);
+  await waitForAnimationsToFinish(page);
 }
 
 test.describe("Accessibility audit — axe scan across all 14 routes (E6-F1-S3)", () => {
@@ -78,6 +87,7 @@ test.describe("Accessibility audit — axe scan across all 14 routes (E6-F1-S3)"
 
   test("color contrast passes in both light and dark themes on the home page", async ({ page }) => {
     await page.goto("/");
+    await waitForAnimationsToFinish(page);
     // Dark is the default theme now — check it first.
     const darkResults = await new AxeBuilder({ page }).withTags(["wcag2aa"]).analyze();
     const darkContrastViolations = darkResults.violations.filter((v) => v.id === "color-contrast");
@@ -85,6 +95,7 @@ test.describe("Accessibility audit — axe scan across all 14 routes (E6-F1-S3)"
 
     await page.getByRole("button", { name: "Switch to light theme" }).click();
     await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+    await waitForAnimationsToFinish(page);
     const lightResults = await new AxeBuilder({ page }).withTags(["wcag2aa"]).analyze();
     const lightContrastViolations = lightResults.violations.filter((v) => v.id === "color-contrast");
     expect(lightContrastViolations).toEqual([]);

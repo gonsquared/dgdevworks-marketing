@@ -13,6 +13,11 @@ interface FormErrors {
   message?: string;
 }
 
+// Shared field styling: 16px+ text (no iOS zoom-on-focus), roomy padding, and
+// a border that warms to the accent on hover/focus.
+const fieldClasses =
+  "mt-2 w-full rounded-control border bg-bg px-4 py-3 text-body text-text-primary transition-[border-color,box-shadow] duration-150 placeholder:text-text-tertiary focus:border-accent focus:shadow-[0_0_0_4px_color-mix(in_srgb,var(--color-accent)_16%,transparent)] focus-visible:outline-none [@media(hover:hover)_and_(pointer:fine)]:hover:border-accent";
+
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_NAME_LENGTH = 100;
 const MAX_EMAIL_LENGTH = 200;
@@ -135,8 +140,8 @@ export function ContactForm() {
           aria-invalid={Boolean(errors.name)}
           aria-describedby={errors.name ? `${formId}-name-error` : undefined}
           className={clsx(
-            "mt-1.5 w-full rounded-md border bg-surface px-3.5 py-2.5 text-body text-text-primary",
-            errors.name ? "border-error" : "border-border"
+            fieldClasses,
+            errors.name ? "border-error" : "border-border-strong"
           )}
         />
         {errors.name && (
@@ -161,8 +166,8 @@ export function ContactForm() {
           aria-invalid={Boolean(errors.email)}
           aria-describedby={errors.email ? `${formId}-email-error` : undefined}
           className={clsx(
-            "mt-1.5 w-full rounded-md border bg-surface px-3.5 py-2.5 text-body text-text-primary",
-            errors.email ? "border-error" : "border-border"
+            fieldClasses,
+            errors.email ? "border-error" : "border-border-strong"
           )}
         />
         {errors.email && (
@@ -186,8 +191,8 @@ export function ContactForm() {
           aria-invalid={Boolean(errors.message)}
           aria-describedby={errors.message ? `${formId}-message-error` : undefined}
           className={clsx(
-            "mt-1.5 w-full rounded-md border bg-surface px-3.5 py-2.5 text-body text-text-primary",
-            errors.message ? "border-error" : "border-border"
+            fieldClasses,
+            errors.message ? "border-error" : "border-border-strong"
           )}
         />
         {errors.message && (
@@ -216,7 +221,7 @@ export function ContactForm() {
         {status === "loading" ? "Sending…" : "Send message"}
       </Button>
 
-      <div id={`${formId}-status`} role="status" aria-live="polite">
+      <div id={`${formId}-status`} role="status" aria-live="polite" className="min-h-6">
         {status === "success" && <p className="text-ui text-success">{statusMessage}</p>}
         {status === "error" && <p className="text-ui text-error">{statusMessage}</p>}
       </div>

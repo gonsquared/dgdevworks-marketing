@@ -19,14 +19,17 @@ test.describe("Mobile nav (E1-F3-S2, docs/design-system.md §5/§7)", () => {
     const hamburger = page.getByRole("button", { name: "Open navigation menu" });
     await expect(hamburger).toBeVisible();
     await hamburger.click();
+    // While the dialog is open the header content is inert + aria-hidden, so
+    // role queries can't see the trigger; address it by its aria-controls.
+    const trigger = page.locator('button[aria-controls="mobile-nav-panel"]');
 
     const dialog = page.getByRole("dialog", { name: "Site navigation" });
     await expect(dialog).toBeVisible();
-    await expect(hamburger).toHaveAttribute("aria-expanded", "true");
+    await expect(trigger).toHaveAttribute("aria-expanded", "true");
 
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
-    await expect(hamburger).toBeFocused();
+    await expect(trigger).toBeFocused();
   });
 
   test("booking CTA and hamburger remain visible on the bar (never buried inside the collapsed menu)", async ({

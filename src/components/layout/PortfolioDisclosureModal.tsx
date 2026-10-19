@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
-import { SpecLabel } from "@/components/ui/SpecLabel";
+import { Badge } from "@/components/ui/Badge";
 import { portfolioDisclosureCopy as copy } from "@/data/portfolioDisclosure";
 
 const FOCUSABLE_SELECTOR =
@@ -155,7 +155,7 @@ export function PortfolioDisclosureModal() {
             aria-labelledby="portfolio-disclosure-heading"
             aria-describedby="portfolio-disclosure-body"
             onClick={(event) => event.stopPropagation()}
-            className="card-bracket relative w-full max-w-[440px] rounded-lg border border-border bg-surface p-8"
+            className="relative w-full max-w-[440px] rounded-panel border border-border bg-surface p-8 shadow-lift"
             initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.96, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.96, y: 8 }}
@@ -168,15 +168,15 @@ export function PortfolioDisclosureModal() {
               type="button"
               onClick={dismiss}
               aria-label={copy.closeButtonAriaLabel}
-              className="absolute top-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-text-primary"
+              className="absolute top-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full text-text-secondary transition-[color,background-color,transform] duration-150 active:scale-95 motion-reduce:active:scale-100 [@media(hover:hover)_and_(pointer:fine)]:hover:bg-wash [@media(hover:hover)_and_(pointer:fine)]:hover:text-text-primary"
             >
               <span aria-hidden="true" className="text-lg leading-none">
                 ×
               </span>
             </button>
 
-            <SpecLabel>{copy.eyebrow}</SpecLabel>
-            <h2 id="portfolio-disclosure-heading" className="heading-h3 text-text-primary mt-3">
+            <Badge>{copy.eyebrow}</Badge>
+            <h2 id="portfolio-disclosure-heading" className="heading-h3 text-text-primary mt-4">
               {copy.heading}
             </h2>
             <p id="portfolio-disclosure-body" className="text-body text-text-secondary mt-3">

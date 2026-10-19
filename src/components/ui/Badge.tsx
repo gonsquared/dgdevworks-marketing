@@ -11,7 +11,7 @@ export function Badge({ children, className }: BadgeProps) {
   return (
     <span
       className={clsx(
-        "inline-flex items-center rounded-full border border-border-strong bg-surface-sunken px-2.5 py-1 text-ui text-text-secondary",
+        "inline-flex items-center rounded-full bg-accent-soft px-3 py-1 text-sm font-medium text-accent",
         className
       )}
     >

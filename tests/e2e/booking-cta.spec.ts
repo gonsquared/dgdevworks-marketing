@@ -36,7 +36,7 @@ test.describe("Book a call CTA (E5-F2-S1)", () => {
   }) => {
     for (const path of ["/", "/services/mvp-development"]) {
       await page.goto(path);
-      const ctaBand = page.locator("text=Ready to talk about your project?").locator("..").locator("..");
+      const ctaBand = page.locator("text=Ready to scope your project?").locator("..").locator("..");
       await expect(ctaBand.getByRole("link", { name: "Book a call" })).toBeVisible();
       await expect(ctaBand.getByRole("link", { name: "Send a message" })).toBeVisible();
     }

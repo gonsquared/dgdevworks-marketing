@@ -14,8 +14,9 @@ describe("Figure primitive (BROADSHEET foundation, replaces AbstractVisual)", ()
     expect(items).toHaveLength(4);
     expect(screen.getByText("Discovery & scoping")).toBeInTheDocument();
     expect(screen.getByText("Handoff")).toBeInTheDocument();
-    expect(screen.getByText("01")).toBeInTheDocument();
-    expect(screen.getByText("04")).toBeInTheDocument();
+    // A real sequence keeps its numbers (1-based, no zero padding).
+    expect(screen.getByText("1")).toBeInTheDocument();
+    expect(screen.getByText("4")).toBeInTheDocument();
   });
 
   it("impact-bar renders the label and both before/after values as real text, with the SVG hidden from assistive tech", () => {

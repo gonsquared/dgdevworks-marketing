@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 /*
- * DG DevWorks design tokens — "Spec Sheet / Blueprint" aesthetic, Shiny
- * Metagross palette. Source: docs/design-system.md (E1-F2-S1), recolored
- * per docs/superpowers/plans/2026-08-19-shiny-metagross-theme-reskin.md.
- * Structural language (hairline rules, mono annotation labels, corner-
- * bracket registration marks) is unchanged — only bg/surface/border and the
- * accent/error hues moved to a violet-orchid family (shiny body plating),
- * with the red-orange error token standing in for the red eye. Dark is the
- * default theme; light is opt-in via `data-theme="light"` on <html> (see
- * src/app/layout.tsx and src/lib/theme.ts).
+ * DG DevWorks design tokens — "quiet authority".
+ *
+ * A senior engineer's practice, not an agency template: flat paper-and-ink
+ * surfaces, one confident indigo accent, Bricolage Grotesque for display and
+ * Instrument Sans for text. Structure comes from spacing, scale and a small
+ * radius hierarchy (control < panel < pill) rather than hairline rules,
+ * numbered rails or mono caps labels. Dark is the default theme; light is
+ * opt-in via `data-theme="light"` on <html> (see src/app/layout.tsx and
+ * src/lib/theme.ts).
  *
  * Pattern: raw values live on :root / [data-theme="dark"], then an
  * `@theme inline` block re-exposes them as Tailwind utilities (bg-bg,
@@ -19,46 +19,54 @@
 
 :root,
 [data-theme="light"] {
-  --color-bg: #f5f3fa;
+  --color-bg: #f4f5f9;
   --color-surface: #ffffff;
-  --color-surface-sunken: #eeeaf5;
-  --color-text-primary: #16191d;
-  --color-text-secondary: #5c6470;
-  --color-text-tertiary: #8a9099;
-  --color-border: #e0dbee;
-  --color-border-strong: #c7bcd9;
-  --color-accent: #524293;
-  --color-accent-hover: #3d3070;
-  --color-accent-bright: #7d68c9;
-  --color-accent-soft: #ece7f7;
+  --color-surface-sunken: #e9ebf3;
+  --color-text-primary: #14132b;
+  --color-text-secondary: #4b4f66;
+  --color-text-tertiary: #6b6f86;
+  --color-border: #dcdfea;
+  --color-border-strong: #bfc4d6;
+  --color-accent: #4f3fd6;
+  --color-accent-hover: #3a2cb5;
+  --color-accent-bright: #7a6bff;
+  --color-accent-soft: #e8e6fb;
   --color-accent-on-fill: #ffffff;
   --color-success: #1f8a57;
   --color-error: #c7360f;
-  --color-focus-ring: #524293;
-  --color-rule: #eeebf6;
-  --color-wash: #e5e1f0;
+  --color-focus-ring: #4f3fd6;
+  --color-rule: #e4e6ef;
+  --color-wash: #eceef6;
+  --shadow-panel:
+    0 1px 2px rgb(20 19 43 / 0.04), 0 8px 24px -8px rgb(79 63 214 / 0.1),
+    0 24px 48px -24px rgb(20 19 43 / 0.12);
+  --shadow-lift:
+    0 1px 2px rgb(20 19 43 / 0.05), 0 12px 32px -8px rgb(79 63 214 / 0.18),
+    0 32px 56px -28px rgb(20 19 43 / 0.2);
   color-scheme: light;
 }
 
 [data-theme="dark"] {
-  --color-bg: #0c0a16;
-  --color-surface: #171029;
-  --color-surface-sunken: #07060d;
-  --color-text-primary: #edeff3;
-  --color-text-secondary: #94a0b4;
-  --color-text-tertiary: #5e6b80;
-  --color-border: #2a2440;
-  --color-border-strong: #3c3459;
-  --color-accent: #b9a3ff;
-  --color-accent-hover: #cdb9ff;
-  --color-accent-bright: #e4d8ff;
-  --color-accent-soft: #241c3f;
-  --color-accent-on-fill: #0c0a16;
-  --color-success: #34c77e;
+  --color-bg: #0b0a14;
+  --color-surface: #14122a;
+  --color-surface-sunken: #07060e;
+  --color-text-primary: #ecebf6;
+  --color-text-secondary: #a5a8c0;
+  --color-text-tertiary: #7c8099;
+  --color-border: #26233f;
+  --color-border-strong: #38345a;
+  --color-accent: #a99bff;
+  --color-accent-hover: #c1b7ff;
+  --color-accent-bright: #dad4ff;
+  --color-accent-soft: #1f1a3d;
+  --color-accent-on-fill: #0b0a14;
+  --color-success: #3dd68c;
   --color-error: #ff6a45;
-  --color-focus-ring: #b9a3ff;
-  --color-rule: #211b36;
-  --color-wash: #211936;
+  --color-focus-ring: #a99bff;
+  --color-rule: #1d1a33;
+  --color-wash: #1a1733;
+  --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 24px 48px -24px rgb(0 0 0 / 0.6);
+  --shadow-lift: 0 1px 0 rgb(255 255 255 / 0.06) inset, 0 32px 56px -24px rgb(0 0 0 / 0.75);
   color-scheme: dark;
 }
 
@@ -82,9 +90,17 @@
   --color-rule: var(--color-rule);
   --color-wash: var(--color-wash);
 
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-space-grotesk);
-  --font-mono: var(--font-ibm-plex-mono);
+  --font-sans: var(--font-instrument-sans);
+  --font-heading: var(--font-bricolage);
+
+  --radius-control: 10px;
+  --radius-panel: 20px;
+
+  --shadow-panel: var(--shadow-panel);
+  --shadow-lift: var(--shadow-lift);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 @layer base {
@@ -94,46 +110,31 @@
 
   html {
     scroll-behavior: smooth;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
     background-color: var(--color-bg);
-    background-image:
-      repeating-linear-gradient(
-        0deg,
-        color-mix(in srgb, var(--color-text-primary) 2.5%, transparent) 0,
-        color-mix(in srgb, var(--color-text-primary) 2.5%, transparent) 1px,
-        transparent 1px,
-        transparent 48px
-      ),
-      repeating-linear-gradient(
-        90deg,
-        color-mix(in srgb, var(--color-text-primary) 2.5%, transparent) 0,
-        color-mix(in srgb, var(--color-text-primary) 2.5%, transparent) 1px,
-        transparent 1px,
-        transparent 48px
-      );
-    background-size: 48px 48px;
     color: var(--color-text-primary);
+    font-feature-settings: "ss01", "kern", "liga";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-accent) 28%, transparent);
   }
 
   :focus-visible {
     outline: 2px solid var(--color-focus-ring);
-    outline-offset: 2px;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Touch devices: no sticky hover flashes, no grey tap rectangle. */
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
@@ -161,89 +162,190 @@
     }
   }
 
-  /* Typography scale — docs/superpowers/specs/2026-08-19-broadsheet-redesign-design.md §2.2
-     Space Grotesk is variable (wght 300–700) — real weights are available, no
-     synthetic bold risk. Headings use 500; .text-voice stays at 400 so the
-     pull-quote reads as spoken rather than as a headline. */
+  /* Typography scale. Bricolage Grotesque is variable (opsz 12–96, wdth
+     75–100, wght 200–800), so large sizes pick up its display cut
+     automatically (font-optical-sizing: auto) and tracking tightens as
+     size grows. Text stays in Instrument Sans with slightly looser
+     leading than the display. */
   .heading-masthead {
     font-family: var(--font-heading);
-    font-weight: 500;
-    font-size: clamp(2.75rem, 2rem + 3.6vw, 4.5rem);
-    line-height: 1.02;
-    letter-spacing: -0.03em;
+    font-weight: 600;
+    font-size: clamp(2.75rem, 1.4rem + 6.4vw, 6.25rem);
+    line-height: 0.96;
+    letter-spacing: -0.032em;
+    font-optical-sizing: auto;
+    text-wrap: balance;
   }
 
   .heading-display {
     font-family: var(--font-heading);
-    font-weight: 500;
-    font-size: clamp(2.5rem, 1.8rem + 3.2vw, 3.75rem);
+    font-weight: 600;
+    font-size: clamp(2.5rem, 1.6rem + 4.2vw, 4.75rem);
     line-height: 1;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.03em;
+    font-optical-sizing: auto;
+    text-wrap: balance;
   }
 
   .heading-h2 {
     font-family: var(--font-heading);
-    font-weight: 500;
-    font-size: clamp(1.875rem, 1.5rem + 1.6vw, 2.5rem);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
+    font-weight: 600;
+    font-size: clamp(1.875rem, 1.3rem + 2.2vw, 3rem);
+    line-height: 1.04;
+    letter-spacing: -0.026em;
+    font-optical-sizing: auto;
+    text-wrap: balance;
   }
 
   .heading-h3 {
-    font-family: var(--font-sans);
+    font-family: var(--font-heading);
     font-weight: 600;
     font-size: 1.5rem;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-optical-sizing: auto;
   }
 
   .heading-h4 {
-    font-family: var(--font-sans);
+    font-family: var(--font-heading);
     font-weight: 600;
     font-size: 1.125rem;
-    line-height: 1.4;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
   }
 
   .text-voice {
     font-family: var(--font-heading);
-    font-weight: 400;
-    letter-spacing: -0.01em;
+    font-weight: 500;
+    letter-spacing: -0.024em;
+    line-height: 1.12;
+    text-wrap: balance;
   }
 
   .text-body-lead {
     font-size: 1.25rem;
-    line-height: 1.6;
+    line-height: 1.55;
     font-weight: 400;
     max-width: 54ch;
+    text-wrap: pretty;
   }
 
   .text-body {
     font-size: 1.0625rem;
-    line-height: 1.7;
+    line-height: 1.65;
     font-weight: 400;
-    max-width: 68ch;
+    max-width: 66ch;
+    text-wrap: pretty;
   }
 
   .text-ui {
     font-size: 0.9375rem;
     line-height: 1.4;
     font-weight: 500;
-    letter-spacing: 0.005em; /* small text: slightly positive tracking */
+    letter-spacing: 0.005em;
   }
 
-  .font-mono-figure {
-    font-family: var(--font-mono);
-    font-weight: 500;
-    font-size: clamp(2.25rem, 1.6rem + 2.8vw, 4rem);
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -0.02em;
+  /* Figures: the display face with tabular numerals so prices and stats
+     align in columns without reaching for a monospace. */
+  .font-figure {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums lining-nums;
+    letter-spacing: -0.03em;
+    line-height: 1;
   }
 
-  .font-mono-annotation {
-    font-family: var(--font-mono);
-    font-weight: 500;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+  /* Quiet inline link: underline that thickens on hover, no arrow glyph. */
+  .link-underline {
+    text-decoration-line: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.28em;
+    transition:
+      text-decoration-color 160ms var(--ease-out),
+      color 160ms var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .link-underline:hover {
+      text-decoration-color: currentColor;
+    }
+  }
+
+  /* Hero line reveal — the one orchestrated page-load moment. Each line is
+     an overflow-hidden mask; the inner span rises into it. CSS, not JS, so
+     it stays smooth while the page hydrates. */
+  .line-mask {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+
+  .line-mask > span {
+    display: block;
+    animation: line-rise 820ms var(--ease-out) both;
+    animation-delay: calc(var(--line, 0) * 90ms + 80ms);
+  }
+
+  @keyframes line-rise {
+    from {
+      transform: translateY(105%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  /* FAQ answer reveal: plays when the panel's [hidden] attribute is removed. */
+  .faq-panel:not([hidden]) {
+    animation: fade-in 260ms var(--ease-out) both;
+  }
+
+  .fade-in-late {
+    animation: fade-in 700ms var(--ease-out) both;
+    animation-delay: calc(var(--line, 0) * 90ms + 240ms);
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .line-mask > span {
+      animation: none;
+    }
+    .fade-in-late {
+      animation: fade-in-plain 200ms ease both;
+    }
+    @keyframes fade-in-plain {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

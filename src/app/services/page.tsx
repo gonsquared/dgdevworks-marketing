@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/ui/Section";
 import { IndexRow } from "@/components/ui/IndexRow";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { ServicesExplorer } from "@/components/ServicesExplorer";
 import { services } from "@/data/services";
+import { pricing } from "@/data/pricing";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -15,41 +16,29 @@ export const metadata: Metadata = buildMetadata({
 export default function ServicesIndexPage() {
   return (
     <>
-      <Section size="loose" rule="bottom">
+      <Section size="loose">
         <h1 className="heading-display">Services</h1>
-        <p className="text-body-lead text-text-secondary mt-4 max-w-2xl">
+        <p className="text-body-lead text-text-secondary mt-6">
           Four ways to work together. Pick the one that matches where your project is right now.
         </p>
       </Section>
 
-      <Section rule="bottom">
-        <h2 className="font-mono-annotation text-text-secondary">WHICH ONE ARE YOU?</h2>
-        <div className="mt-4">
-          {services.map((service, index) => (
+      <Section className="pt-0 md:pt-0">
+        <h2 className="heading-h2">Which one are you?</h2>
+        <ServicesExplorer services={services} packages={pricing.packages} className="mt-12 md:mt-16" />
+      </Section>
+
+      <Section bleed className="bg-surface-sunken">
+        <h2 className="heading-h2">Compare every service</h2>
+        <div className="mt-10 md:mt-12">
+          {services.map((service) => (
             <IndexRow
               key={service.slug}
               href={`/services/${service.slug}`}
-              index={String(index + 1).padStart(2, "0")}
-              title={service.situation ?? service.title}
-              summary={`Best fit: ${service.title}`}
+              title={service.title}
+              summary={service.summary}
+              meta={service.priceLabel}
             />
-          ))}
-        </div>
-      </Section>
-
-      <Section rail={{ number: "01", label: "ALL SERVICES" }}>
-        <h2 className="heading-h2">The full index</h2>
-        <div className="mt-8">
-          {services.map((service, index) => (
-            <ScrollReveal key={service.slug} delay={index * 0.035}>
-              <IndexRow
-                href={`/services/${service.slug}`}
-                index={String(index + 1).padStart(2, "0")}
-                title={service.title}
-                summary={service.summary}
-                meta={service.priceLabel}
-              />
-            </ScrollReveal>
           ))}
         </div>
       </Section>

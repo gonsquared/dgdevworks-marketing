@@ -30,11 +30,10 @@ export interface ScopeBandFigureProps {
 export type FigureProps = PhaseTrackFigureProps | ImpactBarFigureProps | ScopeBandFigureProps;
 
 /**
- * Content-derived illustrative figure — replaces AbstractVisual's decorative
- * placeholder shapes with a rendering of the actual data being illustrated.
- * All numeric/text content is real DOM text, not SVG-embedded text; any
- * decorative SVG is aria-hidden with the equivalent information available as
- * adjacent real text.
+ * Content-derived illustrative figure that renders the actual data being
+ * illustrated. All numeric/text content is real DOM text, not SVG-embedded
+ * text; any decorative SVG is aria-hidden with the equivalent information
+ * available as adjacent real text.
  */
 export function Figure(props: FigureProps) {
   switch (props.variant) {
@@ -47,19 +46,34 @@ export function Figure(props: FigureProps) {
   }
 }
 
+/** A real sequence, so it keeps its numbers; a rail connects the steps. */
 function PhaseTrack({ steps, className }: PhaseTrackFigureProps) {
   return (
-    <ol className={clsx("flex flex-col md:flex-row md:items-start", className)}>
+    <ol className={clsx("grid grid-cols-1 gap-x-10 gap-y-10 md:grid-cols-2 lg:grid-cols-4", className)}>
       {steps.map((step, index) => (
-        <li
-          key={step}
-          className={clsx(
-            "relative flex-1 border-l-2 border-rule py-3 pl-5 md:border-t-2 md:border-l-0 md:py-0 md:pt-4 md:pr-6 md:pl-0",
-            index === steps.length - 1 && "md:pr-0"
+        <li key={step} className="relative flex gap-5 lg:flex-col lg:gap-6">
+          <span
+            aria-hidden="true"
+            className="font-figure relative z-10 flex size-11 shrink-0 items-center justify-center rounded-full bg-accent-soft text-lg text-accent"
+          >
+            {index + 1}
+          </span>
+          {index < steps.length - 1 && (
+            <span
+              aria-hidden="true"
+              className="absolute top-11 -bottom-10 left-5.25 w-px bg-border-strong md:hidden"
+            />
           )}
-        >
-          <span className="font-mono-annotation text-accent block">{String(index + 1).padStart(2, "0")}</span>
-          <span className="text-body text-text-secondary mt-1 block">{step}</span>
+          {index < steps.length - 1 && (
+            <span
+              aria-hidden="true"
+              className="absolute top-5.25 left-14 hidden h-px w-[calc(100%-3.5rem+2.5rem)] bg-border-strong lg:block"
+            />
+          )}
+          <span className="text-body text-text-secondary">
+            <span className="sr-only">Step {index + 1}: </span>
+            {step}
+          </span>
         </li>
       ))}
     </ol>
@@ -75,17 +89,17 @@ function ImpactBar({ label, beforeLabel, beforeValue, afterLabel, afterValue, cl
 
   return (
     <div className={clsx("flex flex-col gap-3", className)}>
-      <span className="font-mono-annotation text-text-secondary">{label}</span>
+      <span className="text-ui text-text-secondary">{label}</span>
       {rows.map((row) => {
         const width = Math.max((row.value / max) * 100, 2);
         return (
           <div key={row.key} className="flex items-center gap-3">
             <span className="text-ui text-text-secondary w-16 shrink-0">{row.label}</span>
             <svg viewBox="0 0 100 8" className="h-2 flex-1" aria-hidden="true" preserveAspectRatio="none">
-              <rect width="100" height="8" rx="1" className="fill-surface-sunken" />
-              <rect width={width} height="8" rx="1" className={row.tone} />
+              <rect width="100" height="8" rx="4" className="fill-surface-sunken" />
+              <rect width={width} height="8" rx="4" className={row.tone} />
             </svg>
-            <span className={clsx("font-mono-figure w-16 shrink-0 text-right text-base", row.textTone)}>
+            <span className={clsx("font-figure w-16 shrink-0 text-right text-base", row.textTone)}>
               {row.value}
             </span>
           </div>
@@ -110,12 +124,12 @@ function ScopeBand({
 
   return (
     <div className={clsx("flex flex-col gap-2", className)}>
-      <span className="font-mono-annotation text-text-secondary">{label}</span>
+      <span className="text-ui text-text-secondary">{label}</span>
       <svg viewBox="0 0 100 8" className="h-2 w-full" aria-hidden="true" preserveAspectRatio="none">
-        <rect width="100" height="8" rx="1" className="fill-surface-sunken" />
-        <rect x={start} width={width} height="8" rx="1" className="fill-accent" />
+        <rect width="100" height="8" rx="4" className="fill-surface-sunken" />
+        <rect x={start} width={width} height="8" rx="4" className="fill-accent" />
       </svg>
-      <span className="font-mono-figure text-accent text-base">
+      <span className="font-figure text-accent text-base">
         {formatValue(rangeMin)}–{formatValue(rangeMax)}
       </span>
     </div>

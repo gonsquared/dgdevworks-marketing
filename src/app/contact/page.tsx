@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/ui/Section";
-import { SpecLabel } from "@/components/ui/SpecLabel";
 import { Surface } from "@/components/ui/Surface";
 import { Button } from "@/components/ui/Button";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
@@ -26,34 +25,36 @@ export default function ContactPage() {
     <>
       <JsonLd data={faqPageJsonLd(contactFaq)} />
 
-      <Section className="pt-14">
-        <SpecLabel>§00 · CONTACT</SpecLabel>
-        <h1 className="heading-display mt-3">Let&apos;s talk about your project</h1>
+      <Section size="loose">
+        <h1 className="heading-display max-w-[14ch]">Let&apos;s talk about your project</h1>
+      </Section>
 
-        <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[1.2fr_1fr]">
+      <Section className="pt-0 md:pt-0">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
           <div>
             <Surface variant="panel">
               <h2 className="heading-h3">Send a message</h2>
-              <ContactForm />
+              <div className="mt-6">
+                <ContactForm />
+              </div>
             </Surface>
-            <TrustLine className="mt-4">{business.trustLine}</TrustLine>
+            <TrustLine className="mt-5 px-2">{business.trustLine}</TrustLine>
           </div>
 
-          <div className="flex flex-col gap-8">
-            <Surface variant="panel">
+          <div className="flex flex-col gap-12">
+            <Surface variant="inverted">
               <h2 className="heading-h3">Prefer to talk it through?</h2>
               <p className="text-body text-text-secondary mt-3">
                 Book time directly on the calendar. No back-and-forth over email.
               </p>
-              <Button href={bookingUrl} external variant="solid" size="lg" className="mt-5">
+              <Button href={bookingUrl} external variant="solid" size="lg" className="mt-6">
                 Book a call
               </Button>
             </Surface>
 
             <div>
-              <SpecLabel>FAQ</SpecLabel>
-              <h2 className="heading-h3 mt-3">Common questions</h2>
-              <FAQAccordion items={contactFaq} className="mt-6" />
+              <h2 className="heading-h3">Common questions</h2>
+              <FAQAccordion items={contactFaq} className="mt-4" />
             </div>
           </div>
         </div>

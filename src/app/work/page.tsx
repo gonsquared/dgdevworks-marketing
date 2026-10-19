@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/ui/Section";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { IndexRow } from "@/components/ui/IndexRow";
 import { CaseStudyLead } from "@/components/CaseStudyLead";
 import { caseStudies, getCaseStudyBySlug } from "@/data/caseStudies";
@@ -21,27 +20,25 @@ export default function WorkIndexPage() {
 
   return (
     <>
-      <Section size="loose" rule="bottom">
+      <Section size="loose">
         <h1 className="heading-display">Work</h1>
-        <p className="text-body-lead text-text-secondary mt-4 max-w-2xl">
+        <p className="text-body-lead text-text-secondary mt-6">
           Employer projects, reframed as proof of work: challenge, approach, and impact, without
           confidential specifics.
         </p>
       </Section>
 
-      <Section>
+      <Section className="pt-0 md:pt-0">
         <CaseStudyLead caseStudy={leadCaseStudy} headingLevel={2} />
-        <div className="mt-2">
-          {otherCaseStudies.map((caseStudy, index) => (
-            <ScrollReveal key={caseStudy.slug} delay={index * 0.035}>
-              <IndexRow
-                href={`/work/${caseStudy.slug}`}
-                index={String(index + 1).padStart(2, "0")}
-                title={caseStudy.title}
-                summary={caseStudy.challenge}
-                meta={caseStudy.headlineStat?.value}
-              />
-            </ScrollReveal>
+        <div className="mt-6 md:mt-10">
+          {otherCaseStudies.map((caseStudy) => (
+            <IndexRow
+              key={caseStudy.slug}
+              href={`/work/${caseStudy.slug}`}
+              title={caseStudy.title}
+              summary={caseStudy.challenge}
+              meta={caseStudy.headlineStat?.value}
+            />
           ))}
         </div>
       </Section>

@@ -6,12 +6,15 @@ export interface LogotypeProps {
   className?: string;
 }
 
-/** BracketMark + "DevWorks" — text uses `.heading-h4`, which resolves to `--font-sans`/Inter, not `--font-heading`. Reused in Nav, Footer, and root OG image. */
+/** BracketMark + "DevWorks" in the display face. Reused in Nav and Footer. */
 export function Logotype({ className }: LogotypeProps) {
   return (
     <Link
       href="/"
-      className={clsx("inline-flex items-center gap-2 heading-h4 text-text-primary", className)}
+      className={clsx(
+        "inline-flex items-center gap-2.5 font-heading text-[1.1875rem] font-semibold tracking-[-0.02em] text-text-primary",
+        className
+      )}
       aria-label="DG DevWorks, home"
     >
       <BracketMark className="text-accent h-4 w-6" />

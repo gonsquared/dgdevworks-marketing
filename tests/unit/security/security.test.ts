@@ -79,7 +79,7 @@ describe("Security: no hardcoded secrets outside NEXT_PUBLIC_* env var usage", (
     expect(envSource).toContain("NEXT_PUBLIC_DISCORD_WEBHOOK_URL");
     expect(envSource).toContain("NEXT_PUBLIC_BOOKING_URL");
 
-    const otherFiles = fileContents.filter(({ file }) => !file.endsWith("lib/env.ts"));
+    const otherFiles = fileContents.filter(({ file }) => !file.split(path.sep).join("/").endsWith("lib/env.ts"));
     const offenders = otherFiles
       .filter(({ content }) => /process\.env\.NEXT_PUBLIC_(DISCORD_WEBHOOK_URL|BOOKING_URL|SITE_URL)/.test(content))
       .map(({ file }) => path.relative(SRC_DIR, file));

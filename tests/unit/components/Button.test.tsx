@@ -57,7 +57,7 @@ describe("Button primitive (E1-F3-S4)", () => {
     expect(screen.getByRole("button", { name: "Submit" })).toHaveAttribute("type", "submit");
   });
 
-  it("does not apply the retired accent glow shadow, and uses the near-square BROADSHEET radius", () => {
+  it("uses the control radius token (10px) rather than the retired near-square radius", () => {
     render(
       <Button variant="solid" href="/contact">
         Send a message
@@ -65,6 +65,6 @@ describe("Button primitive (E1-F3-S4)", () => {
     );
     const link = screen.getByRole("link", { name: "Send a message" });
     expect(link.className).not.toContain("shadow-[var(--shadow-glow-accent)]");
-    expect(link).toHaveClass("rounded-[3px]");
+    expect(link).toHaveClass("rounded-control");
   });
 });

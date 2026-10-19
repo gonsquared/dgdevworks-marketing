@@ -2,34 +2,30 @@ import Link from "next/link";
 import { caseStudies } from "@/data/caseStudies";
 
 /**
- * Full-bleed ruled row of quantified proof, pulled directly from
- * caseStudies[].headlineStat — the home page's trust layer (previously
- * absent entirely). Each cell links to its source case study.
+ * The home page's trust layer, set as one running statement in display type
+ * instead of a row of stat tiles. Each figure is pulled directly from
+ * caseStudies[].headlineStat and links to its source case study.
  */
 export function ProofStrip() {
   const stats = caseStudies.filter((cs) => cs.headlineStat);
 
   return (
-    <div className="grid grid-cols-2 border-t border-rule md:grid-cols-4">
-      {/* Leading-edge cell of each row loses its left rule: below md that's
-          every odd cell (2-col wrap), at md+ it's only the first cell
-          (single 4-col row). Assumes each Link below is a direct,
-          unwrapped grid child with no interspersed elements. */}
+    <p className="font-heading max-w-[28ch] text-[clamp(1.75rem,1.1rem+2.6vw,3.25rem)] leading-[1.14] font-medium tracking-[-0.028em] text-text-secondary sm:max-w-[34ch] md:max-w-[44ch] lg:max-w-[52ch]">
       {stats.map((cs) => (
-        <Link
-          key={cs.slug}
-          href={`/work/${cs.slug}`}
-          aria-label={`${cs.headlineStat!.value}: ${cs.headlineStat!.label}`}
-          className="group flex flex-col gap-1 border-b border-l border-rule px-5 py-6 transition-colors duration-150 max-md:[&:nth-child(2n+1)]:border-l-0 md:first:border-l-0 hover:bg-wash focus-visible:bg-wash md:border-b-0"
-        >
-          <span aria-hidden="true" className="font-mono-figure text-accent text-3xl md:text-4xl">
-            {cs.headlineStat!.value}
-          </span>
-          <span aria-hidden="true" className="text-ui text-text-secondary">
-            {cs.headlineStat!.label}
-          </span>
-        </Link>
+        <span key={cs.slug}>
+          <Link
+            href={`/work/${cs.slug}`}
+            aria-label={`${cs.headlineStat!.value}: ${cs.headlineStat!.label}`}
+            className="group rounded-md transition-colors duration-150 [@media(hover:hover)_and_(pointer:fine)]:hover:text-text-primary"
+          >
+            <span aria-hidden="true">
+              <span className="font-figure text-accent">{cs.headlineStat!.value}</span>{" "}
+              <span>{cs.headlineStat!.label}</span>
+              <span className="text-text-tertiary">.</span>
+            </span>
+          </Link>{" "}
+        </span>
       ))}
-    </div>
+    </p>
   );
 }

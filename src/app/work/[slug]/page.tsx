@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BackLink } from "@/components/ui/BackLink";
 import { Section } from "@/components/ui/Section";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { IndexRow } from "@/components/ui/IndexRow";
 import { Button } from "@/components/ui/Button";
 import { JsonLd } from "@/components/JsonLd";
@@ -63,55 +62,61 @@ export default async function CaseStudyDetailPage({
     <>
       <JsonLd data={caseStudyJsonLd(caseStudy)} />
 
-      <Section size="loose" rule="bottom">
+      <Section size="loose">
         <BackLink href="/work" label="Work" />
 
-        <h1 className="heading-display">{caseStudy.title}</h1>
+        <h1 className="heading-display max-w-[20ch]">{caseStudy.title}</h1>
         {caseStudy.headlineStat && (
-          <div className="mt-8 flex items-baseline gap-4 border-t border-rule pt-6">
-            <p className="font-mono-figure text-accent">{caseStudy.headlineStat.value}</p>
-            <p className="text-ui text-text-secondary">{caseStudy.headlineStat.label}</p>
-          </div>
+          <p className="text-ui mt-8 inline-flex items-baseline gap-3 rounded-full bg-accent-soft px-5 py-2 text-accent">
+            <span className="font-figure text-2xl">{caseStudy.headlineStat.value}</span>
+            <span>{caseStudy.headlineStat.label}</span>
+          </p>
         )}
       </Section>
 
-      <Section rule="bottom">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
+      <Section className="pt-0 md:pt-0">
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-20">
           <div className="lg:col-span-7">
-            <ScrollReveal>
-              <h2 className="heading-h3">Challenge</h2>
-              <p className="text-body text-text-secondary mt-3">{caseStudy.challenge}</p>
-              <h2 className="heading-h3 mt-8">Approach</h2>
-              <p className="text-body text-text-secondary mt-3">{caseStudy.approach}</p>
-            </ScrollReveal>
+            <h2 className="heading-h3">Challenge</h2>
+            <p className="text-body text-text-secondary mt-4">{caseStudy.challenge}</p>
+            <h2 className="heading-h3 mt-12">Approach</h2>
+            <p className="text-body text-text-secondary mt-4">{caseStudy.approach}</p>
           </div>
           <div className="lg:col-span-5">
-            <ScrollReveal delay={0.05}>
+            <div className="rounded-panel bg-surface-sunken p-7 md:p-9 lg:sticky lg:top-24">
               <h2 className="heading-h3">Impact</h2>
-              <ul className="mt-3 flex flex-col gap-3 border-t border-rule pt-3">
+              <ul className="mt-6 flex flex-col gap-5">
                 {caseStudy.impact.map((stat) => (
-                  <li key={stat} className="text-body text-text-secondary flex gap-3 border-b border-rule pb-3">
-                    <span aria-hidden="true" className="text-accent">
-                      —
-                    </span>
+                  <li key={stat} className="text-ui text-text-primary flex gap-3 leading-snug">
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 16 16"
+                      className="mt-0.5 size-4 shrink-0 text-accent"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="m3.5 8.5 3 3 6-7" />
+                    </svg>
                     <span>{stat}</span>
                   </li>
                 ))}
               </ul>
-            </ScrollReveal>
+            </div>
           </div>
         </div>
       </Section>
 
       {relatedServices.length > 0 && (
-        <Section rail={{ number: "01", label: "RELATED SERVICE" }}>
+        <Section bleed className="bg-surface-sunken">
           <h2 className="heading-h2">The service this proves</h2>
-          <div className="mt-8">
-            {relatedServices.map((service, index) => (
+          <div className="mt-10 md:mt-12">
+            {relatedServices.map((service) => (
               <IndexRow
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                index={String(index + 1).padStart(2, "0")}
                 title={service.title}
                 summary={service.summary}
                 meta={service.priceLabel}
@@ -121,9 +126,9 @@ export default async function CaseStudyDetailPage({
         </Section>
       )}
 
-      <Section rule="top">
-        <p className="text-body text-text-secondary">Recognize a challenge like this in your own stack?</p>
-        <Button href={getBookingUrl()} external className="mt-4" size="lg">
+      <Section>
+        <h2 className="heading-h2 max-w-[20ch]">Recognize a challenge like this in your own stack?</h2>
+        <Button href={getBookingUrl()} external className="mt-8" size="lg">
           Book a call
         </Button>
       </Section>

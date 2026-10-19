@@ -1,6 +1,5 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import clsx from "clsx";
-import { IndexRail } from "./IndexRail";
 
 export interface ContainerProps extends ComponentPropsWithoutRef<"div"> {
   children: ReactNode;
@@ -9,7 +8,7 @@ export interface ContainerProps extends ComponentPropsWithoutRef<"div"> {
 /** Centered max-width content container with responsive gutters. */
 export function Container({ children, className, ...rest }: ContainerProps) {
   return (
-    <div className={clsx("mx-auto w-full max-w-[1280px] px-6 md:px-8 lg:px-10", className)} {...rest}>
+    <div className={clsx("mx-auto w-full max-w-[1240px] px-6 md:px-10", className)} {...rest}>
       {children}
     </div>
   );
@@ -20,8 +19,8 @@ export type SectionRule = "top" | "bottom" | "both" | "none";
 
 const sizeClasses: Record<SectionSize, string> = {
   tight: "py-12 md:py-16",
-  default: "py-20 md:py-24 lg:py-28",
-  loose: "py-28 md:py-32 lg:py-40",
+  default: "py-20 md:py-28",
+  loose: "pt-20 pb-16 md:pt-28 md:pb-20 lg:pt-36 lg:pb-24",
 };
 
 export interface SectionProps extends ComponentPropsWithoutRef<"section"> {
@@ -30,17 +29,15 @@ export interface SectionProps extends ComponentPropsWithoutRef<"section"> {
   bare?: boolean;
   /** Vertical rhythm gear. Defaults to "default". */
   size?: SectionSize;
-  /** Full-bleed hairline rule(s) at the section boundary. Defaults to "none". */
+  /** Full-bleed hairline rule(s) at the section boundary. Defaults to "none".
+   * Use sparingly — spacing and surface change should carry most structure. */
   rule?: SectionRule;
   /** Background/content spans the full viewport width while the content itself
    * stays inset to the container width — for full-bleed bands. */
   bleed?: boolean;
-  /** Renders an IndexRail (section number + label) in a left rail at
-   * >=1280px, inline above the content below that breakpoint. */
-  rail?: { number: string; label: string };
 }
 
-/** Page-level section with editorial vertical rhythm and optional full-bleed rules/bands. */
+/** Page-level section with generous vertical rhythm and optional full-bleed rules/bands. */
 export function Section({
   children,
   className,
@@ -48,7 +45,6 @@ export function Section({
   size = "default",
   rule = "none",
   bleed = false,
-  rail,
   ...rest
 }: SectionProps) {
   const ruleClasses = clsx(
@@ -56,29 +52,20 @@ export function Section({
     (rule === "bottom" || rule === "both") && "border-b border-rule"
   );
 
-  const inner = rail ? (
-    <div className="xl:grid xl:grid-cols-[8rem_1fr] xl:gap-10">
-      <IndexRail number={rail.number} label={rail.label} className="mb-6 xl:mb-0" />
-      <div className="min-w-0">{children}</div>
-    </div>
-  ) : (
-    children
-  );
-
   if (bleed) {
     return (
       <section
-        className={clsx(sizeClasses[size], ruleClasses, "grid grid-cols-[1fr_min(1280px,100%)_1fr]", className)}
+        className={clsx(sizeClasses[size], ruleClasses, "grid grid-cols-[1fr_min(1240px,100%)_1fr]", className)}
         {...rest}
       >
-        <div className="col-start-2 col-end-3 w-full px-6 md:px-8 lg:px-10">{inner}</div>
+        <div className="col-start-2 col-end-3 w-full px-6 md:px-10">{children}</div>
       </section>
     );
   }
 
   return (
     <section className={clsx(sizeClasses[size], ruleClasses, className)} {...rest}>
-      {bare ? inner : <Container>{inner}</Container>}
+      {bare ? children : <Container>{children}</Container>}
     </section>
   );
 }

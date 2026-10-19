@@ -5,9 +5,8 @@ import { ProofStrip } from "@/components/ProofStrip";
 import { CaseStudyLead } from "@/components/CaseStudyLead";
 import { PricingTable } from "@/components/PricingTable";
 import { IndexRow } from "@/components/ui/IndexRow";
-import { ServiceColumn } from "@/components/ui/ServiceColumn";
+import { ServicesExplorer } from "@/components/ServicesExplorer";
 import { Section } from "@/components/ui/Section";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { ClosingRecord } from "@/components/ui/ClosingRecord";
 import { services } from "@/data/services";
 import { caseStudies, getCaseStudyBySlug } from "@/data/caseStudies";
@@ -29,58 +28,47 @@ export default function HomePage() {
 
   return (
     <>
-      <Section size="loose" rule="bottom">
+      <Section size="loose">
         <Masthead />
       </Section>
 
-      <Section bare rule="bottom">
+      <Section size="tight" className="pt-4 md:pt-8">
         <ProofStrip />
       </Section>
 
-      <Section rail={{ number: "01", label: "SERVICES" }}>
-        <h2 className="heading-h2">Ways we can work together</h2>
-        <div className="mt-8 grid grid-cols-1 border-y border-rule md:grid-cols-4">
-          {services.map((service, index) => (
-            <ScrollReveal key={service.slug} delay={index * 0.035}>
-              <ServiceColumn
-                href={`/services/${service.slug}`}
-                index={String(index + 1).padStart(2, "0")}
-                title={service.title}
-                meta={service.priceLabel}
-              />
-            </ScrollReveal>
-          ))}
-        </div>
-        <Link href="/services" className="text-ui text-accent mt-6 inline-block hover:text-accent-hover">
-          See every service →
+      <Section>
+        <h2 className="heading-h2 max-w-[18ch]">Pick the situation that sounds like yours</h2>
+        <ServicesExplorer services={services} packages={pricing.packages} className="mt-12 md:mt-16" />
+        <Link href="/services" className="text-ui text-accent link-underline mt-10 inline-block py-2">
+          Compare every service
         </Link>
       </Section>
 
-      <Section rule="top" rail={{ number: "02", label: "PROOF OF WORK" }}>
-        <h2 className="heading-h2">Shipped in production, not just planned</h2>
-        <div className="mt-2">
+      <Section>
+        <h2 className="heading-h2 max-w-[20ch]">Shipped in production, not just planned</h2>
+        <div className="mt-12 md:mt-16">
           <CaseStudyLead caseStudy={leadCaseStudy} />
-          {otherCaseStudies.map((caseStudy, index) => (
-            <ScrollReveal key={caseStudy.slug} delay={index * 0.035}>
+          <div className="mt-6 md:mt-10">
+            {otherCaseStudies.map((caseStudy) => (
               <IndexRow
+                key={caseStudy.slug}
                 href={`/work/${caseStudy.slug}`}
-                index={String(index + 1).padStart(2, "0")}
                 title={caseStudy.title}
                 summary={caseStudy.challenge}
                 meta={caseStudy.headlineStat?.value}
               />
-            </ScrollReveal>
-          ))}
+            ))}
+          </div>
         </div>
       </Section>
 
-      <Section rule="top" rail={{ number: "03", label: "PRICING" }}>
-        <h2 className="heading-h2">Indicative pricing, pending a scoping call</h2>
-        <div className="mt-8">
+      <Section bleed className="bg-surface-sunken">
+        <h2 className="heading-h2 max-w-[20ch]">Indicative pricing, pending a scoping call</h2>
+        <div className="mt-12 md:mt-16">
           <PricingTable packages={pricing.packages} recommendedSlug="mvp-development" />
         </div>
-        <Link href="/pricing" className="text-ui text-accent mt-6 inline-block hover:text-accent-hover">
-          See full pricing details →
+        <Link href="/pricing" className="text-ui text-accent link-underline mt-10 inline-block py-2">
+          See full pricing details
         </Link>
       </Section>
 

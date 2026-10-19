@@ -12,7 +12,7 @@ describe("CaseStudyLead (BROADSHEET, one dominant case study block)", () => {
     expect(screen.getByText("faster query performance")).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent(caseStudy.title);
     expect(screen.getByText(caseStudy.challenge)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Read the record/ })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /Read the case study/ })).toHaveAttribute(
       "href",
       "/work/stock-exchange-data-migration"
     );
@@ -41,10 +41,10 @@ describe("CaseStudyLead (BROADSHEET, one dominant case study block)", () => {
     expect(screen.getByRole("heading", { level: 2, name: caseStudy.title })).toBeInTheDocument();
   });
 
-  it("hides the decorative arrow from the link's accessible name and disambiguates it by title", () => {
+  it("disambiguates the link by case-study title in its accessible name", () => {
     const caseStudy = getCaseStudyBySlug("stock-exchange-data-migration")!;
     render(<CaseStudyLead caseStudy={caseStudy} />);
-    const link = screen.getByRole("link", { name: `Read the record for ${caseStudy.title}` });
+    const link = screen.getByRole("link", { name: `Read the case study: ${caseStudy.title}` });
     expect(link).toHaveAttribute("href", "/work/stock-exchange-data-migration");
   });
 });

@@ -136,7 +136,7 @@ export function MobileNavPanel({ open, onClose, triggerRef }: MobileNavPanelProp
               type="button"
               onClick={onClose}
               aria-label="Close navigation menu"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border text-text-primary transition-transform duration-75 active:scale-95 motion-reduce:active:scale-100"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-control border border-border text-text-primary transition-transform duration-75 active:scale-95 motion-reduce:active:scale-100"
             >
               <span aria-hidden="true" className="text-xl leading-none">
                 ×
@@ -145,7 +145,7 @@ export function MobileNavPanel({ open, onClose, triggerRef }: MobileNavPanelProp
           </div>
 
           <nav aria-label="Mobile" className="flex flex-1 flex-col gap-6 overflow-y-auto px-8 py-4">
-            <ul className="flex flex-col gap-5">
+            <ul className="flex flex-col gap-4">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
@@ -154,7 +154,7 @@ export function MobileNavPanel({ open, onClose, triggerRef }: MobileNavPanelProp
                       href={link.href}
                       onClick={onClose}
                       aria-current={isActive ? "page" : undefined}
-                      className="heading-h3 text-text-primary data-[active=true]:text-accent"
+                      className="heading-h2 text-text-primary data-[active=true]:text-accent"
                       data-active={isActive}
                     >
                       {link.label}
@@ -169,7 +169,7 @@ export function MobileNavPanel({ open, onClose, triggerRef }: MobileNavPanelProp
             </div>
           </nav>
 
-          <div className="flex flex-col gap-3 border-t border-border px-8 py-6">
+          <div className="flex flex-col gap-3 border-t border-rule px-8 py-6">
             <Button href={bookingUrl} external variant="solid" size="lg" onClick={onClose}>
               Book a call
             </Button>

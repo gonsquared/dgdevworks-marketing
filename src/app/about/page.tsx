@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/ui/Section";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 import { AboutStory } from "@/components/AboutStory";
 import { buildMetadata } from "@/lib/seo";
@@ -18,13 +17,13 @@ export default function AboutPage() {
 
   return (
     <Section size="loose">
-      <h1 className="heading-display">About DG DevWorks</h1>
+      <h1 className="heading-display max-w-[14ch]">About DG DevWorks</h1>
 
-      <ScrollReveal className="mt-10">
+      <div className="mt-14 md:mt-20">
         <AboutStory />
-      </ScrollReveal>
+      </div>
 
-      <div className="mt-12">
+      <div className="mt-14">
         <Button href={bookingUrl} external variant="solid" size="lg">
           Book a call
         </Button>

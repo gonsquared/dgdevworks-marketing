@@ -17,9 +17,9 @@ describe("PricingTable (BROADSHEET, replaces PricingCard)", () => {
   it("marks the recommended row with a visible text label, not color alone (WCAG 1.4.1)", () => {
     render(<PricingTable packages={pricing.packages} recommendedSlug="mvp-development" />);
     const recommendedLink = screen.getByRole("link", { name: /MVP \/ Product Build/ });
-    expect(recommendedLink).toHaveTextContent("RECOMMENDED");
+    expect(recommendedLink).toHaveTextContent("Recommended");
     const otherLink = screen.getByRole("link", { name: /Marketing \/ Landing Site/ });
-    expect(otherLink).not.toHaveTextContent("RECOMMENDED");
+    expect(otherLink).not.toHaveTextContent("Recommended");
   });
 
   it("gives each link a non-concatenated accessible name (name, recommendation, price, and timeframe separated)", () => {
