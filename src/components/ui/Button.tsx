@@ -6,7 +6,7 @@ export type ButtonVariant = "solid" | "outline" | "ghost";
 export type ButtonSize = "sm" | "md" | "lg";
 
 const baseClasses =
-  "inline-flex items-center justify-center gap-2 rounded-[3px] text-ui font-medium transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-[3px] text-ui font-medium transition-[color,background-color,border-color,transform] duration-150 active:scale-[0.97] active:duration-75 motion-reduce:active:scale-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:pointer-events-none";
 
 const variantClasses: Record<ButtonVariant, string> = {
   solid: "bg-accent text-accent-on-fill hover:bg-accent-hover",

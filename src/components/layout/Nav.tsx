@@ -44,7 +44,7 @@ export function Nav() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 h-16 border-b border-rule bg-bg relative">
+    <header className="sticky top-0 z-40 h-16 border-b border-rule material-chrome relative">
       {/* Full-bleed accent rule that draws in on scroll — replaces the old
           border-color swap. transform-only animation, no layout cost. */}
       <div
@@ -107,7 +107,7 @@ export function Nav() {
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav-panel"
             onClick={() => setMobileOpen(true)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-[3px] border border-border text-text-primary md:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-[3px] border border-border text-text-primary transition-transform duration-75 active:scale-95 motion-reduce:active:scale-100 md:hidden"
           >
             <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4" fill="none">
               <path d="M2.5 6h15M2.5 14h15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

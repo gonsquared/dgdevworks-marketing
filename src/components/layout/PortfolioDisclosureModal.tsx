@@ -159,7 +159,9 @@ export function PortfolioDisclosureModal() {
             initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.96, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.96, y: 8 }}
-            transition={{ duration: shouldReduceMotion ? 0 : 0.2, ease: "easeOut" }}
+            transition={
+              shouldReduceMotion ? { duration: 0 } : { type: "spring", bounce: 0, duration: 0.35 }
+            }
           >
             <button
               ref={closeButtonRef}

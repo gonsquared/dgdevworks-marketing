@@ -112,14 +112,31 @@ export function MobileNavPanel({ open, onClose, triggerRef }: MobileNavPanelProp
           initial={shouldReduceMotion ? { opacity: 1 } : { x: "100%" }}
           animate={shouldReduceMotion ? { opacity: 1 } : { x: 0 }}
           exit={shouldReduceMotion ? { opacity: 1 } : { x: "100%" }}
-          transition={{ duration: shouldReduceMotion ? 0 : 0.24, ease: "easeInOut" }}
+          // Critically damped spring: re-targets from the live on-screen
+          // position, so grabbing mid-open/close never jumps. Enter and exit
+          // share one path (right edge), per spatial consistency.
+          transition={
+            shouldReduceMotion ? { duration: 0 } : { type: "spring", bounce: 0, duration: 0.4 }
+          }
+          // Swipe right to dismiss: 1:1 tracking, resistance on the left edge.
+          drag={shouldReduceMotion ? false : "x"}
+          dragDirectionLock
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={{ left: 0.08, right: 1 }}
+          dragSnapToOrigin
+          onDragEnd={(_, info) => {
+            // Project where the flick is headed (UIScrollView deceleration)
+            // and dismiss if that lands past the midpoint.
+            const projected = info.offset.x + (info.velocity.x / 1000) * (0.998 / (1 - 0.998));
+            if (projected > window.innerWidth / 2) onClose();
+          }}
         >
           <div className="flex items-center justify-end px-6 py-5">
             <button
               type="button"
               onClick={onClose}
               aria-label="Close navigation menu"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border text-text-primary"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border text-text-primary transition-transform duration-75 active:scale-95 motion-reduce:active:scale-100"
             >
               <span aria-hidden="true" className="text-xl leading-none">
                 ×

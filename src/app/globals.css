@@ -138,6 +138,29 @@
 }
 
 @layer components {
+  /* Translucent chrome (apple-design §12): sticky header floats over content
+     instead of consuming an opaque strip. Falls back to a solid surface when
+     the user asks for reduced transparency or more contrast. */
+  .material-chrome {
+    background-color: color-mix(in srgb, var(--color-bg) 78%, transparent);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+  }
+
+  @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+    .material-chrome {
+      background-color: var(--color-bg);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    .material-chrome {
+      border-bottom-color: var(--color-border-strong);
+    }
+  }
+
   /* Typography scale — docs/superpowers/specs/2026-08-19-broadsheet-redesign-design.md §2.2
      Space Grotesk is variable (wght 300–700) — real weights are available, no
      synthetic bold risk. Headings use 500; .text-voice stays at 400 so the
@@ -205,6 +228,7 @@
     font-size: 0.9375rem;
     line-height: 1.4;
     font-weight: 500;
+    letter-spacing: 0.005em; /* small text: slightly positive tracking */
   }
 
   .font-mono-figure {
