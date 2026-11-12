@@ -162,11 +162,11 @@ Steps to deploy:
 
 ## Architecture Summary
 
-- **Next.js 16 App Router, static export.** All 16 routes (11 route templates, including 2 dynamic `[slug]` templates for services and case studies) are pre-rendered at build time via `generateStaticParams()`. No server runtime, no API routes, no middleware.
+- **Next.js 16 App Router, static export.** All 13 routes (11 route templates, including 2 dynamic `[slug]` templates for services and case studies) are pre-rendered at build time via `generateStaticParams()`. No server runtime, no API routes, no middleware.
 - **No backend, no database, no API, no Docker.** All content (services, case studies, pricing, business/contact info, FAQ, portfolio-disclosure copy) lives in typed TypeScript data files under `src/data/`, imported directly by pages and components. There is no CMS, no persistence layer, no `app/api/*` route handlers, and no containerization: the project builds to a static export and deploys directly to Vercel (see [Build / Deployment](#build--deployment)).
 - **Contact form → Discord webhook.** The `/contact` form POSTs directly from the browser to a Discord incoming webhook URL (`NEXT_PUBLIC_DISCORD_WEBHOOK_URL`), formatted as an embed. This is the site's only external integration.
 - **Theming.** Light-default / dark-toggle theme implemented via CSS custom properties and a `data-theme` attribute on `<html>`, set by a blocking inline script in the root layout before first paint (no flash of incorrect theme), with preference persisted via `localStorage`.
-- **SEO/AEO/GEO.** Per-route `generateMetadata()`, `app/sitemap.ts` / `app/robots.ts` driven by the same data used for `generateStaticParams()`, per-route Open Graph images (`opengraph-image.tsx`, including 8 dynamic ones for services/case studies), and JSON-LD structured data (`Person`/`ProfessionalService` sitewide, `Service` per service page, `FAQPage` on `/pricing` and `/contact`).
+- **SEO/AEO/GEO.** Per-route `generateMetadata()`, `app/sitemap.ts` / `app/robots.ts` driven by the same data used for `generateStaticParams()`, per-route Open Graph images (`opengraph-image.tsx`, including 7 dynamic ones for services/case studies), and JSON-LD structured data (`Person`/`ProfessionalService` sitewide, `Service` per service page, `FAQPage` on `/pricing` and `/contact`).
 - **Portfolio disclosure modal.** A sitewide, session-scoped modal (`src/components/layout/PortfolioDisclosureModal.tsx`) shown once per browser session on first load, disclosing this is a portfolio project and linking to `/contact`.
 
 Deeper rationale behind these decisions (why, not just how) lives in internal planning notes (`docs/`) that are gitignored and not part of a fresh clone.

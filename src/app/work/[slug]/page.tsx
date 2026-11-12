@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { BackLink } from "@/components/ui/BackLink";
+import { SpecLabel } from "@/components/ui/SpecLabel";
 import { Section } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { IndexRow } from "@/components/ui/IndexRow";
@@ -66,12 +68,36 @@ export default async function CaseStudyDetailPage({
       <Section size="loose" rule="bottom">
         <BackLink href="/work" label="Work" />
 
-        <h1 className="heading-display">{caseStudy.title}</h1>
+        <SpecLabel>{caseStudy.context.toUpperCase()}</SpecLabel>
+        <h1 className="heading-display mt-3">{caseStudy.title}</h1>
         {caseStudy.headlineStat && (
           <div className="mt-8 flex items-baseline gap-4 border-t border-rule pt-6">
             <p className="font-mono-figure text-accent">{caseStudy.headlineStat.value}</p>
             <p className="text-ui text-text-secondary">{caseStudy.headlineStat.label}</p>
           </div>
+        )}
+        <ul aria-label="Technologies" className="mt-6 flex flex-wrap gap-2">
+          {caseStudy.tags.map((tag) => (
+            <li
+              key={tag}
+              className="font-mono-annotation rounded-sm border border-rule px-2 py-1 text-text-secondary normal-case tracking-normal"
+            >
+              {tag}
+            </li>
+          ))}
+        </ul>
+        {caseStudy.image && (
+          <figure className="mt-10 overflow-hidden rounded-lg border border-rule bg-surface">
+            <Image
+              src={caseStudy.image.src}
+              alt={caseStudy.image.alt}
+              width={caseStudy.image.width}
+              height={caseStudy.image.height}
+              priority
+              sizes="(min-width: 1280px) 1200px, 100vw"
+              className="h-auto w-full"
+            />
+          </figure>
         )}
       </Section>
 
@@ -98,6 +124,15 @@ export default async function CaseStudyDetailPage({
                   </li>
                 ))}
               </ul>
+              <a
+                href={caseStudy.fullCaseStudyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-ui text-accent mt-6 inline-block hover:text-accent-hover"
+              >
+                Read the full case study ↗
+                <span className="sr-only"> (opens in new tab)</span>
+              </a>
             </ScrollReveal>
           </div>
         </div>

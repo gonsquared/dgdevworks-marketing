@@ -9,13 +9,8 @@ export type ServiceSlug =
   | "modernization"
   | "fractional";
 
-export type CaseStudySlug =
-  | "crm-platform-hardening"
-  | "network-data-integration"
-  | "bank-platform-modernization"
-  | "hardware-brand-partner-portals"
-  | "retail-pos-platform"
-  | "stock-exchange-data-migration";
+/** Mirrors the portfolio project slugs (portfolio/src/app/projects/*) so URLs match across both sites. */
+export type CaseStudySlug = "dg-devteam" | "n8n-reservation-automation" | "moments-cafe-wordpress";
 
 export interface Service {
   slug: ServiceSlug;
@@ -42,6 +37,14 @@ export interface CaseStudy {
    * additive — never fabricated beyond what impact[] already states. */
   headlineStat?: { value: string; label: string };
   relatedServiceSlugs: ServiceSlug[];
+  /** Short project type line, e.g. "n8n automation". */
+  context: string;
+  /** Stack / technique tags, shown on the detail page. */
+  tags: string[];
+  /** Lead image, served from /public/work/<slug>/. */
+  image?: { src: string; alt: string; width: number; height: number };
+  /** Absolute URL of the full write-up on the personal portfolio. */
+  fullCaseStudyUrl: string;
 }
 
 export interface PricingPackage {

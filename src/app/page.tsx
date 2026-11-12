@@ -21,7 +21,7 @@ export const metadata: Metadata = buildMetadata({
   path: "",
 });
 
-const LEAD_CASE_STUDY_SLUG = "crm-platform-hardening";
+const LEAD_CASE_STUDY_SLUG = "dg-devteam";
 
 export default function HomePage() {
   const leadCaseStudy = getCaseStudyBySlug(LEAD_CASE_STUDY_SLUG)!;
@@ -38,7 +38,7 @@ export default function HomePage() {
       </Section>
 
       <Section rail={{ number: "01", label: "SERVICES" }}>
-        <h2 className="heading-h2">Ways we can work together</h2>
+        <h2 className="heading-h2">How we can work together</h2>
         <div className="mt-8 grid grid-cols-1 border-y border-rule md:grid-cols-4">
           {services.map((service, index) => (
             <ScrollReveal key={service.slug} delay={index * 0.035}>
@@ -52,7 +52,7 @@ export default function HomePage() {
           ))}
         </div>
         <Link href="/services" className="text-ui text-accent mt-6 inline-block hover:text-accent-hover">
-          See every service →
+          View services →
         </Link>
       </Section>
 

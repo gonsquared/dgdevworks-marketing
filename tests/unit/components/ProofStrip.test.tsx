@@ -7,10 +7,8 @@ describe("ProofStrip (BROADSHEET home trust layer)", () => {
   it("renders one figure/label cell per case study, each linking to its case study", () => {
     render(<ProofStrip />);
     // Find each link by its href first, then scope the value/label text
-    // assertions to that link. Matching by accessible-name regex isn't safe
-    // here: two case studies legitimately share the same headlineStat.value
-    // ("2"), and one label ("markets localized (Arabic RTL + Spanish)")
-    // contains regex metacharacters that break a naive new RegExp(label).
+    // assertions to that link, so shared values or regex metacharacters in a
+    // label can never cause a false match.
     const links = screen.getAllByRole("link");
     for (const cs of caseStudies) {
       const link = links.find((a) => a.getAttribute("href") === `/work/${cs.slug}`);

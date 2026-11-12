@@ -3,18 +3,11 @@ import { caseStudies, getCaseStudyBySlug } from "@/data/caseStudies";
 import { services } from "@/data/services";
 import type { CaseStudySlug } from "@/data/types";
 
-const EXPECTED_SLUGS: CaseStudySlug[] = [
-  "crm-platform-hardening",
-  "network-data-integration",
-  "bank-platform-modernization",
-  "hardware-brand-partner-portals",
-  "retail-pos-platform",
-  "stock-exchange-data-migration",
-];
+const EXPECTED_SLUGS: CaseStudySlug[] = ["dg-devteam", "n8n-reservation-automation", "moments-cafe-wordpress"];
 
 describe("src/data/caseStudies.ts (E2-F1-S2)", () => {
-  it("exports exactly 6 entries", () => {
-    expect(caseStudies).toHaveLength(6);
+  it("exports exactly 3 entries (one per portfolio case study)", () => {
+    expect(caseStudies).toHaveLength(3);
   });
 
   it("slugs match the spec exactly", () => {
@@ -56,7 +49,7 @@ describe("src/data/caseStudies.ts (E2-F1-S2)", () => {
   });
 
   it("getCaseStudyBySlug resolves valid slugs and returns undefined for unknown slugs", () => {
-    expect(getCaseStudyBySlug("hardware-brand-partner-portals")?.slug).toBe("hardware-brand-partner-portals");
+    expect(getCaseStudyBySlug("moments-cafe-wordpress")?.slug).toBe("moments-cafe-wordpress");
     expect(getCaseStudyBySlug("nonexistent")).toBeUndefined();
   });
 
@@ -65,14 +58,11 @@ describe("src/data/caseStudies.ts (E2-F1-S2)", () => {
     expect(new Set(slugs).size).toBe(slugs.length);
   });
 
-  it("every entry has a headlineStat derived from its own impact copy, with non-empty value/label", () => {
+  it("every entry has a headlineStat taken from its portfolio write-up, with non-empty value/label", () => {
     const EXPECTED: Record<CaseStudySlug, { value: string; label: string }> = {
-      "crm-platform-hardening": { value: "527", label: "isolated backend tests" },
-      "network-data-integration": { value: "1 week", label: "to a functional local environment" },
-      "bank-platform-modernization": { value: "0", label: "unplanned downtime during migration" },
-      "hardware-brand-partner-portals": { value: "2", label: "portals migrated, zero content loss" },
-      "retail-pos-platform": { value: "2", label: "markets localized (Arabic RTL + Spanish)" },
-      "stock-exchange-data-migration": { value: "40%", label: "faster query performance" },
+      "dg-devteam": { value: "5", label: "delivery stages, each with a quality gate" },
+      "n8n-reservation-automation": { value: "2", label: "coordinated workflows" },
+      "moments-cafe-wordpress": { value: "7", label: "owner-editable details, no developer needed" },
     };
     for (const cs of caseStudies) {
       expect(cs.headlineStat, `${cs.slug} is missing headlineStat`).toBeDefined();
@@ -81,15 +71,12 @@ describe("src/data/caseStudies.ts (E2-F1-S2)", () => {
   });
 });
 
-describe("case study <-> service cross-link mapping table (spec: docs/superpowers/specs/2026-08-18-dgdevworks-marketing-site-design.md)", () => {
+describe("case study <-> service cross-link mapping table ", () => {
   // Exact primary/secondary mapping table from the approved design spec.
   const EXPECTED_MAPPING: Record<CaseStudySlug, string[]> = {
-    "crm-platform-hardening": ["mvp-development", "modernization"],
-    "network-data-integration": ["modernization", "fractional"],
-    "bank-platform-modernization": ["modernization", "fractional"],
-    "hardware-brand-partner-portals": ["marketing-sites"],
-    "retail-pos-platform": ["mvp-development"],
-    "stock-exchange-data-migration": ["mvp-development", "modernization"],
+    "dg-devteam": ["fractional", "mvp-development"],
+    "n8n-reservation-automation": ["mvp-development"],
+    "moments-cafe-wordpress": ["marketing-sites"],
   };
 
   it("relatedServiceSlugs match the spec's mapping table exactly, in primary-then-secondary order", () => {
@@ -108,6 +95,24 @@ describe("case study <-> service cross-link mapping table (spec: docs/superpower
           `service "${serviceSlug}" does not link back to case study "${cs.slug}"`
         ).toBe(true);
       }
+    }
+  });
+});
+
+describe("portfolio sourcing", () => {
+  it("every case study links to its full write-up on the portfolio, under the matching slug", () => {
+    for (const cs of caseStudies) {
+      expect(cs.fullCaseStudyUrl).toMatch(/^https:\/\//);
+      expect(cs.fullCaseStudyUrl.endsWith(`/projects/${cs.slug}`)).toBe(true);
+    }
+  });
+
+  it("every case study has a context line, tags, and a lead image served from /work/<slug>/ with alt text", () => {
+    for (const cs of caseStudies) {
+      expect(cs.context.length).toBeGreaterThan(0);
+      expect(cs.tags.length).toBeGreaterThan(0);
+      expect(cs.image?.src.startsWith(`/work/${cs.slug}/`)).toBe(true);
+      expect(cs.image?.alt.length).toBeGreaterThan(0);
     }
   });
 });

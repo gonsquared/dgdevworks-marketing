@@ -17,17 +17,14 @@ const SERVICE_ROUTES = [
   "/services/fractional",
 ];
 const CASE_STUDY_ROUTES = [
-  "/work/crm-platform-hardening",
-  "/work/network-data-integration",
-  "/work/bank-platform-modernization",
-  "/work/hardware-brand-partner-portals",
-  "/work/retail-pos-platform",
-  "/work/stock-exchange-data-migration",
+  "/work/dg-devteam",
+  "/work/n8n-reservation-automation",
+  "/work/moments-cafe-wordpress",
 ];
 const ALL_ROUTES = [...STATIC_ROUTES, ...SERVICE_ROUTES, ...CASE_STUDY_ROUTES];
 
 test.describe("SEO: sitemap.xml (E4-F1-S2)", () => {
-  test("lists all 16 pages", async ({ request }) => {
+  test("lists all 13 pages", async ({ request }) => {
     const response = await request.get("/sitemap.xml");
     expect(response.status()).toBe(200);
     const body = await response.text();
@@ -35,9 +32,9 @@ test.describe("SEO: sitemap.xml (E4-F1-S2)", () => {
       const suffix = route === "/" ? "" : route;
       expect(body.includes(`${suffix}</loc>`) || body.includes(`${suffix}<`)).toBe(true);
     }
-    // 16 <loc> entries total.
+    // 13 <loc> entries total.
     const locCount = (body.match(/<loc>/g) ?? []).length;
-    expect(locCount).toBe(16);
+    expect(locCount).toBe(13);
   });
 });
 
