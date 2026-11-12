@@ -26,6 +26,7 @@ const FOCUSABLE_SELECTOR =
 export function MobileNavPanel({ open, onClose, triggerRef }: MobileNavPanelProps) {
   const pathname = usePathname();
   const panelRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const bookingUrl = getBookingUrl();
 
@@ -61,9 +62,9 @@ export function MobileNavPanel({ open, onClose, triggerRef }: MobileNavPanelProp
       headerContent?.removeAttribute("aria-hidden");
     }
 
-    const panel = panelRef.current;
-    const firstFocusable = panel?.querySelector<HTMLElement>(FOCUSABLE_SELECTOR);
-    firstFocusable?.focus();
+    // Initial focus goes to the close button (not the first focusable, which is
+    // the theme toggle beside it), so keyboard users can dismiss immediately.
+    closeButtonRef.current?.focus();
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
@@ -114,8 +115,10 @@ export function MobileNavPanel({ open, onClose, triggerRef }: MobileNavPanelProp
           exit={shouldReduceMotion ? { opacity: 1 } : { x: "100%" }}
           transition={{ duration: shouldReduceMotion ? 0 : 0.24, ease: "easeInOut" }}
         >
-          <div className="flex items-center justify-end px-6 py-5">
+          <div className="flex items-center justify-end gap-3 px-6 py-5">
+            <ThemeToggle />
             <button
+              ref={closeButtonRef}
               type="button"
               onClick={onClose}
               aria-label="Close navigation menu"
@@ -146,10 +149,6 @@ export function MobileNavPanel({ open, onClose, triggerRef }: MobileNavPanelProp
                 );
               })}
             </ul>
-
-            <div className="mt-2">
-              <ThemeToggle />
-            </div>
           </nav>
 
           <div className="flex flex-col gap-3 border-t border-border px-8 py-6">
