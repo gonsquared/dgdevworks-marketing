@@ -15,10 +15,12 @@ export function Container({ children, className, ...rest }: ContainerProps) {
   );
 }
 
-export type SectionSize = "tight" | "default" | "loose";
+export type SectionSize = "none" | "tight" | "default" | "loose";
 export type SectionRule = "top" | "bottom" | "both" | "none";
 
 const sizeClasses: Record<SectionSize, string> = {
+  /** No vertical padding: for full-bleed bands whose content defines the height. */
+  none: "",
   tight: "py-12 md:py-16",
   default: "py-20 md:py-24 lg:py-28",
   loose: "py-28 md:py-32 lg:py-40",

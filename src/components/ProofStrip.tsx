@@ -14,9 +14,9 @@ export function ProofStrip() {
     <div
       // At lg+ every stat sits on a single row, however many case studies there are.
       style={{ "--proof-cols": stats.length } as CSSProperties}
-      className="grid grid-cols-1 border-t border-rule sm:grid-cols-2 lg:grid-cols-[repeat(var(--proof-cols),minmax(0,1fr))]"
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(var(--proof-cols),minmax(0,1fr))]"
     >
-      {/* Rules: stacked below sm (bottom rule between cells); a 2-column wrap
+      {/* No top rule: the masthead section above already ends in one. Rules: stacked below sm (bottom rule between cells); a 2-column wrap
           at sm, where each row's first (odd) cell drops its left rule; a single
           row at lg+, where only the first cell drops its left rule and no cell
           has a bottom rule. Assumes each Link is a direct, unwrapped grid

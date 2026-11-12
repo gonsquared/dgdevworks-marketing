@@ -33,7 +33,7 @@ export default function HomePage() {
         <Masthead />
       </Section>
 
-      <Section bare rule="bottom">
+      <Section bare size="none" rule="bottom">
         <ProofStrip />
       </Section>
 
