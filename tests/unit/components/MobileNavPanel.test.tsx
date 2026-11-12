@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 
@@ -79,32 +79,30 @@ describe("MobileNavPanel (E1-F3-S2, docs/design-system.md §5/§7)", () => {
     expect(screen.getByRole("button", { name: "Close navigation menu" })).toBeInTheDocument();
   });
 
-  it("places the theme toggle in the top bar, left of the close button, and focuses the close button on open", () => {
+  it("has no theme toggle (the navbar already has one) and focuses the close button on open", () => {
     render(<Harness open onClose={() => {}} />);
-    const closeButton = screen.getByRole("button", { name: "Close navigation menu" });
-    const themeToggle = screen.getByRole("button", { name: /Switch to (light|dark) theme/ });
-    expect(themeToggle.parentElement).toBe(closeButton.parentElement);
-    expect(themeToggle.compareDocumentPosition(closeButton) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(closeButton).toHaveFocus();
+    const dialog = screen.getByRole("dialog", { name: "Site navigation" });
+    expect(within(dialog).queryByRole("button", { name: /Switch to (light|dark) theme/ })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Close navigation menu" })).toHaveFocus();
   });
 
   it("traps Tab focus inside the panel: Tab from the last focusable element wraps to the first", async () => {
     render(<Harness open onClose={() => {}} />);
-    const themeToggle = screen.getByRole("button", { name: /Switch to (light|dark) theme/ });
+    const closeButton = screen.getByRole("button", { name: "Close navigation menu" });
     const sendMessageLink = screen.getByRole("link", { name: "Send a message" });
 
     sendMessageLink.focus();
     expect(sendMessageLink).toHaveFocus();
 
     await userEvent.tab();
-    expect(themeToggle).toHaveFocus();
+    expect(closeButton).toHaveFocus();
   });
 
   it("traps Shift+Tab focus inside the panel: Shift+Tab from the first focusable element wraps to the last", async () => {
     render(<Harness open onClose={() => {}} />);
-    const themeToggle = screen.getByRole("button", { name: /Switch to (light|dark) theme/ });
-    themeToggle.focus();
-    expect(themeToggle).toHaveFocus();
+    const closeButton = screen.getByRole("button", { name: "Close navigation menu" });
+    closeButton.focus();
+    expect(closeButton).toHaveFocus();
 
     await userEvent.tab({ shift: true });
     expect(screen.getByRole("link", { name: "Send a message" })).toHaveFocus();

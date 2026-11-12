@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { navLinks } from "@/lib/navLinks";
-import { ThemeToggle } from "./ThemeToggle";
 import { Button } from "@/components/ui/Button";
 import { getBookingUrl } from "@/lib/env";
 
@@ -62,8 +61,7 @@ export function MobileNavPanel({ open, onClose, triggerRef }: MobileNavPanelProp
       headerContent?.removeAttribute("aria-hidden");
     }
 
-    // Initial focus goes to the close button (not the first focusable, which is
-    // the theme toggle beside it), so keyboard users can dismiss immediately.
+    // Initial focus goes to the close button so keyboard users can dismiss immediately.
     closeButtonRef.current?.focus();
 
     function handleKeyDown(event: KeyboardEvent) {
@@ -115,8 +113,7 @@ export function MobileNavPanel({ open, onClose, triggerRef }: MobileNavPanelProp
           exit={shouldReduceMotion ? { opacity: 1 } : { x: "100%" }}
           transition={{ duration: shouldReduceMotion ? 0 : 0.24, ease: "easeInOut" }}
         >
-          <div className="flex items-center justify-end gap-3 px-6 py-5">
-            <ThemeToggle />
+          <div className="flex items-center justify-end px-6 py-5">
             <button
               ref={closeButtonRef}
               type="button"
