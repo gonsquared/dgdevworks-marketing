@@ -36,6 +36,14 @@ describe("ContactForm (E5-F1-S1 / E5-F1-S2)", () => {
     expect(message).toBeInTheDocument();
   });
 
+  it("shows a just-in-time privacy notice before submission, linked to the full policy, with no consent checkbox", () => {
+    render(<ContactForm />);
+    expect(screen.getByText(/only to reply to your inquiry/)).toBeInTheDocument();
+    expect(screen.getByText(/delivered to me through Discord/)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy");
+    expect(screen.queryByRole("checkbox")).not.toBeInTheDocument();
+  });
+
   it("prevents submission of empty required fields, surfacing field-level errors instead of calling the webhook", async () => {
     render(<ContactForm />);
     const { submit } = getFields();

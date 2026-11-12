@@ -43,7 +43,7 @@ test.describe("Critical flow: Home -> Service -> Case study -> back", () => {
       if (msg.type() === "error") consoleErrors.push(msg.text());
     });
 
-    for (const path of ["/", "/services", "/work", "/about", "/pricing", "/contact"]) {
+    for (const path of ["/", "/services", "/work", "/about", "/pricing", "/contact", "/privacy"]) {
       const response = await page.goto(path);
       expect(response?.status(), `${path} should respond 200`).toBe(200);
     }

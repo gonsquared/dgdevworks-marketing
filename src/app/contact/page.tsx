@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { SpecLabel } from "@/components/ui/SpecLabel";
 import { Surface } from "@/components/ui/Surface";
@@ -9,6 +10,7 @@ import { TrustLine } from "@/components/TrustLine";
 import { JsonLd } from "@/components/JsonLd";
 import { contactFaq } from "@/data/faq";
 import { business } from "@/data/business";
+import { PRIVACY_PATH } from "@/data/privacy";
 import { buildMetadata, faqPageJsonLd } from "@/lib/seo";
 import { getBookingUrl } from "@/lib/env";
 
@@ -37,6 +39,11 @@ export default function ContactPage() {
               <ContactForm />
             </Surface>
             <TrustLine className="mt-4">{business.trustLine}</TrustLine>
+            <p className="text-ui text-text-secondary mt-2">
+              <Link href={PRIVACY_PATH} className="text-accent underline underline-offset-2 hover:text-accent-hover">
+                Read the Privacy Policy
+              </Link>
+            </p>
           </div>
 
           <div className="flex flex-col gap-8">
@@ -48,6 +55,14 @@ export default function ContactPage() {
               <Button href={bookingUrl} external variant="solid" size="lg" className="mt-5">
                 Book a call
               </Button>
+              <p className="text-ui text-text-secondary mt-4">
+                Bookings run through Cal.com, which shares your name, email, and notes with me to set up the call.
+                See the{" "}
+                <Link href={PRIVACY_PATH} className="text-accent underline underline-offset-2 hover:text-accent-hover">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
             </Surface>
 
             <div>

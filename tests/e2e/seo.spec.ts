@@ -9,7 +9,7 @@ import { test, expect } from "./fixtures";
  * export output — metadata uniqueness, sitemap/robots correctness, and
  * JSON-LD presence/parseability on every route.
  */
-const STATIC_ROUTES = ["/", "/services", "/work", "/about", "/pricing", "/contact"];
+const STATIC_ROUTES = ["/", "/services", "/work", "/about", "/pricing", "/contact", "/privacy"];
 const SERVICE_ROUTES = [
   "/services/mvp-development",
   "/services/marketing-sites",
@@ -27,7 +27,7 @@ const CASE_STUDY_ROUTES = [
 const ALL_ROUTES = [...STATIC_ROUTES, ...SERVICE_ROUTES, ...CASE_STUDY_ROUTES];
 
 test.describe("SEO: sitemap.xml (E4-F1-S2)", () => {
-  test("lists all 16 pages", async ({ request }) => {
+  test("lists all 17 pages", async ({ request }) => {
     const response = await request.get("/sitemap.xml");
     expect(response.status()).toBe(200);
     const body = await response.text();
@@ -35,9 +35,9 @@ test.describe("SEO: sitemap.xml (E4-F1-S2)", () => {
       const suffix = route === "/" ? "" : route;
       expect(body.includes(`${suffix}</loc>`) || body.includes(`${suffix}<`)).toBe(true);
     }
-    // 16 <loc> entries total.
+    // 17 <loc> entries total.
     const locCount = (body.match(/<loc>/g) ?? []).length;
-    expect(locCount).toBe(16);
+    expect(locCount).toBe(17);
   });
 });
 

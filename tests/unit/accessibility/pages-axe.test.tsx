@@ -18,6 +18,7 @@ import CaseStudyDetailPage, { generateStaticParams as caseStudyParams } from "@/
 import AboutPage from "@/app/about/page";
 import PricingPage from "@/app/pricing/page";
 import ContactPage from "@/app/contact/page";
+import PrivacyPage from "@/app/privacy/page";
 
 /**
  * Renders Nav + page content + Footer together (approximating the real root
@@ -62,7 +63,7 @@ async function assertNoSeriousViolations(container: HTMLElement, route: string) 
   ).toEqual([]);
 }
 
-describe("Accessibility audit — axe scan across all 16 rendered pages (E6-F1-S3)", () => {
+describe("Accessibility audit — axe scan across all 17 rendered pages (E6-F1-S3)", () => {
   it("/ (Home) has no critical/serious axe violations", async () => {
     const { container } = await renderFullPage("/", <HomePage />);
     await assertNoSeriousViolations(container, "/");
@@ -91,6 +92,11 @@ describe("Accessibility audit — axe scan across all 16 rendered pages (E6-F1-S
   it("/contact has no critical/serious axe violations", async () => {
     const { container } = await renderFullPage("/contact", <ContactPage />);
     await assertNoSeriousViolations(container, "/contact");
+  });
+
+  it("/privacy has no critical/serious axe violations", async () => {
+    const { container } = await renderFullPage("/privacy", <PrivacyPage />);
+    await assertNoSeriousViolations(container, "/privacy");
   });
 
   const serviceSlugs = serviceParams().map((p) => p.slug);

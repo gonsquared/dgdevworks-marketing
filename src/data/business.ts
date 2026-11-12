@@ -18,8 +18,11 @@ export const business: BusinessInfo = {
     github: "https://github.com/gonsquared",
     portfolio: "https://www.dgdevworks.com",
   },
+  // Previously "...No spam, no third parties." That was inaccurate: submissions
+  // are delivered via Discord and the site is hosted on Vercel (both service
+  // providers). The full list lives in src/data/privacy.ts → /privacy.
   trustLine:
-    "Your info is only used to respond to your inquiry. No spam, no third parties.",
+    "Your info is only used to respond to your inquiry. No spam, no mailing list, no data resale.",
   footerTrustLine:
     "One software engineer, start to finish. No subcontracting, no hand-offs.",
 };

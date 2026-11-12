@@ -1,9 +1,11 @@
 "use client";
 
 import { useId, useState, type FormEvent } from "react";
+import Link from "next/link";
 import clsx from "clsx";
 import { Button } from "@/components/ui/Button";
 import { submitContactForm, type ContactFormFailureReason } from "@/lib/discord";
+import { PRIVACY_PATH, privacyNotice } from "@/data/privacy";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -211,6 +213,18 @@ export function ContactForm() {
           onChange={(e) => setHoneypot(e.target.value)}
         />
       </div>
+
+      {/* Just-in-time privacy notice (GDPR Art. 13 / RA 10173 transparency):
+          shown before submission and linked to the full policy. No consent
+          checkbox — the legal basis for replying to an inquiry is legitimate
+          interest / pre-contract steps, not consent. */}
+      <p className="text-ui text-text-secondary">
+        {privacyNotice.formNotice} See the{" "}
+        <Link href={PRIVACY_PATH} className="text-accent underline underline-offset-2 hover:text-accent-hover">
+          Privacy Policy
+        </Link>{" "}
+        for details.
+      </p>
 
       <Button type="submit" variant="solid" size="lg" disabled={status === "loading"}>
         {status === "loading" ? "Sending…" : "Send message"}

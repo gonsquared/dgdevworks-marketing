@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Logotype } from "./Logotype";
 import { navLinks } from "@/lib/navLinks";
 import { business } from "@/data/business";
+import { PRIVACY_PATH } from "@/data/privacy";
 import { Container } from "@/components/ui/Section";
 
 const YEAR = new Date().getFullYear();
@@ -94,10 +95,16 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-rule py-6">
+        <div className="flex flex-col gap-3 border-t border-rule py-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono-annotation text-text-secondary normal-case tracking-normal">
             © {YEAR} DG DevWorks. All rights reserved.
           </p>
+          <Link
+            href={PRIVACY_PATH}
+            className="font-mono-annotation text-text-secondary normal-case tracking-normal hover:text-text-primary"
+          >
+            Privacy Policy
+          </Link>
         </div>
       </Container>
     </footer>
