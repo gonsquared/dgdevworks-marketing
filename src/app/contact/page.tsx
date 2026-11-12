@@ -9,6 +9,7 @@ import { TrustLine } from "@/components/TrustLine";
 import { JsonLd } from "@/components/JsonLd";
 import { contactFaq } from "@/data/faq";
 import { business } from "@/data/business";
+import { PrivacyPolicyLink } from "@/components/PrivacyPolicyModal";
 import { buildMetadata, faqPageJsonLd } from "@/lib/seo";
 import { getBookingUrl } from "@/lib/env";
 
@@ -37,6 +38,9 @@ export default function ContactPage() {
               <ContactForm />
             </Surface>
             <TrustLine className="mt-4">{business.trustLine}</TrustLine>
+            <p className="text-ui text-text-secondary mt-2">
+              <PrivacyPolicyLink>Read the Privacy Policy</PrivacyPolicyLink>
+            </p>
           </div>
 
           <div className="flex flex-col gap-8">
@@ -48,6 +52,10 @@ export default function ContactPage() {
               <Button href={bookingUrl} external variant="solid" size="lg" className="mt-5">
                 Book a call
               </Button>
+              <p className="text-ui text-text-secondary mt-4">
+                Bookings run through Cal.com, which shares your name, email, and notes with me to set up the call.
+                See the <PrivacyPolicyLink />.
+              </p>
             </Surface>
 
             <div>

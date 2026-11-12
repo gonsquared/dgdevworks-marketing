@@ -3,7 +3,10 @@
 import { useId, useState, type FormEvent } from "react";
 import clsx from "clsx";
 import { Button } from "@/components/ui/Button";
+import { PrivacyPolicyLink } from "@/components/PrivacyPolicyModal";
 import { submitContactForm, type ContactFormFailureReason } from "@/lib/discord";
+import { privacyNotice } from "@/data/privacy";
+import { emailMeHref } from "@/data/business";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -212,6 +215,14 @@ export function ContactForm() {
         />
       </div>
 
+      {/* Just-in-time privacy notice (GDPR Art. 13 / RA 10173 transparency):
+          shown before submission and linked to the full policy. No consent
+          checkbox — the legal basis for replying to an inquiry is legitimate
+          interest / pre-contract steps, not consent. */}
+      <p className="text-ui text-text-secondary">
+        {privacyNotice.formNotice} See the <PrivacyPolicyLink /> for details.
+      </p>
+
       <Button type="submit" variant="solid" size="lg" disabled={status === "loading"}>
         {status === "loading" ? "Sending…" : "Send message"}
       </Button>
@@ -219,6 +230,14 @@ export function ContactForm() {
       <div id={`${formId}-status`} role="status" aria-live="polite">
         {status === "success" && <p className="text-ui text-success">{statusMessage}</p>}
         {status === "error" && <p className="text-ui text-error">{statusMessage}</p>}
+      </div>
+
+      {/* Alternative to the form: opens the visitor's own email app, addressed to me. */}
+      <div className="flex flex-col gap-3 border-t border-rule pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-ui text-text-secondary">Prefer your own email app?</p>
+        <Button href={emailMeHref} variant="outline" size="md">
+          Email me
+        </Button>
       </div>
     </form>
   );

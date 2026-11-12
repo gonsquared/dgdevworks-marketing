@@ -22,7 +22,7 @@ describe("IndexRow primitive (BROADSHEET foundation)", () => {
 
   it("contains no nested interactive elements (the whole row is one link)", () => {
     const { container } = render(
-      <IndexRow href="/work/bank-platform-modernization" index="01" title="Bank Platform" summary="…" />
+      <IndexRow href="/work/dg-devteam" index="01" title="Bank Platform" summary="…" />
     );
     const link = container.querySelector("a");
     expect(link?.querySelector("a")).toBeNull();

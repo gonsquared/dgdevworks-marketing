@@ -71,6 +71,13 @@ describe("Section/Container primitives (BROADSHEET foundation)", () => {
       </Section>
     );
     expect(screen.getByTestId("section")).toHaveClass("py-28");
+
+    rerender(
+      <Section size="none" data-testid="section">
+        x
+      </Section>
+    );
+    expect(screen.getByTestId("section").className).not.toMatch(/\bpy-/);
   });
 
   it("rule prop renders full-bleed hairline rules at the section boundary", () => {

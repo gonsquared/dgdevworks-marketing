@@ -9,11 +9,11 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Work",
   description:
-    "Case studies from CRM, regulated banking, global hardware, retail, and fintech platforms: proof of the engineering behind DG DevWorks.",
+    "Case studies of a multi-agent AI development workflow, an n8n Messenger reservation automation, and a custom WordPress cafe site, built by DG DevWorks.",
   path: "/work",
 });
 
-const LEAD_CASE_STUDY_SLUG = "crm-platform-hardening";
+const LEAD_CASE_STUDY_SLUG = "dg-devteam";
 
 export default function WorkIndexPage() {
   const leadCaseStudy = getCaseStudyBySlug(LEAD_CASE_STUDY_SLUG)!;
@@ -24,8 +24,9 @@ export default function WorkIndexPage() {
       <Section size="loose" rule="bottom">
         <h1 className="heading-display">Work</h1>
         <p className="text-body-lead text-text-secondary mt-4 max-w-2xl">
-          Employer projects, reframed as proof of work: challenge, approach, and impact, without
-          confidential specifics.
+          Projects I&apos;ve designed and built end to end, from AI agent workflows to automation and
+          websites. Each one covers the challenge, the approach, and the result, with a link to the full
+          write-up on my portfolio.
         </p>
       </Section>
 

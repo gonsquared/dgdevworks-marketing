@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { BackLink } from "@/components/ui/BackLink";
+import { SpecLabel } from "@/components/ui/SpecLabel";
 import { Section } from "@/components/ui/Section";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { IndexRow } from "@/components/ui/IndexRow";
@@ -66,12 +68,40 @@ export default async function CaseStudyDetailPage({
       <Section size="loose" rule="bottom">
         <BackLink href="/work" label="Work" />
 
-        <h1 className="heading-display">{caseStudy.title}</h1>
+        {/* BackLink is inline-flex, so the eyebrow needs its own block line. */}
+        <p>
+          <SpecLabel>{caseStudy.context.toUpperCase()}</SpecLabel>
+        </p>
+        <h1 className="heading-display mt-3">{caseStudy.title}</h1>
         {caseStudy.headlineStat && (
           <div className="mt-8 flex items-baseline gap-4 border-t border-rule pt-6">
             <p className="font-mono-figure text-accent">{caseStudy.headlineStat.value}</p>
             <p className="text-ui text-text-secondary">{caseStudy.headlineStat.label}</p>
           </div>
+        )}
+        <ul aria-label="Technologies" className="mt-6 flex flex-wrap gap-2">
+          {caseStudy.tags.map((tag) => (
+            <li
+              key={tag}
+              className="font-mono-annotation rounded-sm border border-rule px-2 py-1 text-text-secondary normal-case tracking-normal"
+            >
+              {tag}
+            </li>
+          ))}
+        </ul>
+        {/* Skip the lead image when the screenshot gallery below already shows it. */}
+        {caseStudy.image && !caseStudy.screenshots?.desktop.some((shot) => shot.src === caseStudy.image?.src) && (
+          <figure className="mt-10 overflow-hidden rounded-lg border border-rule bg-surface">
+            <Image
+              src={caseStudy.image.src}
+              alt={caseStudy.image.alt}
+              width={caseStudy.image.width}
+              height={caseStudy.image.height}
+              priority
+              sizes="(min-width: 1280px) 1200px, 100vw"
+              className="h-auto w-full"
+            />
+          </figure>
         )}
       </Section>
 
@@ -98,13 +128,79 @@ export default async function CaseStudyDetailPage({
                   </li>
                 ))}
               </ul>
+              <ul className="mt-6 flex flex-col gap-2">
+                {[
+                  { href: caseStudy.fullCaseStudyUrl, label: "Read the full case study" },
+                  ...(caseStudy.liveUrl ? [{ href: caseStudy.liveUrl, label: "Visit the live site" }] : []),
+                  ...(caseStudy.sourceUrl ? [{ href: caseStudy.sourceUrl, label: "View the source on GitHub" }] : []),
+                ].map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-ui text-accent hover:text-accent-hover"
+                    >
+                      {link.label} ↗<span className="sr-only"> (opens in new tab)</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </ScrollReveal>
           </div>
         </div>
       </Section>
 
+      {caseStudy.screenshots && (
+        <Section rule="bottom" rail={{ number: "01", label: "SCREENSHOTS" }}>
+          <h2 className="heading-h2">Desktop and mobile</h2>
+
+          <h3 className="heading-h4 mt-10">Desktop</h3>
+          <div className="mt-4 grid grid-cols-1 gap-8">
+            {caseStudy.screenshots.desktop.map((shot) => (
+              <figure key={shot.src}>
+                <div className="overflow-hidden rounded-lg border border-rule bg-surface">
+                  <Image
+                    src={shot.src}
+                    alt={shot.alt}
+                    width={shot.width}
+                    height={shot.height}
+                    sizes="(min-width: 1280px) 1200px, 100vw"
+                    className="h-auto w-full"
+                  />
+                </div>
+                {shot.caption && (
+                  <figcaption className="font-mono-annotation text-text-secondary mt-3">{shot.caption}</figcaption>
+                )}
+              </figure>
+            ))}
+          </div>
+
+          <h3 className="heading-h4 mt-14">Mobile</h3>
+          <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8">
+            {caseStudy.screenshots.mobile.map((shot) => (
+              <figure key={shot.src}>
+                <div className="overflow-hidden rounded-xl border border-rule bg-surface">
+                  <Image
+                    src={shot.src}
+                    alt={shot.alt}
+                    width={shot.width}
+                    height={shot.height}
+                    sizes="(min-width: 640px) 33vw, 50vw"
+                    className="h-auto w-full"
+                  />
+                </div>
+                {shot.caption && (
+                  <figcaption className="font-mono-annotation text-text-secondary mt-3">{shot.caption}</figcaption>
+                )}
+              </figure>
+            ))}
+          </div>
+        </Section>
+      )}
+
       {relatedServices.length > 0 && (
-        <Section rail={{ number: "01", label: "RELATED SERVICE" }}>
+        <Section rail={{ number: caseStudy.screenshots ? "02" : "01", label: "RELATED SERVICE" }}>
           <h2 className="heading-h2">The service this proves</h2>
           <div className="mt-8">
             {relatedServices.map((service, index) => (

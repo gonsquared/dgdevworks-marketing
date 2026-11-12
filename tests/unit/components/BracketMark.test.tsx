@@ -10,4 +10,9 @@ describe("BracketMark primitive (BROADSHEET chrome)", () => {
     expect(svg).toHaveAttribute("aria-hidden", "true");
     expect(svg).toHaveClass("h-4", "w-6");
   });
+
+  it("draws the </> code mark as three strokes: <, /, and >", () => {
+    const { container } = render(<BracketMark />);
+    expect(container.querySelectorAll("svg path")).toHaveLength(3);
+  });
 });

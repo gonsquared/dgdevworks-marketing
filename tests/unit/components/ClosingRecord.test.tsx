@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { ClosingRecord } from "@/components/ui/ClosingRecord";
-import { business } from "@/data/business";
+import { business, emailMeHref } from "@/data/business";
 
 describe("ClosingRecord (BROADSHEET, replaces CTABand)", () => {
   it("renders the default heading/subheading and a tiered dual CTA", () => {
@@ -11,6 +11,9 @@ describe("ClosingRecord (BROADSHEET, replaces CTABand)", () => {
     expect(bookLink).toHaveAttribute("target", "_blank");
     expect(bookLink).toHaveAttribute("rel", "noopener noreferrer");
     expect(screen.getByRole("link", { name: "Send a message" })).toHaveAttribute("href", "/contact");
+    const emailLink = screen.getByRole("link", { name: "Email me" });
+    expect(emailLink).toHaveAttribute("href", emailMeHref);
+    expect(emailLink).not.toHaveAttribute("target");
   });
 
   it("accepts custom heading/subheading, matching CTABand's prior API", () => {

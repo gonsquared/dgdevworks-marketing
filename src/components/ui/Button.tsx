@@ -59,6 +59,7 @@ function omitOwnProps<T extends object>(props: T): Omit<T, (typeof OWN_PROP_KEYS
  * Usage:
  *   <Button variant="solid" size="lg" href="/contact">Send a message</Button>
  *   <Button variant="outline" href={bookingUrl} external>Book a call</Button>
+ *   <Button variant="outline" href="mailto:me@example.com">Email me</Button>
  *   <Button variant="ghost" onClick={...}>Cancel</Button>
  */
 export function Button(props: ButtonProps) {
@@ -68,6 +69,16 @@ export function Button(props: ButtonProps) {
   if ("href" in props && props.href) {
     const { href, external } = props;
     const anchorRest = omitOwnProps(props);
+
+    // mailto:/tel: links hand off to another app: a plain <a>, no client-side
+    // routing, and no new tab.
+    if (/^(mailto|tel):/i.test(href)) {
+      return (
+        <a href={href} className={classes} {...anchorRest}>
+          {children}
+        </a>
+      );
+    }
 
     if (external) {
       return (

@@ -68,3 +68,17 @@ describe("Button primitive (E1-F3-S4)", () => {
     expect(link).toHaveClass("rounded-[3px]");
   });
 });
+
+describe("Button: mailto/tel links", () => {
+  it("renders a plain anchor with no new tab for mailto: links", () => {
+    render(
+      <Button href="mailto:someone@example.com" variant="outline">
+        Email me
+      </Button>
+    );
+    const link = screen.getByRole("link", { name: "Email me" });
+    expect(link).toHaveAttribute("href", "mailto:someone@example.com");
+    expect(link).not.toHaveAttribute("target");
+    expect(link).not.toHaveAttribute("rel");
+  });
+});

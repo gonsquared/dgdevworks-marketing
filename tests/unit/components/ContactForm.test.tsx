@@ -13,6 +13,7 @@ vi.mock("@/lib/discord", async () => {
 });
 
 import { ContactForm } from "@/components/ContactForm";
+import { business, emailMeHref } from "@/data/business";
 
 describe("ContactForm (E5-F1-S1 / E5-F1-S2)", () => {
   beforeEach(() => {
@@ -34,6 +35,14 @@ describe("ContactForm (E5-F1-S1 / E5-F1-S2)", () => {
     expect(name).toBeInTheDocument();
     expect(email).toBeInTheDocument();
     expect(message).toBeInTheDocument();
+  });
+
+  it("shows a just-in-time privacy notice before submission, linked to the full policy, with no consent checkbox", () => {
+    render(<ContactForm />);
+    expect(screen.getByText(/only to reply to your inquiry/)).toBeInTheDocument();
+    expect(screen.getByText(/delivered to me through Discord/)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Privacy Policy" })).toHaveAttribute("aria-haspopup", "dialog");
+    expect(screen.queryByRole("checkbox")).not.toBeInTheDocument();
   });
 
   it("prevents submission of empty required fields, surfacing field-level errors instead of calling the webhook", async () => {
@@ -155,5 +164,15 @@ describe("ContactForm (E5-F1-S1 / E5-F1-S2)", () => {
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining("honeypot"));
 
     warnSpy.mockRestore();
+  });
+});
+
+describe("ContactForm: Email me alternative", () => {
+  it("offers an Email me link that opens the visitor's email app, addressed to the business email", () => {
+    render(<ContactForm />);
+    const link = screen.getByRole("link", { name: "Email me" });
+    expect(link).toHaveAttribute("href", emailMeHref);
+    expect(emailMeHref.startsWith(`mailto:${business.contactEmail}`)).toBe(true);
+    expect(link).not.toHaveAttribute("target");
   });
 });

@@ -4,8 +4,8 @@ import type { Service } from "./types";
  * The four DG DevWorks service offerings. Source of truth for /services,
  * /services/[slug], home page overview, and Service JSON-LD (E4-F3-S2).
  *
- * relatedCaseStudySlugs mirrors the primary/secondary service-link mapping
- * table in docs/superpowers/specs/2026-08-18-dgdevworks-marketing-site-design.md.
+ * relatedCaseStudySlugs mirrors caseStudies[].relatedServiceSlugs (enforced by
+ * tests/unit/data/caseStudies.test.ts).
  */
 export const services: Service[] = [
   {
@@ -30,7 +30,7 @@ export const services: Service[] = [
     idealClient:
       "Teams at any stage that need senior-level engineering judgment on tap, without committing to a full-time senior hire.",
     priceLabel: "$2,450–$4,900/mo",
-    relatedCaseStudySlugs: ["network-data-integration", "bank-platform-modernization"],
+    relatedCaseStudySlugs: ["dg-devteam"],
   },
   {
     slug: "marketing-sites",
@@ -54,7 +54,7 @@ export const services: Service[] = [
     idealClient:
       "Any business that needs its site to turn visitors into leads or customers, not a generic template, and not a six-week agency process.",
     priceLabel: "$2,500–$3,500",
-    relatedCaseStudySlugs: ["hardware-brand-partner-portals"],
+    relatedCaseStudySlugs: ["dgdevworks-marketing", "moments-cafe-wordpress"],
   },
   {
     slug: "modernization",
@@ -78,12 +78,9 @@ export const services: Service[] = [
     idealClient:
       "Companies and teams carrying a legacy system that's now the bottleneck: slow to change, risky to touch, or blocking new hires from being productive.",
     priceLabel: "Starting at $5,600 (custom quote)",
-    relatedCaseStudySlugs: [
-      "crm-platform-hardening",
-      "network-data-integration",
-      "bank-platform-modernization",
-      "stock-exchange-data-migration",
-    ],
+    // No portfolio case study covers a legacy migration yet; the "Proof this
+    // works" section is hidden while this is empty.
+    relatedCaseStudySlugs: [],
   },
   {
     slug: "mvp-development",
@@ -107,11 +104,7 @@ export const services: Service[] = [
     idealClient:
       "Founders and product teams with a validated idea (or a first customer waiting) who need a working product shipped fast, without hiring a full team first.",
     priceLabel: "Starting at $8,400",
-    relatedCaseStudySlugs: [
-      "crm-platform-hardening",
-      "retail-pos-platform",
-      "stock-exchange-data-migration",
-    ],
+    relatedCaseStudySlugs: ["dg-devteam", "n8n-reservation-automation"],
   },
 ];
 
