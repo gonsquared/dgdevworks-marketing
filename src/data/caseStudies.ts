@@ -153,7 +153,7 @@ export const caseStudies: CaseStudy[] = [
         },
         {
           src: "/work/dgdevworks-marketing/mobile-contact.jpg",
-          alt: "The contact form on a phone, with name, email, and message fields.",
+          alt: "The full contact form on a phone: name, email, and message fields, the privacy notice, and the Send message and Email me buttons.",
           width: 780,
           height: 1688,
           caption: "Contact",

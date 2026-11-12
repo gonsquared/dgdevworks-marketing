@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { Button } from "./Button";
 import { Section } from "./Section";
 import { BracketMark } from "@/components/layout/BracketMark";
-import { business } from "@/data/business";
+import { business, emailMeHref } from "@/data/business";
 import { getBookingUrl } from "@/lib/env";
 
 export interface ClosingRecordProps {
@@ -19,7 +19,7 @@ export interface ClosingRecordProps {
  */
 export function ClosingRecord({
   heading = "Ready to scope your project?",
-  subheading = "Book a call and walk away with a clear plan and a firm quote. Prefer email? Send a message instead.",
+  subheading = "Book a call and walk away with a clear plan and a firm quote. Prefer email? Send a message here, or email me directly.",
   className,
 }: ClosingRecordProps) {
   const bookingUrl = getBookingUrl();
@@ -37,6 +37,9 @@ export function ClosingRecord({
             </Button>
             <Button href="/contact" variant="ghost" size="lg">
               Send a message
+            </Button>
+            <Button href={emailMeHref} variant="ghost" size="lg">
+              Email me
             </Button>
           </div>
         </div>

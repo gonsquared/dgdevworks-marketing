@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { PrivacyPolicyLink } from "@/components/PrivacyPolicyModal";
 import { submitContactForm, type ContactFormFailureReason } from "@/lib/discord";
 import { privacyNotice } from "@/data/privacy";
+import { emailMeHref } from "@/data/business";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -229,6 +230,14 @@ export function ContactForm() {
       <div id={`${formId}-status`} role="status" aria-live="polite">
         {status === "success" && <p className="text-ui text-success">{statusMessage}</p>}
         {status === "error" && <p className="text-ui text-error">{statusMessage}</p>}
+      </div>
+
+      {/* Alternative to the form: opens the visitor's own email app, addressed to me. */}
+      <div className="flex flex-col gap-3 border-t border-rule pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-ui text-text-secondary">Prefer your own email app?</p>
+        <Button href={emailMeHref} variant="outline" size="md">
+          Email me
+        </Button>
       </div>
     </form>
   );

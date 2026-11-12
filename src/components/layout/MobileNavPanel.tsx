@@ -7,6 +7,7 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { navLinks } from "@/lib/navLinks";
 import { Button } from "@/components/ui/Button";
 import { getBookingUrl } from "@/lib/env";
+import { emailMeHref } from "@/data/business";
 
 export interface MobileNavPanelProps {
   open: boolean;
@@ -154,6 +155,9 @@ export function MobileNavPanel({ open, onClose, triggerRef }: MobileNavPanelProp
             </Button>
             <Button href="/contact" variant="outline" size="lg" onClick={onClose}>
               Send a message
+            </Button>
+            <Button href={emailMeHref} variant="ghost" size="lg" onClick={onClose}>
+              Email me
             </Button>
           </div>
         </motion.div>

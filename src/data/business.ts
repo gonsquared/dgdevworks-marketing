@@ -27,4 +27,10 @@ export const business: BusinessInfo = {
     "One software engineer, start to finish. No subcontracting, no hand-offs.",
 };
 
+/**
+ * "Email me" link: opens the visitor's own email app, addressed to
+ * business.contactEmail with a starter subject line.
+ */
+export const emailMeHref = `mailto:${business.contactEmail}?subject=${encodeURIComponent("Project inquiry")}`;
+
 export default business;

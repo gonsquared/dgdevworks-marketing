@@ -13,6 +13,7 @@ vi.mock("@/lib/discord", async () => {
 });
 
 import { ContactForm } from "@/components/ContactForm";
+import { business, emailMeHref } from "@/data/business";
 
 describe("ContactForm (E5-F1-S1 / E5-F1-S2)", () => {
   beforeEach(() => {
@@ -163,5 +164,15 @@ describe("ContactForm (E5-F1-S1 / E5-F1-S2)", () => {
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining("honeypot"));
 
     warnSpy.mockRestore();
+  });
+});
+
+describe("ContactForm: Email me alternative", () => {
+  it("offers an Email me link that opens the visitor's email app, addressed to the business email", () => {
+    render(<ContactForm />);
+    const link = screen.getByRole("link", { name: "Email me" });
+    expect(link).toHaveAttribute("href", emailMeHref);
+    expect(emailMeHref.startsWith(`mailto:${business.contactEmail}`)).toBe(true);
+    expect(link).not.toHaveAttribute("target");
   });
 });

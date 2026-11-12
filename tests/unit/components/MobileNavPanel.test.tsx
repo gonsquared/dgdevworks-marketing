@@ -8,6 +8,7 @@ vi.mock("next/navigation", () => ({
 }));
 
 import { MobileNavPanel } from "@/components/layout/MobileNavPanel";
+import { emailMeHref } from "@/data/business";
 
 function Harness({ open, onClose }: { open: boolean; onClose: () => void }) {
   const ref = createRef<HTMLButtonElement>();
@@ -72,6 +73,7 @@ describe("MobileNavPanel (E1-F3-S2, docs/design-system.md §5/§7)", () => {
     expect(nav.querySelectorAll("a")).toHaveLength(6);
     expect(screen.getByRole("link", { name: "Book a call" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Send a message" })).toHaveAttribute("href", "/contact");
+    expect(screen.getByRole("link", { name: "Email me" })).toHaveAttribute("href", emailMeHref);
   });
 
   it("close (X) button has an accessible name", () => {
@@ -89,10 +91,10 @@ describe("MobileNavPanel (E1-F3-S2, docs/design-system.md §5/§7)", () => {
   it("traps Tab focus inside the panel: Tab from the last focusable element wraps to the first", async () => {
     render(<Harness open onClose={() => {}} />);
     const closeButton = screen.getByRole("button", { name: "Close navigation menu" });
-    const sendMessageLink = screen.getByRole("link", { name: "Send a message" });
+    const lastLink = screen.getByRole("link", { name: "Email me" });
 
-    sendMessageLink.focus();
-    expect(sendMessageLink).toHaveFocus();
+    lastLink.focus();
+    expect(lastLink).toHaveFocus();
 
     await userEvent.tab();
     expect(closeButton).toHaveFocus();
@@ -105,6 +107,6 @@ describe("MobileNavPanel (E1-F3-S2, docs/design-system.md §5/§7)", () => {
     expect(closeButton).toHaveFocus();
 
     await userEvent.tab({ shift: true });
-    expect(screen.getByRole("link", { name: "Send a message" })).toHaveFocus();
+    expect(screen.getByRole("link", { name: "Email me" })).toHaveFocus();
   });
 });
