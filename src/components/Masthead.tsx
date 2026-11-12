@@ -14,7 +14,7 @@ const INFO_ITEMS = [
 ];
 
 /**
- * Home page masthead: mono dateline with the bracket mark, a contained serif
+ * Home page masthead: mono dateline with the </> logomark, a contained serif
  * headline, a positioning paragraph paired with a bordered practice-facts
  * block, and a tiered (one solid button + one ghost text-style link) CTA.
  */

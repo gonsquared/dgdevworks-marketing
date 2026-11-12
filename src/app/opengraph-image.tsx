@@ -33,7 +33,7 @@ export default function Image() {
               color: "#B9A3FF",
             }}
           >
-            [DG]
+            {"</>"}
           </span>
           <span style={{ fontSize: 28, fontWeight: 600 }}>DevWorks</span>
         </div>
