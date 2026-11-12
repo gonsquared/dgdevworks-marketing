@@ -10,7 +10,20 @@ export type ServiceSlug =
   | "fractional";
 
 /** Mirrors the portfolio project slugs (portfolio/src/app/projects/*) so URLs match across both sites. */
-export type CaseStudySlug = "dg-devteam" | "n8n-reservation-automation" | "moments-cafe-wordpress";
+export type CaseStudySlug =
+  | "dg-devteam"
+  | "n8n-reservation-automation"
+  | "moments-cafe-wordpress"
+  | "dgdevworks-marketing";
+
+export interface CaseStudyImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  /** Short visible caption, e.g. "Home". */
+  caption?: string;
+}
 
 export interface Service {
   slug: ServiceSlug;
@@ -42,7 +55,13 @@ export interface CaseStudy {
   /** Stack / technique tags, shown on the detail page. */
   tags: string[];
   /** Lead image, served from /public/work/<slug>/. */
-  image?: { src: string; alt: string; width: number; height: number };
+  image?: CaseStudyImage;
+  /** Optional screenshot gallery for the detail page, split by viewport. */
+  screenshots?: { desktop: CaseStudyImage[]; mobile: CaseStudyImage[] };
+  /** Public live site, when there is one. */
+  liveUrl?: string;
+  /** Public source repository, when there is one. */
+  sourceUrl?: string;
   /** Absolute URL of the full write-up on the personal portfolio. */
   fullCaseStudyUrl: string;
 }

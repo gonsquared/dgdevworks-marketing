@@ -20,11 +20,12 @@ const CASE_STUDY_ROUTES = [
   "/work/dg-devteam",
   "/work/n8n-reservation-automation",
   "/work/moments-cafe-wordpress",
+  "/work/dgdevworks-marketing",
 ];
 const ALL_ROUTES = [...STATIC_ROUTES, ...SERVICE_ROUTES, ...CASE_STUDY_ROUTES];
 
 test.describe("SEO: sitemap.xml (E4-F1-S2)", () => {
-  test("lists all 13 pages", async ({ request }) => {
+  test("lists all 14 pages", async ({ request }) => {
     const response = await request.get("/sitemap.xml");
     expect(response.status()).toBe(200);
     const body = await response.text();
@@ -32,9 +33,9 @@ test.describe("SEO: sitemap.xml (E4-F1-S2)", () => {
       const suffix = route === "/" ? "" : route;
       expect(body.includes(`${suffix}</loc>`) || body.includes(`${suffix}<`)).toBe(true);
     }
-    // 13 <loc> entries total.
+    // 14 <loc> entries total.
     const locCount = (body.match(/<loc>/g) ?? []).length;
-    expect(locCount).toBe(13);
+    expect(locCount).toBe(14);
   });
 });
 

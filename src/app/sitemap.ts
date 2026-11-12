@@ -9,7 +9,7 @@ export const dynamic = "force-static";
 /**
  * Generated from the same slug lists consumed by generateStaticParams() on
  * the service/case-study detail pages, so the sitemap can never drift out
- * of sync with the actual pre-rendered routes (13 pages total).
+ * of sync with the actual pre-rendered routes (14 pages total).
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = getSiteUrl();

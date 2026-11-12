@@ -3,11 +3,16 @@ import { caseStudies, getCaseStudyBySlug } from "@/data/caseStudies";
 import { services } from "@/data/services";
 import type { CaseStudySlug } from "@/data/types";
 
-const EXPECTED_SLUGS: CaseStudySlug[] = ["dg-devteam", "n8n-reservation-automation", "moments-cafe-wordpress"];
+const EXPECTED_SLUGS: CaseStudySlug[] = [
+  "dg-devteam",
+  "n8n-reservation-automation",
+  "moments-cafe-wordpress",
+  "dgdevworks-marketing",
+];
 
 describe("src/data/caseStudies.ts (E2-F1-S2)", () => {
-  it("exports exactly 3 entries (one per portfolio case study)", () => {
-    expect(caseStudies).toHaveLength(3);
+  it("exports exactly 4 entries (one per portfolio case study)", () => {
+    expect(caseStudies).toHaveLength(4);
   });
 
   it("slugs match the spec exactly", () => {
@@ -63,6 +68,7 @@ describe("src/data/caseStudies.ts (E2-F1-S2)", () => {
       "dg-devteam": { value: "5", label: "delivery stages, each with a quality gate" },
       "n8n-reservation-automation": { value: "2", label: "coordinated workflows" },
       "moments-cafe-wordpress": { value: "7", label: "owner-editable details, no developer needed" },
+      "dgdevworks-marketing": { value: "43", label: "user stories, planned and shipped by an agent team" },
     };
     for (const cs of caseStudies) {
       expect(cs.headlineStat, `${cs.slug} is missing headlineStat`).toBeDefined();
@@ -77,6 +83,7 @@ describe("case study <-> service cross-link mapping table ", () => {
     "dg-devteam": ["fractional", "mvp-development"],
     "n8n-reservation-automation": ["mvp-development"],
     "moments-cafe-wordpress": ["marketing-sites"],
+    "dgdevworks-marketing": ["marketing-sites"],
   };
 
   it("relatedServiceSlugs match the spec's mapping table exactly, in primary-then-secondary order", () => {
@@ -113,6 +120,32 @@ describe("portfolio sourcing", () => {
       expect(cs.tags.length).toBeGreaterThan(0);
       expect(cs.image?.src.startsWith(`/work/${cs.slug}/`)).toBe(true);
       expect(cs.image?.alt.length).toBeGreaterThan(0);
+    }
+  });
+});
+
+describe("case study images", () => {
+  it("every referenced image (lead + screenshot gallery) exists under public/", async () => {
+    const { existsSync } = await import("node:fs");
+    const { join } = await import("node:path");
+    for (const cs of caseStudies) {
+      const srcs = [
+        cs.image?.src,
+        ...(cs.screenshots?.desktop ?? []).map((s) => s.src),
+        ...(cs.screenshots?.mobile ?? []).map((s) => s.src),
+      ].filter((s): s is string => Boolean(s));
+      for (const src of srcs) {
+        expect(existsSync(join(process.cwd(), "public", src)), `${cs.slug}: missing public${src}`).toBe(true);
+      }
+    }
+  });
+
+  it("the DG DevWorks marketing case study has both desktop and mobile screenshots with alt text", () => {
+    const cs = getCaseStudyBySlug("dgdevworks-marketing")!;
+    expect(cs.screenshots?.desktop.length).toBeGreaterThan(0);
+    expect(cs.screenshots?.mobile.length).toBeGreaterThan(0);
+    for (const shot of [...cs.screenshots!.desktop, ...cs.screenshots!.mobile]) {
+      expect(shot.alt.length).toBeGreaterThan(0);
     }
   });
 });

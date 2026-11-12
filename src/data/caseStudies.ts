@@ -90,6 +90,81 @@ export const caseStudies: CaseStudy[] = [
     fullCaseStudyUrl: `${PORTFOLIO_URL}/projects/moments-cafe-wordpress`,
     relatedServiceSlugs: ["marketing-sites"],
   },
+  {
+    slug: "dgdevworks-marketing",
+    title: "Building This Site: A Static Marketing Site Planned and Shipped by an Agent Team",
+    context: "Next.js marketing site",
+    challenge:
+      "A one-person engineering practice needed a credible, fast marketing site that explains its services, shows real proof of work, and turns visitors into calls or messages, without a backend, database, or CMS to maintain.",
+    approach:
+      "Planned the site with the DG DevTeam agent workflow: a brief became a tracker of 6 epics and 43 user stories, a design system, and an API contract before any code was written, and each story passed QA and code review before it counted as done. The site is a Next.js 16 static export with every page pre-rendered from typed content files, so there's no server to run. A \"spec sheet\" design system with light and dark themes sets the look, with the theme applied before first paint so it never flashes. The contact form posts straight from the browser to a Discord webhook, with client-side validation, a honeypot, and friendly rate-limit handling. Every route gets its own metadata, Open Graph image, sitemap entry, and JSON-LD, and the test suite covers components, data, SEO, and accessibility with Vitest and Playwright.",
+    impact: [
+      "14 pages pre-rendered as static files, with no backend, database, or CMS to maintain",
+      "A working contact form and booking flow with no server, plus a privacy policy that matches what the site actually does",
+      "Per-route metadata, Open Graph images, sitemap, and structured data for search and answer engines",
+      "Automated axe accessibility scans on every page, alongside unit, component, and end-to-end tests",
+    ],
+    headlineStat: { value: "43", label: "user stories, planned and shipped by an agent team" },
+    tags: ["Next.js 16", "TypeScript", "Tailwind CSS", "Static Export", "Vitest", "Playwright", "DG DevTeam"],
+    image: {
+      src: "/work/dgdevworks-marketing/desktop-home.jpg",
+      alt: "The DG DevWorks home page on desktop: the “From Ideas to Solutions.” masthead, the positioning statement, and a practice summary panel.",
+      width: 2000,
+      height: 1125,
+    },
+    screenshots: {
+      desktop: [
+        {
+          src: "/work/dgdevworks-marketing/desktop-home.jpg",
+          alt: "The DG DevWorks home page on desktop: the “From Ideas to Solutions.” masthead, the positioning statement, and a practice summary panel.",
+          width: 2000,
+          height: 1125,
+          caption: "Home",
+        },
+        {
+          src: "/work/dgdevworks-marketing/desktop-work.jpg",
+          alt: "The Work page on desktop: a featured case study with its headline stat, followed by the rest of the case study list.",
+          width: 2000,
+          height: 1125,
+          caption: "Work",
+        },
+        {
+          src: "/work/dgdevworks-marketing/desktop-contact.jpg",
+          alt: "The Contact page on desktop: the contact form with its privacy notice beside a Book a call panel and FAQ.",
+          width: 2000,
+          height: 1125,
+          caption: "Contact",
+        },
+      ],
+      mobile: [
+        {
+          src: "/work/dgdevworks-marketing/mobile-home.jpg",
+          alt: "The DG DevWorks home page on a phone, showing the masthead and Book a call button.",
+          width: 780,
+          height: 1688,
+          caption: "Home",
+        },
+        {
+          src: "/work/dgdevworks-marketing/mobile-menu.jpg",
+          alt: "The mobile navigation panel open on a phone, listing every page plus the call and message buttons.",
+          width: 780,
+          height: 1688,
+          caption: "Navigation",
+        },
+        {
+          src: "/work/dgdevworks-marketing/mobile-contact.jpg",
+          alt: "The contact form on a phone, with name, email, and message fields.",
+          width: 780,
+          height: 1688,
+          caption: "Contact",
+        },
+      ],
+    },
+    liveUrl: "https://marketing.dgdevworks.com",
+    sourceUrl: "https://github.com/gonsquared/dgdevworks-marketing",
+    fullCaseStudyUrl: `${PORTFOLIO_URL}/projects/dgdevworks-marketing`,
+    relatedServiceSlugs: ["marketing-sites"],
+  },
 ];
 
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {

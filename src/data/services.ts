@@ -54,7 +54,7 @@ export const services: Service[] = [
     idealClient:
       "Any business that needs its site to turn visitors into leads or customers, not a generic template, and not a six-week agency process.",
     priceLabel: "$2,500–$3,500",
-    relatedCaseStudySlugs: ["moments-cafe-wordpress"],
+    relatedCaseStudySlugs: ["dgdevworks-marketing", "moments-cafe-wordpress"],
   },
   {
     slug: "modernization",

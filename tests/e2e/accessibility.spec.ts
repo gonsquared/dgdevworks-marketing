@@ -28,6 +28,7 @@ const ROUTES = [
   "/work/dg-devteam",
   "/work/n8n-reservation-automation",
   "/work/moments-cafe-wordpress",
+  "/work/dgdevworks-marketing",
   "/about",
   "/pricing",
   "/contact",
