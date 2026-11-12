@@ -34,7 +34,6 @@ const ROUTES = [
   "/about",
   "/pricing",
   "/contact",
-  "/privacy",
 ];
 
 /**

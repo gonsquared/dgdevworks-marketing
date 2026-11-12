@@ -1,9 +1,10 @@
 import { business } from "./business";
 
 /**
- * Privacy policy content for /privacy — single source of truth for the full
- * policy page, the short "just-in-time" notice under the contact form, and
- * the contact-page trust line / FAQ answer.
+ * Privacy policy content: the single source of truth for the full policy
+ * (rendered in PrivacyPolicyModal, opened from the footer, contact form, and
+ * contact page, or via the #privacy URL hash) and for the short
+ * "just-in-time" notice under the contact form.
  *
  * Structure follows the disclosures GDPR Art. 13 requires at the point of
  * collection (controller identity, purposes, legal basis, recipients,
@@ -24,7 +25,8 @@ export const PRIVACY_LAST_UPDATED = "2026-11-13";
 /** How long contact-form inquiries that don't turn into an engagement are kept. */
 export const INQUIRY_RETENTION_MONTHS = 12;
 
-export const PRIVACY_PATH = "/privacy";
+/** URL hash that opens the privacy policy modal from anywhere, e.g. "/#privacy". */
+export const PRIVACY_HASH = "privacy";
 
 export interface PrivacySection {
   id: string;

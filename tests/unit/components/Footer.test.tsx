@@ -38,9 +38,9 @@ describe("Footer (E1-F3-S3)", () => {
     expect(screen.getByText(new RegExp(`© ${new Date().getFullYear()} DG DevWorks`))).toBeInTheDocument();
   });
 
-  it("links to the Privacy Policy from every page (CalOPPA: conspicuously posted)", () => {
+  it("offers the Privacy Policy (modal) from every page (CalOPPA: conspicuously posted)", () => {
     render(<Footer />);
-    expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy");
+    expect(screen.getByRole("button", { name: "Privacy Policy" })).toHaveAttribute("aria-haspopup", "dialog");
   });
 
   it("each footer link list is wrapped in its own labeled <nav aria-label>", () => {

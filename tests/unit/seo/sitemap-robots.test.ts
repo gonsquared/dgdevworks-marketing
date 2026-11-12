@@ -8,14 +8,14 @@ import { getSiteUrl } from "@/lib/env";
 describe("app/sitemap.ts (E4-F1-S2)", () => {
   const entries = sitemap();
 
-  it("statically generates entries for all 17 pre-rendered pages", () => {
-    expect(entries).toHaveLength(17);
+  it("statically generates entries for all 16 pre-rendered pages", () => {
+    expect(entries).toHaveLength(16);
   });
 
   it("includes every static route", () => {
     const siteUrl = getSiteUrl();
     const urls = entries.map((e) => e.url);
-    for (const path of ["/", "/services", "/work", "/about", "/pricing", "/contact", "/privacy"]) {
+    for (const path of ["/", "/services", "/work", "/about", "/pricing", "/contact"]) {
       expect(urls).toContain(`${siteUrl}${path === "/" ? "/" : path}`);
     }
   });

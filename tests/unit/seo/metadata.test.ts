@@ -3,7 +3,7 @@ import { buildMetadata } from "@/lib/seo";
 import { services } from "@/data/services";
 import { caseStudies } from "@/data/caseStudies";
 
-// The full static route inventory: 7 static pages, 4 services, and 6 case studies.
+// The full static route inventory: 6 static pages, 4 services, and 6 case studies.
 const STATIC_PAGES = [
   { title: "Home", description: "Home page description", path: "" },
   { title: "Services", description: "Services index description", path: "/services" },
@@ -11,7 +11,6 @@ const STATIC_PAGES = [
   { title: "About", description: "About page description", path: "/about" },
   { title: "Pricing", description: "Pricing page description", path: "/pricing" },
   { title: "Contact", description: "Contact page description", path: "/contact" },
-  { title: "Privacy Policy", description: "Privacy policy description", path: "/privacy" },
 ];
 
 describe("src/lib/seo.ts buildMetadata (E4-F1-S1 generateMetadata per route)", () => {
@@ -29,14 +28,14 @@ describe("src/lib/seo.ts buildMetadata (E4-F1-S1 generateMetadata per route)", (
     expect(title.absolute).toContain("DG DevWorks");
   });
 
-  it("every static + dynamic route title/description combination is unique across all 17 pages", () => {
+  it("every static + dynamic route title/description combination is unique across all 16 pages", () => {
     const allRouteMeta = [
       ...STATIC_PAGES,
       ...services.map((s) => ({ title: s.title, description: s.summary, path: `/services/${s.slug}` })),
       ...caseStudies.map((cs) => ({ title: cs.title, description: cs.challenge, path: `/work/${cs.slug}` })),
     ];
 
-    expect(allRouteMeta).toHaveLength(17);
+    expect(allRouteMeta).toHaveLength(16);
 
     const titles = allRouteMeta.map((p) => buildMetadata(p).title as { absolute: string }).map((t) => t.absolute);
     const descriptions = allRouteMeta.map((p) => buildMetadata(p).description);

@@ -1,5 +1,5 @@
 import type { FAQItem } from "./types";
-import { INQUIRY_RETENTION_MONTHS, PRIVACY_PATH } from "./privacy";
+import { INQUIRY_RETENTION_MONTHS } from "./privacy";
 
 /**
  * Typed FAQ content shared between the visible on-page accordions and the
@@ -39,7 +39,7 @@ export const contactFaq: FAQItem[] = [
   {
     question: "What happens to the information I submit?",
     answer:
-      `It's used only to reply to your inquiry. Submissions are delivered to a private Discord channel that only I can read, and inquiries that don't turn into a project are deleted within ${INQUIRY_RETENTION_MONTHS} months. No spam, no mailing list, and no data resale. The full details, including how to access or delete your data, are in the Privacy Policy at ${PRIVACY_PATH}.`,
+      `It's used only to reply to your inquiry. Submissions are delivered to a private Discord channel that only I can read, and inquiries that don't turn into a project are deleted within ${INQUIRY_RETENTION_MONTHS} months. No spam, no mailing list, and no data resale. The full details, including how to access or delete your data, are in the Privacy Policy, linked under the form and in the site footer.`,
   },
   {
     question: "Do I need a fully-formed spec before reaching out?",

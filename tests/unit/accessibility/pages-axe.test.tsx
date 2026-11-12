@@ -18,7 +18,7 @@ import CaseStudyDetailPage, { generateStaticParams as caseStudyParams } from "@/
 import AboutPage from "@/app/about/page";
 import PricingPage from "@/app/pricing/page";
 import ContactPage from "@/app/contact/page";
-import PrivacyPage from "@/app/privacy/page";
+import { PrivacyPolicyModal } from "@/components/PrivacyPolicyModal";
 
 /**
  * Renders Nav + page content + Footer together (approximating the real root
@@ -63,7 +63,7 @@ async function assertNoSeriousViolations(container: HTMLElement, route: string) 
   ).toEqual([]);
 }
 
-describe("Accessibility audit — axe scan across all 17 rendered pages (E6-F1-S3)", () => {
+describe("Accessibility audit — axe scan across all 16 rendered pages (E6-F1-S3)", () => {
   it("/ (Home) has no critical/serious axe violations", async () => {
     const { container } = await renderFullPage("/", <HomePage />);
     await assertNoSeriousViolations(container, "/");
@@ -94,9 +94,10 @@ describe("Accessibility audit — axe scan across all 17 rendered pages (E6-F1-S
     await assertNoSeriousViolations(container, "/contact");
   });
 
-  it("/privacy has no critical/serious axe violations", async () => {
-    const { container } = await renderFullPage("/privacy", <PrivacyPage />);
-    await assertNoSeriousViolations(container, "/privacy");
+  it("privacy policy modal (open) has no critical/serious axe violations", async () => {
+    // The modal is portalled to document.body, so scan the body rather than the render container.
+    render(<PrivacyPolicyModal open onClose={() => {}} />);
+    await assertNoSeriousViolations(document.body, "privacy policy modal");
   });
 
   const serviceSlugs = serviceParams().map((p) => p.slug);

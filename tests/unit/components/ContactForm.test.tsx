@@ -40,7 +40,7 @@ describe("ContactForm (E5-F1-S1 / E5-F1-S2)", () => {
     render(<ContactForm />);
     expect(screen.getByText(/only to reply to your inquiry/)).toBeInTheDocument();
     expect(screen.getByText(/delivered to me through Discord/)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy");
+    expect(screen.getByRole("button", { name: "Privacy Policy" })).toHaveAttribute("aria-haspopup", "dialog");
     expect(screen.queryByRole("checkbox")).not.toBeInTheDocument();
   });
 

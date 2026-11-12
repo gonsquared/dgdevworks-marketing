@@ -1,11 +1,11 @@
 "use client";
 
 import { useId, useState, type FormEvent } from "react";
-import Link from "next/link";
 import clsx from "clsx";
 import { Button } from "@/components/ui/Button";
+import { PrivacyPolicyLink } from "@/components/PrivacyPolicyModal";
 import { submitContactForm, type ContactFormFailureReason } from "@/lib/discord";
-import { PRIVACY_PATH, privacyNotice } from "@/data/privacy";
+import { privacyNotice } from "@/data/privacy";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -219,11 +219,7 @@ export function ContactForm() {
           checkbox — the legal basis for replying to an inquiry is legitimate
           interest / pre-contract steps, not consent. */}
       <p className="text-ui text-text-secondary">
-        {privacyNotice.formNotice} See the{" "}
-        <Link href={PRIVACY_PATH} className="text-accent underline underline-offset-2 hover:text-accent-hover">
-          Privacy Policy
-        </Link>{" "}
-        for details.
+        {privacyNotice.formNotice} See the <PrivacyPolicyLink /> for details.
       </p>
 
       <Button type="submit" variant="solid" size="lg" disabled={status === "loading"}>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Logotype } from "./Logotype";
 import { navLinks } from "@/lib/navLinks";
 import { business } from "@/data/business";
-import { PRIVACY_PATH } from "@/data/privacy";
+import { PrivacyPolicyLink } from "@/components/PrivacyPolicyModal";
 import { Container } from "@/components/ui/Section";
 
 const YEAR = new Date().getFullYear();
@@ -99,12 +99,10 @@ export function Footer() {
           <p className="font-mono-annotation text-text-secondary normal-case tracking-normal">
             © {YEAR} DG DevWorks. All rights reserved.
           </p>
-          <Link
-            href={PRIVACY_PATH}
-            className="font-mono-annotation text-text-secondary normal-case tracking-normal hover:text-text-primary"
-          >
-            Privacy Policy
-          </Link>
+          <PrivacyPolicyLink
+            openOnHash
+            className="font-mono-annotation self-start text-text-secondary normal-case tracking-normal hover:text-text-primary"
+          />
         </div>
       </Container>
     </footer>

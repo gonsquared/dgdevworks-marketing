@@ -9,7 +9,7 @@ export const dynamic = "force-static";
 /**
  * Generated from the same slug lists consumed by generateStaticParams() on
  * the service/case-study detail pages, so the sitemap can never drift out
- * of sync with the actual pre-rendered routes (17 pages total).
+ * of sync with the actual pre-rendered routes (16 pages total).
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = getSiteUrl();
@@ -21,7 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/about`, changeFrequency: "yearly", priority: 0.6 },
     { url: `${siteUrl}/pricing`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${siteUrl}/contact`, changeFrequency: "yearly", priority: 0.7 },
-    { url: `${siteUrl}/privacy`, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
